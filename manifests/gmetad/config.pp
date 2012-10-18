@@ -1,5 +1,6 @@
 class ganglia::gmetad::config(
-  $clusters
+  $clusters,
+  $gridname = false,
 ) {
   include ganglia::gmetad::install
   include ganglia::gmetad::service
