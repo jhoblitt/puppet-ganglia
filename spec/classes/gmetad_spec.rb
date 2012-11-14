@@ -1,0 +1,22 @@
+require 'spec_helper'
+
+describe 'ganglia::gmetad' do
+  let(:title) { 'redhat' }
+  let(:facts) { {:osfamily=> 'RedHat'} }
+
+  context 'with clusters' do
+    clusters = [
+      { 
+        'name'    => 'test', 
+        'address' => ['test1.example.org', 'test2.example.org'],
+      },
+    ]
+
+    let(:params) { {:clusters => clusters} }
+    it do
+      should include_class('ganglia::gmetad') 
+      should contain_file('/etc/ganglia/gmetad.conf') 
+    end
+  end
+end
+
