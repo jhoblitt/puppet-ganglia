@@ -5,7 +5,7 @@ class ganglia::gmetad::config inherits ganglia::gmetad {
     owner   => 'root',
     group   => 'root',
     mode    => '0644',  
-    content => template($ganglia::params::gmetad_service_erb),
+    content => template($gmetad_service_erb),
     notify  => Class["ganglia::gmetad::service"],
   }
 }
