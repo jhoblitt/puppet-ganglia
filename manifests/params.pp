@@ -16,7 +16,8 @@ class ganglia::params {
           $gmond_service_erb    = 'ganglia/gmond.conf.el5.erb'
 
           $gmetad_service_config = '/etc/gmetad.conf'
-          $gmetad_service_erb    = 'ganglia/gmetad.conf.el5.erb'
+          # it looks like it's safe to use the same template for el5.x & el6.x
+          $gmetad_service_erb    = 'ganglia/gmetad.conf.el6.erb'
         }
         # fedora is also part of $::osfamily = redhat so we shouldn't default
         # to failing on el7.x +
