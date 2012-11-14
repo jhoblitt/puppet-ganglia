@@ -2,8 +2,13 @@ class ganglia::params {
   $gmond_package_name   = 'ganglia-gmond'
   $gmond_service_name   = 'gmond'
 
-  $gmetad_package_name   = 'ganglia-gmetad'
-  $gmetad_service_name   = 'gmetad'
+  $gmetad_package_name  = 'ganglia-gmetad'
+  $gmetad_service_name  = 'gmetad'
+
+  # paths are the same for el5.x & el6.x
+  $web_package_name     = 'ganglia-web'
+  $web_php_config       = '/etc/ganglia/conf.php'
+  $web_php_erb          = 'ganglia/conf.php.el6.erb'
 
   case $::osfamily {
     redhat: {
