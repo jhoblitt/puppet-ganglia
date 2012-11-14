@@ -1,7 +1,6 @@
-class ganglia::gmetad::install {
-  include ganglia::params
+class ganglia::gmetad::install inherits ganglia::gmetad {
 
-  package { $ganglia::params::gmetad_package_name:
+  package { $gmetad_package_name:
     ensure => latest,
   }
 }
