@@ -1,5 +1,5 @@
 class ganglia::gmetad(
-  $clusters,
+  $clusters = [ { 'name' => 'my cluster', 'address' => 'localhost' } ],
   $gridname = '',
 ) inherits ganglia::params {
   validate_array($clusters)
