@@ -15,8 +15,6 @@ class ganglia::params {
       case $::lsbmajdistrelease {
         # the epel packages change uid/gids + install paths between 5 & 6
         5: {
-          $ganglia_uid = 403
-          $ganglia_gid = 403
           $gmond_service_config = '/etc/gmond.conf'
           $gmond_service_erb    = 'ganglia/gmond.conf.el5.erb'
 
@@ -27,8 +25,6 @@ class ganglia::params {
         # fedora is also part of $::osfamily = redhat so we shouldn't default
         # to failing on el7.x +
         6, default: {
-          $ganglia_uid = 211
-          $ganglia_gid = 211
           $gmond_service_config = '/etc/ganglia/gmond.conf'
           $gmond_service_erb    = 'ganglia/gmond.conf.el6.erb'
 

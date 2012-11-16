@@ -5,9 +5,6 @@ class ganglia::gmetad(
   validate_array($clusters)
   validate_string($gridname)
 
-  include ganglia::config
-
-  Class[ 'ganglia::config' ] ->
   class{ 'ganglia::gmetad::config': } ->
   class{ 'ganglia::gmetad::install': } ->
   class{ 'ganglia::gmetad::service': } ->
