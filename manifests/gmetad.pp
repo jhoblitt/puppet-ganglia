@@ -1,3 +1,50 @@
+# == Class: ganglia::gmetad
+#
+# install and configure the ganglia gmetad daemon
+#
+# === Parameters
+#
+# All parameteres are optional.
+#
+# [*clusters*]
+#   array of hashes.  Valid keys are:
+#
+#   -name
+#   -polling_interval
+#   -address
+#     
+#   defaults to:
+#   [ { 'name' => 'my cluster', 'address' => 'localhost' } ],
+#
+# [*gridname*]
+#   string - defaults to '', which means no gridname at all
+#
+#
+# === Examples
+#
+#
+#    $clusters = [
+#      { 
+#        'name'    => 'test', 
+#        'address' => ['test1.example.org', 'test2.example.org'],
+#      },
+#    ]
+#
+#    class{ 'ganglia::gmetad':
+#      clusters => $clusters,   
+#      gridname => 'my grid',   
+#    }
+#
+#
+# === Authors
+#
+# Joshua Hoblitt <jhoblitt@cpan.org>
+#
+# === Copyright
+#
+# Copyright (C) 2012 Joshua Hoblitt
+#
+
 class ganglia::gmetad(
   $clusters = [ { 'name' => 'my cluster', 'address' => 'localhost' } ],
   $gridname = '',
