@@ -54,26 +54,27 @@
 #
 # === Examples
 #
-#    udp_recv_channel = [
-#      {'port' => 8649, 'bind' => 'localhost'},
-#      {'port' => 8649, 'bind' => '0.0.0.0'},
+#    $udp_recv_channel = [
+#      { port => 8649, bind => 'localhost' },
+#      { port => 8649, bind => '0.0.0.0' },
 #    ]
-#    udp_send_channel = [
-#      {'port' => 8649, 'host' => 'test1.example.org', 'ttl' => 2},
-#      {'port' => 8649, 'host' => 'test2.example.org', 'ttl' => 2},
+#    $udp_send_channel = [
+#      { port => 8649, host => 'test1.example.org', ttl => 2 },
+#      { port => 8649, host => 'test2.example.org', ttl => 2 },
 #    ]
-#    tcp_accept_channel = [
-#      {'port' => 8649},
+#    $tcp_accept_channel = [
+#      { port => 8649 },
 #    ]
-#    params = {
-#      'cluster_name'        => "example grid",
-#      'cluster_owner'       => "ACME, Inc.",
-#      'cluster_latlong'     => "N32.2332147 W110.9481163",
-#      'cluster_url'         => "www.example.org",
-#      'host_location'       => "example computer room",
-#      'udp_recv_channel'    => udp_recv_channel,
-#      'udp_send_channel'    => udp_send_channel,
-#      'tcp_accept_channel'  => tcp_accept_channel,
+#
+#    class{ 'ganglia::gmond':
+#      cluster_name       => 'example grid',
+#      cluster_owner      => 'ACME, Inc.',
+#      cluster_latlong    => 'N32.2332147 W110.9481163',
+#      cluster_url        => 'www.example.org',
+#      host_location      => 'example computer room',
+#      udp_recv_channel   => $udp_recv_channel,
+#      udp_send_channel   => $udp_send_channel,
+#      tcp_accept_channel => $tcp_accept_channel,
 #    }
 #
 #
