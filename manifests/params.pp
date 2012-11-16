@@ -15,8 +15,8 @@ class ganglia::params {
       case $::lsbmajdistrelease {
         # the epel packages change uid/gids + install paths between 5 & 6
         5: {
-          $ganglia_uid = 298
-          $ganglia_gid = 298
+          $ganglia_uid = 403
+          $ganglia_gid = 403
           $gmond_service_config = '/etc/gmond.conf'
           $gmond_service_erb    = 'ganglia/gmond.conf.el5.erb'
 
