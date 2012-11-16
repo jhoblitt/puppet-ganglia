@@ -76,7 +76,7 @@ Examples
       $ganglia_port = 8652,
     }
 
-$::osfamily = Redhat and EPEL packages
+$::osfamily = RedHat and EPEL packages
 --------------------------------------
 
 As of 2012-11-16, the stable EPEL repos for el5 and el6 contain, respectively,
