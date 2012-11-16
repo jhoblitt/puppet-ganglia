@@ -1,6 +1,6 @@
 # == Class: ganglia::gmond
 #
-# installs and configures the ganglia gmond daemon
+# install and configure the ganglia gmond daemon
 #
 # === Parameters
 #
@@ -70,7 +70,7 @@
 #      'cluster_owner'       => "ACME, Inc.",
 #      'cluster_latlong'     => "N32.2332147 W110.9481163",
 #      'cluster_url'         => "www.example.org",
-#      'host_location'       => "Example Computer Room",
+#      'host_location'       => "example computer room",
 #      'udp_recv_channel'    => udp_recv_channel,
 #      'udp_send_channel'    => udp_send_channel,
 #      'tcp_accept_channel'  => tcp_accept_channel,
