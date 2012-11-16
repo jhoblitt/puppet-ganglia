@@ -14,7 +14,7 @@
 #   -address
 #     
 #   defaults to:
-#   [ { 'name' => 'my cluster', 'address' => 'localhost' } ],
+#   [ { name => 'my cluster', address => 'localhost' } ],
 #
 # [*gridname*]
 #   string - defaults to '', which means no gridname at all
@@ -25,8 +25,8 @@
 #
 #    $clusters = [
 #      { 
-#        'name'    => 'test', 
-#        'address' => ['test1.example.org', 'test2.example.org'],
+#        name     => 'test', 
+#        address  => ['test1.example.org', 'test2.example.org'],
 #      },
 #    ]
 #
