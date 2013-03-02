@@ -1,3 +1,16 @@
+# == Class: ganglia::params
+#
+# provides parameters for the ganglia module
+#
+# === Authors
+#
+# Joshua Hoblitt <jhoblitt@cpan.org>
+#
+# === Copyright
+#
+# Copyright (C) 2012-2013 Joshua Hoblitt
+#
+
 class ganglia::params {
   $gmond_package_name   = 'ganglia-gmond'
   $gmond_service_name   = 'gmond'

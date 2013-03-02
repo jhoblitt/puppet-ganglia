@@ -28,7 +28,7 @@
 #   -host
 #   -port
 #   -ttl
-#     
+#
 #   defaults to:
 #   [ { mcast_join => '239.2.11.71', port => 8649, bind => '239.2.11.71' } ]
 #
@@ -39,7 +39,7 @@
 #   -mcast_join
 #   -port
 #   -bind
-#     
+#
 #   defaults to:
 #   [ { mcast_join => '239.2.11.71', port => 8649, ttl => 1 } ]
 #
@@ -84,7 +84,7 @@
 #
 # === Copyright
 #
-# Copyright (C) 2012 Joshua Hoblitt
+# Copyright (C) 2012-2013 Joshua Hoblitt
 #
 
 class ganglia::gmond (
@@ -104,8 +104,8 @@ class ganglia::gmond (
   validate_string($cluster_name)
   validate_string($cluster_owner)
   validate_string($cluster_latlong)
-  validate_string($cluster_lurl)
-  validate_string($cluster_location)
+  validate_string($cluster_url)
+  validate_string($host_location)
   validate_array($udp_send_channel)
   validate_array($udp_recv_channel)
   validate_array($tcp_accept_channel)

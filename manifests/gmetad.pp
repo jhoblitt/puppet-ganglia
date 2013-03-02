@@ -12,7 +12,7 @@
 #   -name
 #   -polling_interval
 #   -address
-#     
+#
 #   defaults to:
 #   [ { name => 'my cluster', address => 'localhost' } ],
 #
@@ -24,15 +24,15 @@
 #
 #
 #    $clusters = [
-#      { 
-#        name     => 'test', 
+#      {
+#        name     => 'test',
 #        address  => ['test1.example.org', 'test2.example.org'],
 #      },
 #    ]
 #
 #    class{ 'ganglia::gmetad':
-#      clusters => $clusters,   
-#      gridname => 'my grid',   
+#      clusters => $clusters,
+#      gridname => 'my grid',
 #    }
 #
 #
@@ -42,7 +42,7 @@
 #
 # === Copyright
 #
-# Copyright (C) 2012 Joshua Hoblitt
+# Copyright (C) 2012-2013 Joshua Hoblitt
 #
 
 class ganglia::gmetad(
