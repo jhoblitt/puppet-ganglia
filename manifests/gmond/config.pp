@@ -11,7 +11,7 @@
 # Copyright (C) 2012-2013 Joshua Hoblitt
 #
 
-class ganglia::gmond::config {
+class ganglia::gmond::config inherits ganglia::gmond {
 
   file { $gmond_service_config:
     ensure  => present,

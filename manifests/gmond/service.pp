@@ -11,7 +11,7 @@
 # Copyright (C) 2012-2013 Joshua Hoblitt
 #
 
-class ganglia::gmond::service {
+class ganglia::gmond::service inherits ganglia::gmond{
 
   service { $gmond_service_name:
     ensure      => running,
