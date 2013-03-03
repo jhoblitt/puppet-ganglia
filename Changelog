@@ -1,0 +1,10 @@
+`v0.0.2`
+======
+
+Changes since `v0.0.1`:
+
+Joshua Hoblitt <jhoblitt@cpan.org> (4):
+      * cleanup code to pass puppet-lint and add the 'lint' rake target
+      * fix gmond template namespace issues with puppet >= 3
+      * enable travis-ci support
+      * change license from GPLv2 or later to Apache 2.0
