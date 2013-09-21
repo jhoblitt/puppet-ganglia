@@ -3,23 +3,39 @@ Puppet ganglia Module
 
 [![Build Status](https://travis-ci.org/jhoblitt/puppet-ganglia.png)](https://travis-ci.org/jhoblitt/puppet-ganglia)
 
+#### Table of Contents
+
+1. [Overview](#overview)
+2. [Description](#description)
+3. [Usage](#usage)
+    * [`ganglia::gmond`](#gangliagmond)
+    * [`ganglia::gmetda`](#gangliagmetad)
+    * [`ganglia::web`](#gangliaweb)
+4. [Limitations](#limitations)
+    * [Tested Platforms](#tested-platforms)
+    * [`$::osfamily == RedHat` and EPEL packages](#osfamily--redhat-and-epel-packages)
+5. [Support](#support)
+
+
+Overview
+--------
+
+Install and configure the ganglia gmond & gmetad daemons + web front end
+
 Description
 -----------
 
 This puppet module will install and configure the
-[ganglia](http://ganglia.sourceforge.net/) gmond & gmetad daemons + web front
-end.
+[`ganglia`](http://ganglia.sourceforge.net/) `gmond` & `gmetad` daemons + web
+front end.
 
-It has been tested on:
 
- - el5.x
- - el6.x
-
-Examples
---------
+Usage
+-----
 
 ### ganglia::gmond
 
+```puppet
     # unicast
     $udp_recv_channel = [
       { port => 8649, bind => 'localhost' },
@@ -54,9 +70,11 @@ Examples
       udp_send_channel   => $udp_send_channel,
       tcp_accept_channel => $tcp_accept_channel,
     }
+```
 
 ### ganglia::gmetad
 
+```puppet
     $clusters = [
       { 
         name     => 'test', 
@@ -68,18 +86,31 @@ Examples
       clusters => $clusters,   
       gridname => 'my grid',   
     }
+```
 
 ### ganglia::web
 
+```puppet
     class{ 'ganglia::web': }
 
     class{ 'ganglia::web':
       $ganglia_ip = '192.168.0.1',
       $ganglia_port = 8652,
     }
+```
 
-$::osfamily = RedHat and EPEL packages
---------------------------------------
+Limitations
+-----------
+
+### Tested Platforms
+
+It has been tested on:
+
+* el5.x
+* el6.x
+
+`$::osfamily == RedHat` and EPEL packages
+-----------------------------------------
 
 As of 2012-11-16, the stable EPEL repos for el5 and el6 contain, respectively,
 packages for ganglia 3.0.7 and 3.1.7.  The ganglia UDP protocol for
@@ -94,6 +125,7 @@ install a custom fact).  The example below divides the previous "mycluster"
 into "mycluster_el5" and "mycluster_el6".  Note that you will also have to
 configure gmetad to pull a gmond agent from each of these new clusters.
 
+```puppet
     $udp_recv_channel = [
       { port => 8649, bind => 'localhost' },
       { port => 8649, bind => '0.0.0.0' },
@@ -130,15 +162,12 @@ configure gmetad to pull a gmond agent from each of these new clusters.
       udp_send_channel   => $udp_send_channel,
       tcp_accept_channel => $tcp_accept_channel,
     }
-
+```
 
 Support
 -------
 
-Please log tickets and issues at [github](https://github.com/jhoblitt/puppet-ganglia/issues)
+Please log tickets and issues at
+[github](https://github.com/jhoblitt/puppet-ganglia/issues)
 
-Copyright
----------
-
-Copyright (C) 2012-2013 Joshua Hoblitt <jhoblitt@cpan.org>
 
