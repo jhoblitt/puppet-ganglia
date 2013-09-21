@@ -1,5 +1,5 @@
 name    'jhoblitt-ganglia'
-version '0.0.2'
+version '1.0.0'
 
 author 'Joshua Hoblitt <jhoblitt@cpan.org>'
 license 'Apache'
