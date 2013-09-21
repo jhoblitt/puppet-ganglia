@@ -1,8 +1,7 @@
 require 'spec_helper'
 
 describe 'ganglia::web' do
-  let(:title) { 'redhat' }
-  let(:facts) { {:osfamily=> 'RedHat'} }
+  let(:facts) {{ :osfamily => 'RedHat', :operatingsystemmajrelease => 6 }}
 
   context 'with out params' do
     let(:params) { { } }

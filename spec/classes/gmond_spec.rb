@@ -1,8 +1,7 @@
 require 'spec_helper'
 
 describe 'ganglia::gmond' do
-  let(:title) { 'redhat' }
-  let(:facts) { {:osfamily=> 'RedHat', :lsbmajordistrelease => 6} }
+  let(:facts) {{ :osfamily => 'RedHat', :operatingsystemmajrelease => 6 }}
 
   context 'with lots of params' do
     udp_recv_channel = [
