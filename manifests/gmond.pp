@@ -18,8 +18,14 @@
 # [*cluster_url*]
 #   string - defaults to "unspecified"
 #
+# [*host_dmax*]
+#   integer - defaults to 0
+#
 # [*host_location*]
 #   string - defaults to "unspecified"
+#
+# [*send_metadata_interval*]
+#   integer - defaults to 300
 #
 # [*udp_send_channel*]
 #   array of hashes.  Valid keys are:
@@ -88,24 +94,28 @@
 #
 
 class ganglia::gmond (
-  $cluster_name       = 'unspecified',
-  $cluster_owner      = 'unspecified',
-  $cluster_latlong    = 'unspecified',
-  $cluster_url        = 'unspecified',
-  $host_location      = 'unspecified',
-  $udp_send_channel   = [
-    { mcast_join => '239.2.11.71', port => 8649, ttl => 1 }
+  $cluster_name           = 'unspecified',
+  $cluster_owner          = 'unspecified',
+  $cluster_latlong        = 'unspecified',
+  $cluster_url            = 'unspecified',
+  $host_dmax              = '0',
+  $host_location          = 'unspecified',
+  $send_metadata_interval = '300',
+  $udp_send_channel       = [
+    { mcast_join          => '239.2.11.71', port => 8649, ttl => 1 }
   ],
   $udp_recv_channel   = [
     { mcast_join => '239.2.11.71', port => 8649, bind => '239.2.11.71' }
   ],
   $tcp_accept_channel = [ { port => 8659 } ],
 ) inherits ganglia::params {
-  validate_string($cluster_name)
-  validate_string($cluster_owner)
-  validate_string($cluster_latlong)
-  validate_string($cluster_url)
-  validate_string($host_location)
+  validate_string($cluster_name, 'unspecified')
+  validate_string($cluster_owner, 'unspecified')
+  validate_string($cluster_latlong, 'unspecified')
+  validate_string($cluster_url, 'unspecified')
+  validate_string($host_dmax, '0')
+  validate_string($host_location, 'unspecified')
+  validate_string($send_metadata_interval, '300')
   validate_array($udp_send_channel)
   validate_array($udp_recv_channel)
   validate_array($tcp_accept_channel)
