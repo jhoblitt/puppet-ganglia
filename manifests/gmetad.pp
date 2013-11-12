@@ -52,8 +52,9 @@ class ganglia::gmetad(
   validate_array($clusters)
   validate_string($gridname)
 
+  anchor{ 'ganglia::gmetad::begin': } ->
   class{ 'ganglia::gmetad::config': } ->
   class{ 'ganglia::gmetad::install': } ->
   class{ 'ganglia::gmetad::service': } ->
-  Class[ 'ganglia::gmetad' ]
+  anchor{ 'ganglia::gmetad::end': }
 }

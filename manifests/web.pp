@@ -37,7 +37,8 @@ class ganglia::web(
   $ganglia_port = 8652,
 ) inherits ganglia::params {
 
+  anchor{ 'ganglia::web::begin': } ->
   class{ 'ganglia::web::install': } ->
   class{ 'ganglia::web::config': } ->
-  Class[ 'ganglia::web' ]
+  anchor{ 'ganglia::web::end': }
 }

@@ -110,8 +110,9 @@ class ganglia::gmond (
   validate_array($udp_recv_channel)
   validate_array($tcp_accept_channel)
 
+  anchor{ 'ganglia::gmond::begin': } ->
   class{ 'ganglia::gmond::install': } ->
   class{ 'ganglia::gmond::config': } ->
   class{ 'ganglia::gmond::service': } ->
-  Class[ 'ganglia::gmond']
+  anchor{ 'ganglia::gmond::end': }
 }
