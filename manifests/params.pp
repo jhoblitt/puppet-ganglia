@@ -70,6 +70,7 @@ class ganglia::params {
 
           $gmond_service_config  = '/etc/ganglia/gmond.conf'
           $gmond_service_erb     = 'ganglia/gmond.conf.ubuntu.erb'
+          $gmond_status_command  = 'pgrep -u ganglia -f /usr/sbin/gmond'
 
           $gmetad_service_config = '/etc/ganglia/gmetad.conf'
           # it's the same file as el6 with only the default user comment changed
