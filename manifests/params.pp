@@ -59,7 +59,7 @@ class ganglia::params {
         ubuntu: {
           # I use ubuntu 12.04 and 13.04, have not tested others
           $gmond_package_name    = 'ganglia-monitor'
-          $gmond_service_name    = 'gangilia-monitor'
+          $gmond_service_name    = 'ganglia-monitor'
 
           $gmetad_package_name   = 'gmetad'
           $gmetad_service_name   = 'gmetad'
