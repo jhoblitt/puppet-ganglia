@@ -70,12 +70,16 @@ class ganglia::params {
 
           $gmond_service_config  = '/etc/ganglia/gmond.conf'
           $gmond_service_erb     = 'ganglia/gmond.conf.ubuntu.erb'
-          $gmond_status_command  = 'pgrep -u ganglia -f /usr/sbin/gmond'
 
           $gmetad_service_config = '/etc/ganglia/gmetad.conf'
-          $gmetad_status_command = 'pgrep -u nobody -f /usr/sbin/gmetad'
           # it's the same file as el6 with only the default user comment changed
           $gmetad_service_erb    = 'ganglia/gmetad.conf.el6.erb'
+
+          # ubuntu 12.10 and below didn't have a status command in the init script
+          if ($::lsbmajdistrelease <= 12) {
+            $gmond_status_command  = 'pgrep -u ganglia -f /usr/sbin/gmond'
+            $gmetad_status_command = 'pgrep -u nobody -f /usr/sbin/gmetad'
+          }
         }
         default: {
           fail("Module ${module_name} is not supported on osfamily/operatingsystem: ${::osfamily}/${::operatingsystem}")
