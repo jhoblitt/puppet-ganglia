@@ -1,0 +1,21 @@
+udp_send_channel {
+  port = <%= @port %>
+  <% if @mcast_join -%>
+    mcast_join = <%= @mcast_join %>
+  <% end -%>
+  <% if @mcast_if -%>
+    mcast_if = <%= @mcast_if %>
+  <% end -%>
+  <% if @host -%>
+    host = <%= @host %>
+  <% end -%>
+  <% if @ttl -%>
+    ttl = <%= @ttl %>
+  <% end -%>
+  <% if @bind -%>
+    bind = <%= @bind %>
+  <% end -%>
+  <% if @bind_hostname -%>
+    bind_hostname = <%= @bind_hostname %>
+  <% end -%>
+}
