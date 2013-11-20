@@ -1,6 +1,5 @@
 # == Class: ganglia::gmond::service
-#
-# enables the gmond service
+# # enables the gmond service
 #
 # === Authors
 #

@@ -73,6 +73,7 @@ class ganglia::params {
           $gmond_status_command  = 'pgrep -u ganglia -f /usr/sbin/gmond'
 
           $gmetad_service_config = '/etc/ganglia/gmetad.conf'
+          $gmetad_status_command = 'pgrep -u nobody -f /usr/sbin/gmetad'
           # it's the same file as el6 with only the default user comment changed
           $gmetad_service_erb    = 'ganglia/gmetad.conf.el6.erb'
         }
