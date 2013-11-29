@@ -20,7 +20,7 @@ define ganglia::gmond::udp_recv_channel (
 ) {
   include ::ganglia::params
   
-  file { "${::ganglia::params::gmond_conf_d}/${name}.conf":
+  file { "${::ganglia::params::gmond_conf_d}/udp_recv_channel_${name}.conf":
     content => template('ganglia/gmond/udp_recv_channel.conf.erb'),
     mode    => '0644',
   }

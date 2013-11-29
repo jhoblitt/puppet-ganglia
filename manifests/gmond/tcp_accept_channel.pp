@@ -19,7 +19,7 @@ define ganglia::gmond::tcp_accept_channel (
 ) {
   include ::ganglia::params
   
-  file { "${::ganglia::params::gmond_conf_d}/${name}.conf":
+  file { "${::ganglia::params::gmond_conf_d}/tcp_accept_channel_${name}.conf":
     content => template('ganglia/gmond/tcp_accept_channel.conf.erb'),
     mode    => '0644',
   }
