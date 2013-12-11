@@ -13,7 +13,7 @@ describe 'ganglia::gmetad' do
 
     let(:params) { {:clusters => clusters} }
     it do
-      should include_class('ganglia::gmetad') 
+      should contain_class('ganglia::gmetad') 
       should contain_file('/etc/ganglia/gmetad.conf') 
     end
   end
