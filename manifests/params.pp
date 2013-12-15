@@ -14,6 +14,7 @@
 class ganglia::params {
   $gmond_package_name   = 'ganglia-gmond'
   $gmond_service_name   = 'gmond'
+  $gmond_conf_d         = '/etc/ganglia/conf.d'
 
   $gmetad_package_name  = 'ganglia-gmetad'
   $gmetad_service_name  = 'gmetad'

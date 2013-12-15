@@ -1,0 +1,13 @@
+tcp_accept_channel {
+  port = <%= @port %>
+  <% if @bind -%>
+    bind = <%= @bind %>
+  <% end -%>
+  <% if @family -%>
+    family = <%= @family %>
+  <% end -%>
+  <% if @timeout -%>
+    timeout = <%= @timeout %>
+  <% end -%>
+}
+

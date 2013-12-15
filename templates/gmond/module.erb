@@ -1,0 +1,21 @@
+modules {
+  module {
+    name = <%= @module_name %>
+    <% if defined? @enabled -%>
+      enabled = <%= @enabled %>
+    <%  end -%>
+    <% if @language -%>
+      language = <%= @language %>
+    <% end -%>
+    <% if @params -%>
+      params = <%= @params %>
+    <% end %>
+    <% if @param -%>
+      <% @param.each do |param, value| -%>
+        param <%= param %> {
+          value = <%= value %>
+        }
+      <% end -%>
+    <% end -%>
+  }
+}
