@@ -1,6 +1,7 @@
 require 'puppetlabs_spec_helper/rake_tasks'
-require 'puppet-syntax/tasks/puppet-syntax'
+require 'rspec-system/rake_task'
 require 'puppet-lint/tasks/puppet-lint'
+require 'puppet-syntax/tasks/puppet-syntax'
 
 PuppetSyntax.exclude_paths = ['spec/fixtures/**/*']
 PuppetLint.configuration.send('disable_class_inherits_from_params_class')

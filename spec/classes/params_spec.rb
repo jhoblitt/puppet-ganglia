@@ -8,26 +8,26 @@ describe 'ganglia::params', :type => :class do
     describe 'el5.x' do
       before { facts[:operatingsystemmajrelease] = '5' }
 
-      it { should include_class('ganglia::params') }
+      it { should contain_class('ganglia::params') }
     end
 
     describe 'el6.x' do
       before { facts[:operatingsystemmajrelease] = '6' }
   
-      it { should include_class('ganglia::params') }
+      it { should contain_class('ganglia::params') }
     end
 
     describe 'el7.x+/fedora' do
       before { facts[:operatingsystemmajrelease] = '7' }
 
-      it { should include_class('ganglia::params') }
+      it { should contain_class('ganglia::params') }
     end
 
     describe 'el4.x' do
       before { facts[:operatingsystemmajrelease] = '4' }
 
       it 'should fail' do
-        expect { should include_class('ganglia::params') }.
+        expect { should contain_class('ganglia::params') }.
           to raise_error(Puppet::Error, /not supported on operatingsystemmajrelease/)
       end
     end
@@ -42,7 +42,7 @@ describe 'ganglia::params', :type => :class do
     end
   
     it 'should fail' do
-      expect { should include_class('ganglia::params') }.
+      expect { should contain_class('ganglia::params') }.
         to raise_error(Puppet::Error, /not supported on Debian/)
     end
   end

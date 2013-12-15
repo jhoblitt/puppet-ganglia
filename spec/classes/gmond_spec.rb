@@ -28,7 +28,7 @@ describe 'ganglia::gmond' do
 
     let(:params) { params }
     it do
-      should include_class('ganglia::gmond') 
+      should contain_class('ganglia::gmond') 
       should contain_file('/etc/ganglia/gmond.conf') 
     end
   end
