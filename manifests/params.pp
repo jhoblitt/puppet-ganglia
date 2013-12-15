@@ -18,22 +18,40 @@ class ganglia::params {
   $gmetad_package_name  = 'ganglia-gmetad'
   $gmetad_service_name  = 'gmetad'
 
+  $vded_package_name    = 'vded'
+  $vded_service_name    = 'vded'
+
   # paths are the same for el5.x & el6.x
   $web_package_name     = 'ganglia-web'
   $web_php_config       = '/etc/ganglia/conf.php'
   $web_php_erb          = 'ganglia/conf.php.el6.erb'
 
+  group { 'ganglia':
+    ensure => 'present',
+    system => true,
+  }
+  user { 'ganglia':
+    ensure  => 'present',
+    comment => 'Ganglia Monitoring System',
+    gid     => 'ganglia',
+    shell   => '/sbin/nologin',
+    system  => true,
+    require => Group['ganglia'],
+  }
   case $::osfamily {
     redhat: {
       case $::operatingsystemmajrelease {
         # the epel packages change uid/gids + install paths between 5 & 6
         5: {
-          $gmond_service_config = '/etc/gmond.conf'
+          $gmond_service_config = '/etc/ganglia/gmond.conf'
           $gmond_service_erb    = 'ganglia/gmond.conf.el5.erb'
 
-          $gmetad_service_config = '/etc/gmetad.conf'
+          $gmetad_service_config = '/etc/ganglia/gmetad.conf'
           # it looks like it's safe to use the same template for el5.x & el6.x
           $gmetad_service_erb    = 'ganglia/gmetad.conf.el6.erb'
+
+          $vded_service_config = '/etc/vded/config'
+          $vded_service_erb = 'ganglia/vded.config.erb'
         }
         # fedora is also part of $::osfamily = redhat so we shouldn't default
         # to failing on el7.x +
@@ -44,6 +62,9 @@ class ganglia::params {
 
           $gmetad_service_config = '/etc/ganglia/gmetad.conf'
           $gmetad_service_erb    = 'ganglia/gmetad.conf.el6.erb'
+
+          $vded_service_config = '/etc/vded/config'
+          $vded_service_erb = 'ganglia/vded.config.erb'
         }
         default: {
           fail("Module ${module_name} is not supported on operatingsystemmajrelease ${::operatingsystemmajrelease}")

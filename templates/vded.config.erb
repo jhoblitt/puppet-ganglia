@@ -1,0 +1,17 @@
+#
+# Configuration options for VDED
+#
+# -port=PORT       Port to listen for requests (defaults to 48333)
+# -state=FILE      Path for JSON serialization (defaults to "/var/lib/vded/state.json"
+# -ghost=HOST      Ganglia host (defaults to "localhost")
+# -gport=PORT      Ganglia port (defaults to 8649)
+# -gspoof=IP:HOST  Ganglia spoof string (defaults to "")
+# -max=ENTRIES      Maximum number of entries to retain (defaults to 300)
+#
+
+SPOOF_HOSTNAME="$( hostname -s | sed -e 's/p[12]$//g;' ).<%= @domain %>"
+SPOOF_IP=$( host $SPOOF_HOSTNAME | grep 'has address' | cut -d' ' -f4 | head -1 )
+GHOST="<%= @ghosts.map{|v| v['host']}.join(",") -%>"
+
+VDED_PORT=<%= @port %>
+VDED_OPTIONS=" -port=${VDED_PORT} -state=/var/lib/vded/state.json -ghost=${GHOST} -gport=8649 -gspoof=${SPOOF_IP}:${SPOOF_HOSTNAME} -max=1440 "

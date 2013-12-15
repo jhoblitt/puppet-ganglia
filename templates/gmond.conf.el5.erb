@@ -8,9 +8,11 @@ globals {
   max_udp_msg_len = 1472        
   mute = no             
   deaf = no             
-  host_dmax = 86400 /*secs */ 
+  allow_extra_data = yes
+  host_dmax = <%= @host_dmax %> /*secs */ 
   cleanup_threshold = 300 /*secs */ 
   gexec = no             
+  send_metadata_interval = 15 /*secs */
 } 
 
 /* If a cluster attribute is specified, then all gmond hosts are wrapped inside 
@@ -32,6 +34,7 @@ host {
    used to only support having a single channel */ 
 <% @udp_send_channel.each do |channel| -%>
 udp_send_channel { 
+  bind_hostname = yes
   <%- if channel['mcast_join'] then -%>
   mcast_join = <%= channel['mcast_join'] %>
   <%- end -%>
@@ -72,6 +75,45 @@ tcp_accept_channel {
 } 
 
 <% end -%>
+/* Each metrics module that is referenced by gmond must be specified and
+   loaded. If the module has been statically linked with gmond, it does
+   not require a load path. However all dynamically loadable modules must
+   include a load path. */
+modules {
+  module {
+    name = "core_metrics"
+  }
+  module {
+    name = "cpu_module"
+    path = "modcpu.so"
+  }
+  module {
+    name = "disk_module"
+    path = "moddisk.so"
+  }
+  module {
+    name = "load_module"
+    path = "modload.so"
+  }
+  module {
+    name = "mem_module"
+    path = "modmem.so"
+  }
+  module {
+    name = "net_module"
+    path = "modnet.so"
+  }
+  module {
+    name = "proc_module"
+    path = "modproc.so"
+  }
+  module {
+    name = "sys_module"
+    path = "modsys.so"
+  }
+}
+
+include ('/etc/ganglia/conf.d/*.conf')
 /* The old internal 2.5.x metric array has been replaced by the following 
    collection_group directives.  What follows is the default behavior for 
    collecting and sending metrics that is as close to 2.5.x behavior as 
@@ -95,31 +137,40 @@ collection_group {
   time_threshold = 1200 
   metric { 
     name = "cpu_num" 
+    title = "CPU Count"
   } 
   metric { 
     name = "cpu_speed" 
+    title = "CPU Speed"
   } 
   metric { 
     name = "mem_total" 
+    title = "Memory Total"
   } 
   /* Should this be here? Swap can be added/removed between reboots. */ 
   metric { 
     name = "swap_total" 
+    title = "Swap Space Total"
   } 
   metric { 
     name = "boottime" 
+    title = "Last Boot Time"
   } 
   metric { 
     name = "machine_type" 
+    title = "Machine Type"
   } 
   metric { 
     name = "os_name" 
+    title = "Operating System"
   } 
   metric { 
     name = "os_release" 
+    title = "Operating System Release"
   } 
   metric { 
-    name = "location" 
+    name = "location"
+    title = "Location"
   } 
 } 
 
@@ -130,6 +181,7 @@ collection_group {
   time_threshold = 300 
   metric { 
     name = "gexec" 
+    title = "Gexec Status"
   } 
 } 
 
@@ -143,36 +195,44 @@ collection_group {
   metric { 
     name = "cpu_user"  
     value_threshold = "1.0" 
+    title = "CPU User"
   } 
   metric { 
     name = "cpu_system"   
     value_threshold = "1.0" 
+    title = "CPU System"
   } 
   metric { 
     name = "cpu_idle"  
     value_threshold = "5.0" 
+    title = "CPU Idle"
   } 
   metric { 
     name = "cpu_nice"  
     value_threshold = "1.0" 
+    title = "CPU Nice"
   } 
   metric { 
     name = "cpu_aidle" 
     value_threshold = "5.0" 
+    title = "CPU aidle"
   } 
   metric { 
     name = "cpu_wio" 
     value_threshold = "1.0" 
+    title = "CPU wio"
   } 
   /* The next two metrics are optional if you want more detail... 
      ... since they are accounted for in cpu_system.  
   metric { 
     name = "cpu_intr" 
     value_threshold = "1.0" 
+    title = "CPU intr"
   } 
   metric { 
     name = "cpu_sintr" 
     value_threshold = "1.0" 
+    title = "CPU sintr"
   } 
   */ 
 } 
@@ -184,14 +244,17 @@ collection_group {
   metric { 
     name = "load_one" 
     value_threshold = "1.0" 
+    title = "One Minute Load Average"
   } 
   metric { 
     name = "load_five" 
     value_threshold = "1.0" 
+    title = "Five Minute Load Average"
   } 
   metric { 
     name = "load_fifteen" 
     value_threshold = "1.0" 
+    title = "Fifteen Minute Load Average"
   }
 } 
 
@@ -202,10 +265,12 @@ collection_group {
   metric { 
     name = "proc_run" 
     value_threshold = "1.0" 
+    title = "Total Running Processes"
   } 
   metric { 
     name = "proc_total" 
     value_threshold = "1.0" 
+    title = "Total Processes"
   } 
 }
 
@@ -218,22 +283,27 @@ collection_group {
   metric { 
     name = "mem_free" 
     value_threshold = "1024.0" 
+    title = "Free Memory"
   } 
   metric { 
     name = "mem_shared" 
     value_threshold = "1024.0" 
+    title = "Shared Memory"
   } 
   metric { 
     name = "mem_buffers" 
     value_threshold = "1024.0" 
+    title = "Memory Buffers"
   } 
   metric { 
     name = "mem_cached" 
     value_threshold = "1024.0" 
+    title = "Cached Memory"
   } 
   metric { 
     name = "swap_free" 
     value_threshold = "1024.0" 
+    title = "Free Swap Space"
   } 
 } 
 
@@ -243,18 +313,22 @@ collection_group {
   metric { 
     name = "bytes_out" 
     value_threshold = 4096 
+    title = "Bytes Sent"
   } 
   metric { 
     name = "bytes_in" 
     value_threshold = 4096 
+    title = "Bytes Received"
   } 
   metric { 
     name = "pkts_in" 
     value_threshold = 256 
+    title = "Packets Received"
   } 
   metric { 
     name = "pkts_out" 
     value_threshold = 256 
+    title = "Packets Sent"
   } 
 }
 
@@ -265,6 +339,7 @@ collection_group {
   metric { 
     name = "disk_total" 
     value_threshold = 1.0 
+    title = "Total Disk Space"
   } 
 }
 
@@ -274,10 +349,12 @@ collection_group {
   metric { 
     name = "disk_free" 
     value_threshold = 1.0 
+    title = "Disk Space Available"
   } 
   metric { 
     name = "part_max_used" 
     value_threshold = 1.0 
+    title = "Maximum Disk Space Used"
   } 
 }
 
