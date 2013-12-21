@@ -14,18 +14,21 @@ Puppet ganglia Module
 4. [Limitations](#limitations)
     * [Tested Platforms](#tested-platforms)
     * [`$::osfamily == RedHat` and EPEL packages](#osfamily--redhat-and-epel-packages)
-5. [Support](#support)
+5. [Versioning](#versioning)
+6. [Support](#support)
+7. [See Also](#see-also)
 
 
 Overview
 --------
 
-Install and configure the ganglia gmond & gmetad daemons + web front end
+Manages ganglia gmond & gmetad daemons + web front end
+
 
 Description
 -----------
 
-This puppet module will install and configure the
+This is a puppet module for installation and configuration of the
 [`ganglia`](http://ganglia.sourceforge.net/) `gmond` & `gmetad` daemons + web
 front end.
 
@@ -33,7 +36,9 @@ front end.
 Usage
 -----
 
-### ganglia::gmond
+### `ganglia::gmond`
+
+This class manages the configurtion of the Ganglia `gmond` daemon.
 
 ```puppet
     # unicast
@@ -72,6 +77,44 @@ Usage
     }
 ```
 
+ * `cluster_name`
+
+    `String` defaults to: `unspecified`
+
+ * `cluster_owner`
+
+    `String` defaults to: `unspecified`
+
+ * `cluster_latlong`
+
+    `String` defaults to: `unspecified`
+
+ * `cluster_url`
+
+    `String` defaults to: `unspecified`
+
+ * `host_location`
+
+    `String` defaults to: `unspecified`
+
+ * `udp_send_channel`
+
+    `Array of Hash` defaults to:
+
+        [ { mcast_join => '239.2.11.71', port => 8649, ttl => 1 } ]
+
+ * `udp_recv_channel`
+
+    `Array of Hash` defaults to:
+
+         [ { mcast_join => '239.2.11.71', port => 8649, bind => '239.2.11.71' } ]
+
+ * `tcp_accept_channel` 
+
+    `Array of Hash` defaults to:
+
+        [ { port => 8659 } ]
+
 ### ganglia::gmetad
 
 ```puppet
@@ -88,6 +131,16 @@ Usage
     }
 ```
 
+ * `clusters` 
+
+    `Array of Hash` defaults to:
+
+        [ { 'name' => 'my cluster', 'address' => 'localhost' } ]
+
+ * `gridname` 
+
+    `String` defaults to: `undef`
+
 ### ganglia::web
 
 ```puppet
@@ -98,6 +151,15 @@ Usage
       $ganglia_port = 8652,
     }
 ```
+
+ * `ganglia_ip` 
+
+    `String` defaults to: `127.0.0.1`
+
+ * `ganglia_port` 
+
+    `String` defaults to: `8652`
+
 
 Limitations
 -----------
@@ -112,8 +174,7 @@ It has been tested on:
 * ubuntu 13.04
 * debian 6.07
 
-`$::osfamily == RedHat` and EPEL packages
------------------------------------------
+### `$::osfamily == RedHat` and EPEL packages
 
 As of 2012-11-16, the stable EPEL repos for el5 and el6 contain, respectively,
 packages for ganglia 3.0.7 and 3.1.7.  The ganglia UDP protocol for
@@ -167,10 +228,23 @@ configure gmetad to pull a gmond agent from each of these new clusters.
     }
 ```
 
+
+Versioning
+----------
+
+This module is versioned according to the [Semantic Versioning
+2.0.0](http://semver.org/spec/v2.0.0.html) specification.
+
+
 Support
 -------
 
 Please log tickets and issues at
 [github](https://github.com/jhoblitt/puppet-ganglia/issues)
 
+
+See Also
+--------
+
+ * [Ganglia](http://ganglia.sourceforge.net/)
 
