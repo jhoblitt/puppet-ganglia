@@ -2,8 +2,11 @@ require 'spec_helper_system'
 
 describe 'ganglia::gmetad class' do
   case node.facts['osfamily']
-  when 'RedHat', 'Debian'
+  when 'RedHat'
     package_name = 'ganglia-gmetad'
+    service_name = 'gmetad'
+  when 'Debian'
+    package_name = 'gmetad'
     service_name = 'gmetad'
   end
 
@@ -11,7 +14,9 @@ describe 'ganglia::gmetad class' do
     # Using puppet_apply as a helper
     it 'should work with no errors' do
       pp = <<-EOS
-        class { 'epel': } ->
+        if $::osfamily == 'RedHat' {
+          class { 'epel': } -> Class['ganglia::gmetad']
+        }
         class { 'ganglia::gmetad': }
       EOS
 
