@@ -55,38 +55,29 @@ class ganglia::params {
       }
     }
     debian: {
-      case $::operatingsystem {
-        ubuntu: {
-          # I use ubuntu 12.04 and 13.04, have not tested others
-          $gmond_package_name    = 'ganglia-monitor'
-          $gmond_service_name    = 'ganglia-monitor'
+      $gmond_package_name    = 'ganglia-monitor'
+      $gmond_service_name    = 'ganglia-monitor'
 
-          $gmetad_package_name   = 'gmetad'
-          $gmetad_service_name   = 'gmetad'
-          $gmetad_user           = 'nobody'
+      $gmetad_package_name   = 'gmetad'
+      $gmetad_service_name   = 'gmetad'
+      $gmetad_user           = 'nobody'
 
-          $web_package_name      = 'ganglia-webfrontend'
-          $web_php_config        = '/usr/share/ganglia-webfrontend/conf.php'
+      $web_package_name      = 'ganglia-webfrontend'
+      $web_php_config        = '/usr/share/ganglia-webfrontend/conf.php'
 
-          $gmond_service_config  = '/etc/ganglia/gmond.conf'
-          $gmond_service_erb     = 'ganglia/gmond.conf.ubuntu.erb'
+      $gmond_service_config  = '/etc/ganglia/gmond.conf'
+      $gmond_service_erb     = 'ganglia/gmond.conf.debian.erb'
 
-          $gmetad_service_config = '/etc/ganglia/gmetad.conf'
-          # it's the same file as el6 with only the default user comment changed
-          $gmetad_service_erb    = 'ganglia/gmetad.conf.el6.erb'
+      $gmetad_service_config = '/etc/ganglia/gmetad.conf'
+      # it's the same file as el6 with only the default user comment changed
+      $gmetad_service_erb    = 'ganglia/gmetad.conf.el6.erb'
 
-          # ubuntu 12.10 and below didn't have a status command in the init script
-          if ($::lsbmajdistrelease <= 12) {
-            $gmond_status_command  = 'pgrep -u ganglia -f /usr/sbin/gmond'
-            $gmetad_status_command = 'pgrep -u nobody -f /usr/sbin/gmetad'
-          }
-        }
-        default: {
-          fail("Module ${module_name} is not supported on osfamily/operatingsystem: ${::osfamily}/${::operatingsystem}")
-        }
+      # ubuntu 12.10 and below didn't have a status command in the init script
+      if ! ($::operatingsystem == 'Ubuntu' and $::lsbmajdistrelease > 12) {
+        $gmond_status_command  = 'pgrep -u ganglia -f /usr/sbin/gmond'
+        $gmetad_status_command = 'pgrep -u nobody -f /usr/sbin/gmetad'
       }
     }
-
     default: {
       fail("Module ${module_name} is not supported on ${::operatingsystem}")
     }

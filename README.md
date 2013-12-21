@@ -110,6 +110,7 @@ It has been tested on:
 * el6.x
 * ubuntu 12.04
 * ubuntu 13.04
+* debian 6.07
 
 `$::osfamily == RedHat` and EPEL packages
 -----------------------------------------
