@@ -36,6 +36,8 @@ class ganglia::web(
   $ganglia_ip = '127.0.0.1',
   $ganglia_port = 8652,
 ) inherits ganglia::params {
+  validate_string($ganglia_ip)
+  validate_string($ganglia_port)
 
   anchor{ 'ganglia::web::begin': } ->
   class{ 'ganglia::web::install': } ->
