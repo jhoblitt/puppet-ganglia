@@ -33,17 +33,41 @@ describe 'ganglia::params', :type => :class do
     end
   end
 
+  describe 'for osfamily debian' do
+    let :facts do
+      {
+        :osfamily => 'Debian'
+      }
+    end
+
+    describe 'for operatingsystem ubuntu' do
+      before { facts[:operatingsystem] = 'Ubuntu' ; facts[:lsbmajdistrelease] = 12 }
+
+      it { should contain_class('ganglia::params') }
+    end
+
+    describe 'for operatingsystem debian' do
+      before { facts[:operatingsystem] = 'Debian' }
+
+      it 'should fail' do
+        expect { should contain_class('ganglia::params') }.
+          to raise_error(Puppet::Error, /not supported on .*Debian\/Debian/)
+      end
+    end
+  end
+
+
   describe 'unsupported osfamily' do
     let :facts do 
       {
-        :osfamily        => 'Debian',
-        :operatingsystem => 'Debian',
+        :osfamily        => 'Solaris',
+        :operatingsystem => 'Solaris',
       }
     end
   
     it 'should fail' do
       expect { should contain_class('ganglia::params') }.
-        to raise_error(Puppet::Error, /not supported on Debian/)
+        to raise_error(Puppet::Error, /not supported on Solaris/)
     end
   end
 

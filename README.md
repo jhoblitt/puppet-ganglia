@@ -108,6 +108,8 @@ It has been tested on:
 
 * el5.x
 * el6.x
+* ubuntu 12.04
+* ubuntu 13.04
 
 `$::osfamily == RedHat` and EPEL packages
 -----------------------------------------
