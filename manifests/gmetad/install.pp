@@ -11,9 +11,9 @@
 # Copyright (C) 2012-2013 Joshua Hoblitt
 #
 
-class ganglia::gmetad::install inherits ganglia::gmetad {
+class ganglia::gmetad::install {
 
-  package { $gmetad_package_name:
+  package { $::ganglia::params::gmetad_package_name:
     ensure => present,
   }
 }

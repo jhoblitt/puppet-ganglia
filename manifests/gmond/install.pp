@@ -11,9 +11,9 @@
 # Copyright (C) 2012-2013 Joshua Hoblitt
 #
 
-class ganglia::gmond::install inherits ganglia::gmond {
+class ganglia::gmond::install {
 
-  package { $gmond_package_name:
+  package { $::ganglia::params::gmond_package_name:
     ensure => present,
   }
 }

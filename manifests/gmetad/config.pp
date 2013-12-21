@@ -11,14 +11,14 @@
 # Copyright (C) 2012-2013 Joshua Hoblitt
 #
 
-class ganglia::gmetad::config inherits ganglia::gmetad {
+class ganglia::gmetad::config {
 
-  file { $gmetad_service_config:
+  file { $::ganglia::params::gmetad_service_config:
     ensure  => present,
     owner   => 'root',
     group   => 'root',
     mode    => '0644',
-    content => template($gmetad_service_erb),
+    content => template($::ganglia::params::gmetad_service_erb),
     notify  => Class['ganglia::gmetad::service'],
   }
 }

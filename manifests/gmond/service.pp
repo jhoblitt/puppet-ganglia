@@ -10,19 +10,19 @@
 # Copyright (C) 2012-2013 Joshua Hoblitt
 #
 
-class ganglia::gmond::service inherits ganglia::gmond{
+class ganglia::gmond::service {
 
-  if ($gmond_status_command) {
+  if ($::ganglia::params::gmond_status_command) {
     $hasstatus = false
   } else {
     $hasstatus = true
   }
 
-  service { $gmond_service_name:
+  service { $::ganglia::params::gmond_service_name:
     ensure     => running,
     hasstatus  => $hasstatus,
     hasrestart => true,
     enable     => true,
-    status     => $gmond_status_command,
+    status     => $::ganglia::params::gmond_status_command,
   }
 }

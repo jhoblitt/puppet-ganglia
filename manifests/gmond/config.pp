@@ -11,14 +11,14 @@
 # Copyright (C) 2012-2013 Joshua Hoblitt
 #
 
-class ganglia::gmond::config inherits ganglia::gmond {
+class ganglia::gmond::config {
 
-  file { $gmond_service_config:
+  file { $::ganglia::params::gmond_service_config:
     ensure  => present,
     owner   => 'root',
     group   => 'root',
     mode    => '0644',
-    content => template($gmond_service_erb),
+    content => template($::ganglia::params::gmond_service_erb),
     notify  => Class['ganglia::gmond::service'],
   }
 }

@@ -11,9 +11,9 @@
 # Copyright (C) 2012-2013 Joshua Hoblitt
 #
 
-class ganglia::web::install inherits ganglia::web {
+class ganglia::web::install {
 
-  package { $web_package_name:
+  package { $::ganglia::params::web_package_name:
     ensure => present,
   }
 }

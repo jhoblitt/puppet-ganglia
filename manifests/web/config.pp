@@ -11,13 +11,13 @@
 # Copyright (C) 2012-2013 Joshua Hoblitt
 #
 
-class ganglia::web::config inherits ganglia::web {
+class ganglia::web::config {
 
-  file { $web_php_config:
+  file { $::ganglia::params::web_php_config:
     ensure  => present,
     owner   => 'root',
     group   => 'root',
     mode    => '0644',
-    content => template($web_php_erb),
+    content => template($::ganglia::params::web_php_erb),
   }
 }

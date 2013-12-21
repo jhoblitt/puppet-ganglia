@@ -11,19 +11,19 @@
 # Copyright (C) 2012-2013 Joshua Hoblitt
 #
 
-class ganglia::gmetad::service inherits ganglia::gmetad {
+class ganglia::gmetad::service {
 
-  if ($gmetad_status_command) {
+  if ($::ganglia::params::gmetad_status_command) {
     $hasstatus = false
   } else {
     $hasstatus = true
   }
 
-  service { $gmetad_service_name:
+  service { $::ganglia::params::gmetad_service_name:
     ensure     => running,
     hasstatus  => $hasstatus,
     hasrestart => true,
     enable     => true,
-    status     => $gmetad_status_command,
+    status     => $::ganglia::params::gmetad_status_command,
   }
 }
