@@ -33,6 +33,7 @@ host {
 
 /* Feel free to specify as many udp_send_channels as you like.  Gmond
    used to only support having a single channel */
+<% unless @udp_send_channel.nil? -%>
 <% @udp_send_channel.each do |channel| -%>
 udp_send_channel {
   <%- if channel['mcast_join'] then -%>
@@ -50,7 +51,9 @@ udp_send_channel {
 }
 
 <% end -%>
+<% end -%>
 /* You can specify as many udp_recv_channels as you like as well. */
+<% unless @udp_recv_channel.nil? -%>
 <% @udp_recv_channel.each do |channel| -%>
 udp_recv_channel {
   <%- if channel['mcast_join'] then -%>
@@ -65,8 +68,10 @@ udp_recv_channel {
 }
 
 <% end -%>
+<% end -%>
 /* You can specify as many tcp_accept_channels as you like to share
    an xml description of the state of the cluster */
+<% unless @tcp_accept_channel.nil? -%>
 <% @tcp_accept_channel.each do |channel| -%>
 tcp_accept_channel {
   <%- if channel['port'] then -%>
@@ -74,6 +79,7 @@ tcp_accept_channel {
   <%- end -%>
 }
 
+<% end -%>
 <% end -%>
 /* Each metrics module that is referenced by gmond must be specified and
    loaded. If the module has been statically linked with gmond, it does
