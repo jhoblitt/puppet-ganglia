@@ -1,5 +1,9 @@
 
 #### [Current]
+ * [b361ec4](../../commit/b361ec4) - __(Joshua Hoblitt)__ rm old Changelog (replaced by CHANGELOG.md)
+
+#### v1.2.1
+ * [2f3a5c7](../../commit/2f3a5c7) - __(Joshua Hoblitt)__ bump version to v1.2.1
  * [73457c5](../../commit/73457c5) - __(Joshua Hoblitt)__ Merge pull request [#11](../../issues/11) from jhoblitt/gmond_template_array_checking
 
 change gmond erb templates to gracefully handle nil variables
