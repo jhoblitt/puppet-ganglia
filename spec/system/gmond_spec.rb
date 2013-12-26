@@ -44,4 +44,15 @@ describe 'ganglia::gmond class' do
   describe service(daemon_name) do
     it { should be_running }
   end
+
+  # default udp_recv_channel
+  describe port(8649) do
+    it { should be_listening.with('udp') }
+  end
+
+  # default tcp_accept_channel
+  describe port(8659) do
+    it { should be_listening.with('tcp') }
+  end
+
 end
