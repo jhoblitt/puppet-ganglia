@@ -9,7 +9,7 @@ globals {
   mute = no
   deaf = no
   allow_extra_data = yes
-  host_dmax = 0 /*secs */
+  host_dmax = <%= @host_dmax %> /*secs */
   cleanup_threshold = 300 /*secs */
   gexec = no
   send_metadata_interval = 300 /*secs */
@@ -35,6 +35,9 @@ host {
    used to only support having a single channel */
 <% @udp_send_channel.each do |channel| -%>
 udp_send_channel {
+  <%- if channel['bind_hostname'] then -%>
+  bind_hostname = <%= channel['bind_hostname'] %>
+  <%- end -%>
   <%- if channel['mcast_join'] then -%>
   mcast_join = <%= channel['mcast_join'] %>
   <%- end -%>

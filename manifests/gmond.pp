@@ -18,19 +18,26 @@
 # [*cluster_url*]
 #   string - defaults to "unspecified"
 #
+# [*host_dmax*]
+#   integer - defaults to 0
+#
 # [*host_location*]
 #   string - defaults to "unspecified"
+#
+# [*send_metadata_interval*]
+#   integer - defaults to 300
 #
 # [*udp_send_channel*]
 #   array of hashes.  Valid keys are:
 #
 #   -mcast_join
+#   -bind_hostname
 #   -host
 #   -port
 #   -ttl
 #
 #   defaults to:
-#   [ { mcast_join => '239.2.11.71', port => 8649, bind => '239.2.11.71' } ]
+#   [ { mcast_join => '239.2.11.71', bind_hostname => 'no', port => 8649, bind => '239.2.11.71' } ]
 #
 # [*udp_recv_channel*]
 #   array of hashes.  Valid keys are:
@@ -59,8 +66,8 @@
 #      { port => 8649, bind => '0.0.0.0' },
 #    ]
 #    $udp_send_channel = [
-#      { port => 8649, host => 'test1.example.org', ttl => 2 },
-#      { port => 8649, host => 'test2.example.org', ttl => 2 },
+#      { port => 8649, bind_hostname => 'yes', host => 'test1.example.org', ttl => 2 },
+#      { port => 8649, bind_hostname => 'yes', host => 'test2.example.org', ttl => 2 },
 #    ]
 #    $tcp_accept_channel = [
 #      { port => 8649 },
@@ -88,13 +95,15 @@
 #
 
 class ganglia::gmond (
-  $cluster_name       = 'unspecified',
-  $cluster_owner      = 'unspecified',
-  $cluster_latlong    = 'unspecified',
-  $cluster_url        = 'unspecified',
-  $host_location      = 'unspecified',
-  $udp_send_channel   = [
-    { mcast_join => '239.2.11.71', port => 8649, ttl => 1 }
+  $cluster_name           = 'unspecified',
+  $cluster_owner          = 'unspecified',
+  $cluster_latlong        = 'unspecified',
+  $cluster_url            = 'unspecified',
+  $host_dmax              = '0',
+  $host_location          = 'unspecified',
+  $send_metadata_interval = '300',
+  $udp_send_channel       = [
+    { mcast_join => '239.2.11.71', bind_hostname => 'no', port => 8649, ttl => 1 }
   ],
   $udp_recv_channel   = [
     { mcast_join => '239.2.11.71', port => 8649, bind => '239.2.11.71' }

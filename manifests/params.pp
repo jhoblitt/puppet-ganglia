@@ -23,6 +23,17 @@ class ganglia::params {
   $web_php_config       = '/etc/ganglia/conf.php'
   $web_php_erb          = 'ganglia/conf.php.el6.erb'
 
+  group { 'ganglia':
+    ensure => 'present',
+    system => true,
+  }
+  user { 'ganglia':
+    ensure  => 'present',
+    comment => 'Ganglia Monitoring System',
+    gid     => 'ganglia',
+    shell   => '/sbin/nologin',
+    system  => true,
+  }
   case $::osfamily {
     redhat: {
       case $::operatingsystemmajrelease {
