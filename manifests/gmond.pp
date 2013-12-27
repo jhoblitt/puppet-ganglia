@@ -110,13 +110,13 @@ class ganglia::gmond (
   ],
   $tcp_accept_channel = [ { port => 8659 } ],
 ) inherits ganglia::params {
-  validate_string($cluster_name, 'unspecified')
-  validate_string($cluster_owner, 'unspecified')
-  validate_string($cluster_latlong, 'unspecified')
-  validate_string($cluster_url, 'unspecified')
-  validate_string($host_dmax, '0')
-  validate_string($host_location, 'unspecified')
-  validate_string($send_metadata_interval, '300')
+  validate_string($cluster_name)
+  validate_string($cluster_owner)
+  validate_string($cluster_latlong)
+  validate_string($cluster_url)
+  validate_string($host_dmax)
+  validate_string($host_location)
+  validate_string($send_metadata_interval)
   validate_array($udp_send_channel)
   validate_array($udp_recv_channel)
   validate_array($tcp_accept_channel)
