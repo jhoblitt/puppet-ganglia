@@ -39,6 +39,7 @@
 #   -mcast_join
 #   -port
 #   -bind
+#   -family
 #
 #   defaults to:
 #   [ { mcast_join => '239.2.11.71', port => 8649, ttl => 1 } ]
@@ -47,6 +48,7 @@
 #   array of hashes.  Valid keys are:
 #
 #   -port
+#   -family
 #
 #   defaults to:
 #   [ { port => 8659 } ]
