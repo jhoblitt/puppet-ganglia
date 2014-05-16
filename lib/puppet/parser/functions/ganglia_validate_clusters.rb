@@ -3,7 +3,52 @@ module Puppet::Parser::Functions
   newfunction(:ganglia_validate_clusters, :doc => <<-'ENDHEREDOC') do |args|
     The following values will pass:
 
+    * [{ 'name' => 'my cluster', 'address' => 'localhost' }]
+    * [{ 'name' => 'my cluster', 'address' => 'localhost', 'polling_interval' => 10 }]
+    * [
+      {
+        'name'    => 'foo',
+        'address' => [
+          'foo1.example.org',
+          'foo2.example.org',
+          'foo3.example.org',
+        ],
+      },
+      {
+        'name'             => 'bar',
+        'address'          => [
+          'bar1.example.org',
+          'bar2.example.org',
+          'bar3.example.org'
+        ],
+        'polling_interval' => 42,
+      },
+      {
+        'name'    => 'baz',
+        'address' => [
+          'baz1.example.org',
+          'baz2.example.org',
+          'baz3.example.org',
+        ],
+      },
+    ]
+
     The following values will fail, causing compilation to abort:
+
+    * true
+    * false
+    * {}
+    * 'foo'
+    * undef
+    * []
+    * ['foo', 'bar']
+    * [{}, {}]
+    * [{ 'address' => 'localhost' }]
+    * [{ 'name' => ['my cluster'], 'address' => 'localhost' }]
+    * [{ 'name' => 'my cluster' }]
+    * [{ 'name' => 'my cluster', 'address' => {'a' => 1} }]
+    * [{ 'name' => 'my cluster', 'address' => 'localhost', 'polling_interval' => [ 10 ] }]
+    * [{ 'name' => 'my cluster', 'address' => 'localhost', 'polling_interval' => 10, 'foo' => 1, 'bar' => 2 }]
 
     ENDHEREDOC
 
