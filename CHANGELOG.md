@@ -1,5 +1,47 @@
 
 #### [Current]
+ * [221b474](../../commit/221b474) - __(Joshua Hoblitt)__ Merge pull request [#14](../../issues/14) from jhoblitt/feature/validate_gmetad_clusters
+
+Feature/validate gmetad clusters
+ * [fbbeb0e](../../commit/fbbeb0e) - __(Joshua Hoblitt)__ make ganglia_validate_clusters output consistently testable
+
+Between Ruby 1.8.7 and 1.9.3+
+
+ * [59d378d](../../commit/59d378d) - __(Joshua Hoblitt)__ add docstring to ganglia_validate_clusters() function
+ * [53988e9](../../commit/53988e9) - __(Joshua Hoblitt)__ deeply validate ganglia::gmetad's clusters parameter
+
+This should address the confusing template error reported in [#12](../../issues/12) when
+incorrect data is passed to this parameter.
+
+ * [aa98bee](../../commit/aa98bee) - __(Joshua Hoblitt)__ update copyright notice year (-2014)
+ * [375dad9](../../commit/375dad9) - __(Joshua Hoblitt)__ update .gitignore
+ * [57fde5b](../../commit/57fde5b) - __(Joshua Hoblitt)__ Merge pull request [#13](../../issues/13) from xavpaice/master
+
+Add IPv6 support for Debian based gmond
+ * [bd53972](../../commit/bd53972) - __(Xav Paice)__ Add send_metadata_interval at 300s to debian
+
+Previously, the send_metadata_interval for gmond was set at 0 for
+Debian based systems, and 300 for Red Hat based systems.  This change
+synchronizes the setting such that Debian is now 300s as well.
+
+ * [d88c383](../../commit/d88c383) - __(Xav Paice)__ Add IPv6 capability for RHEL/CentOS
+
+For gmond.conf, add same capability as for Debian systems.
+
+ * [d21f12e](../../commit/d21f12e) - __(Xav Paice)__ Add IPv6 support for gmond listener
+
+This commit adds the 'family' parameter for udp and tcp listeners
+for the gmond config, for Debian based systems.
+
+ * [9b84864](../../commit/9b84864) - __(Xav Paice)__ Add IPv6 support for gmond listener
+
+This commit adds the 'family' parameter for udp and tcp listeners
+for the gmond config, for Debian based systems.
+
+ * [37252ad](../../commit/37252ad) - __(Joshua Hoblitt)__ trim travis test matrix
+
+#### v1.2.2
+ * [5f22d49](../../commit/5f22d49) - __(Joshua Hoblitt)__ bump version to v1.2.2
  * [b361ec4](../../commit/b361ec4) - __(Joshua Hoblitt)__ rm old Changelog (replaced by CHANGELOG.md)
 
 #### v1.2.1
