@@ -106,7 +106,7 @@ module Puppet::Parser::Functions
       # any other keys should be rejected
       extras = c.keys - %w{ name address polling_interval }
       if extras.length > 0
-        raise Puppet::ParseError, ("ganglia_validate_clusters(): nested Hash contains unknown keys (#{extras.sort})") 
+        raise Puppet::ParseError, ("ganglia_validate_clusters(): nested Hash contains unknown keys (#{extras.sort.join(' ')})") 
       end
     end
   end

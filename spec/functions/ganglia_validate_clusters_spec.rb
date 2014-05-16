@@ -78,7 +78,7 @@ describe 'ganglia_validate_clusters', :type => :puppet_function do
   it 'should fail with unknown keys' do
     clusters = [{ 'name' => 'my cluster', 'address' => 'localhost', 'polling_interval' => 10, 'foo' => 1, 'bar' => 2 }]
     expect { subject.call([clusters]) }.
-      to raise_error(Puppet::ParseError, Regexp.new(Regexp.escape('contains unknown keys (["bar", "foo"])')))
+      to raise_error(Puppet::ParseError, /contains unknown keys \(bar foo\)/)
   end
 
   it 'work with reasonable input - simple example' do
