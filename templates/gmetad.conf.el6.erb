@@ -99,9 +99,10 @@ gridname "<%= @gridname %>"
 # setuid off
 #
 #-------------------------------------------------------------------------------
-# User gmetad will setuid to (defaults to "<%= @gmetad_user %>")
-# default: "<%= @gmetad_user %>"
-# setuid_username "<%= @gmetad_user %>"
+# User gmetad will setuid to (defaults to "nobody")
+# default: "nobody"
+setuid_username "<%= @gmetad_user %>"
+
 #
 #-------------------------------------------------------------------------------
 # The port gmetad will answer requests for XML
