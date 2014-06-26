@@ -12,7 +12,7 @@ globals {
   host_dmax = <%= @ganglia_globals_host_dmax %> /*secs */
   cleanup_threshold = 300 /*secs */
   gexec = no
-  send_metadata_interval = 300 /*secs */
+  send_metadata_interval = <%= @ganglia_globals_send_metadata_interval %> /*secs */
 }
 
 /*

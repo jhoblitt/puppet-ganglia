@@ -92,6 +92,7 @@
 class ganglia::gmond (
   $ganglia_globals_deaf = 'no',
   $ganglia_globals_host_dmax = '0',
+  $ganglia_globals_send_metadata_interval  = '300',
   $cluster_name       = 'unspecified',
   $cluster_owner      = 'unspecified',
   $cluster_latlong    = 'unspecified',
@@ -107,6 +108,7 @@ class ganglia::gmond (
 ) inherits ganglia::params {
   validate_string($ganglia_globals_deaf)
   validate_string($ganglia_globals_host_dmax)
+  validate_string($ganglia_globals_send_metadata_interval)
   validate_string($cluster_name)
   validate_string($cluster_owner)
   validate_string($cluster_latlong)
