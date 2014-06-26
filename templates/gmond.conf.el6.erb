@@ -36,6 +36,9 @@ host {
 <% unless @udp_send_channel.nil? -%>
 <% @udp_send_channel.each do |channel| -%>
 udp_send_channel {
+  <%- if channel['bind_hostname'] then -%>
+  bind_hostname = <%= channel['bind_hostname'] %>
+  <%- end -%>
   <%- if channel['mcast_join'] then -%>
   mcast_join = <%= channel['mcast_join'] %>
   <%- end -%>
