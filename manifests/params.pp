@@ -23,7 +23,6 @@ class ganglia::params {
 
       $gmetad_package_name  = 'ganglia-gmetad'
       $gmetad_service_name  = 'gmetad'
-      $gmetad_user          = 'ganglia'
 
       # paths are the same for el5.x & el6.x
       $web_package_name     = 'ganglia-web'
@@ -33,6 +32,7 @@ class ganglia::params {
         # the epel packages change uid/gids + install paths between 5 & 6
         5: {
           $gmond_service_config = '/etc/gmond.conf'
+          $gmetad_user          = 'ganglia'
           $gmond_service_erb    = 'ganglia/gmond.conf.el5.erb'
 
           $gmetad_service_config = '/etc/gmetad.conf'
@@ -44,6 +44,7 @@ class ganglia::params {
         # match 7 .. 99
         6, /^([7-9]|[1-9][0-9])$/: {
           $gmond_service_config = '/etc/ganglia/gmond.conf'
+          $gmetad_user          = 'nobody'
           $gmond_service_erb    = 'ganglia/gmond.conf.el6.erb'
 
           $gmetad_service_config = '/etc/ganglia/gmetad.conf'
