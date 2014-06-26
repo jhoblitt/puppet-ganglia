@@ -9,7 +9,7 @@ globals {
   mute = no
   deaf = <%= @ganglia_globals_deaf %>
   allow_extra_data = yes
-  host_dmax = 0 /*secs */
+  host_dmax = <%= @ganglia_globals_host_dmax %> /*secs */
   cleanup_threshold = 300 /*secs */
   gexec = no
   send_metadata_interval = 300 /*secs */
