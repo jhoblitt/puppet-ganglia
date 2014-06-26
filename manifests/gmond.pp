@@ -90,6 +90,7 @@
 #
 
 class ganglia::gmond (
+  $ganglia_globals_deaf = 'no',
   $cluster_name       = 'unspecified',
   $cluster_owner      = 'unspecified',
   $cluster_latlong    = 'unspecified',
@@ -103,6 +104,7 @@ class ganglia::gmond (
   ],
   $tcp_accept_channel = [ { port => 8659 } ],
 ) inherits ganglia::params {
+  validate_string($ganglia_globals_deaf)
   validate_string($cluster_name)
   validate_string($cluster_owner)
   validate_string($cluster_latlong)
