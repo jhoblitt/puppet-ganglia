@@ -66,7 +66,7 @@ udp_recv_channel {
   bind       = <%= channel['bind'] %>
   <%- end -%>
   <%- if channel['family'] then -%>
-  family     = <%= channel['family'] %> 
+  family     = <%= channel['family'] %>
   <%- end -%>
 }
 
@@ -81,7 +81,7 @@ tcp_accept_channel {
   port       = <%= channel['port'] %>
   <%- end -%>
   <%- if channel['family'] then -%>
-  family     = <%= channel['family'] %> 
+  family     = <%= channel['family'] %>
   <%- end -%>
 }
 
