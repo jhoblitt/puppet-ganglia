@@ -25,7 +25,7 @@ $rrds = "$gmetad_root/rrds";
 # otherwise, change it if it is installed elsewhere (like /usr/bin)
 define("RRDTOOL", "/usr/bin/rrdtool");
 
-# If rrdcached is being used, this argument must specify the 
+# If rrdcached is being used, this argument must specify the
 # socket to use.
 #
 # ganglia-web only requires, and should use, the low-privilege socket
@@ -39,7 +39,7 @@ $graphdir='./graph.d';
 #
 # If you want to grab data from a different ganglia source specify it here.
 # Although, it would be strange to alter the IP since the Round-Robin
-# databases need to be local to be read. 
+# databases need to be local to be read.
 #
 $ganglia_ip = "<%= @ganglia_ip %>";
 $ganglia_port = <%= @ganglia_port %>;
@@ -47,7 +47,7 @@ $ganglia_port = <%= @ganglia_port %>;
 #
 # The maximum number of dynamic graphs to display.  If you set this
 # to 0 (the default) all graphs will be shown.  This option is
-# helpful if you are viewing the web pages from a browser with a 
+# helpful if you are viewing the web pages from a browser with a
 # small pipe.
 #
 $max_graphs = 0;
@@ -72,7 +72,7 @@ $metriccols = 2;
 #
 $show_meta_snapshot = "yes";
 
-# 
+#
 # The default refresh frequency on pages.
 #
 $default_refresh = 300;
@@ -130,7 +130,7 @@ $load_scale = 1.0;
 $default_metric_color = "555555";
 
 #
-# Default metric 
+# Default metric
 #
 $default_metric = "load_one";
 
@@ -145,7 +145,7 @@ $strip_domainname = false;
 #
 #$optional_graphs = array('packet');
 
-# 
+#
 # Time ranges
 # Each value is the # of seconds in that range.
 #

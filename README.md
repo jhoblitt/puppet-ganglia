@@ -56,10 +56,10 @@ This class manages the configurtion of the Ganglia `gmond` daemon.
 
     # multicast
     $udp_recv_channel = [
-      { mcast_join => '239.2.11.71', port => 8649, ttl => 1 } 
+      { mcast_join => '239.2.11.71', port => 8649, ttl => 1 }
     ]
     $udp_send_channel = [
-      { mcast_join => '239.2.11.71', port => 8649, bind => '239.2.11.71' } 
+      { mcast_join => '239.2.11.71', port => 8649, bind => '239.2.11.71' }
     ]
     $tcp_accept_channel = [
       { port => 8649 },
@@ -109,7 +109,7 @@ This class manages the configurtion of the Ganglia `gmond` daemon.
 
          [ { mcast_join => '239.2.11.71', port => 8649, bind => '239.2.11.71' } ]
 
- * `tcp_accept_channel` 
+ * `tcp_accept_channel`
 
     `Array of Hash` defaults to:
 
@@ -119,25 +119,25 @@ This class manages the configurtion of the Ganglia `gmond` daemon.
 
 ```puppet
     $clusters = [
-      { 
-        name     => 'test', 
+      {
+        name     => 'test',
         address  => ['test1.example.org', 'test2.example.org'],
       },
     ]
 
     class{ 'ganglia::gmetad':
-      clusters => $clusters,   
-      gridname => 'my grid',   
+      clusters => $clusters,
+      gridname => 'my grid',
     }
 ```
 
- * `clusters` 
+ * `clusters`
 
     `Array of Hash` defaults to:
 
         [ { 'name' => 'my cluster', 'address' => 'localhost' } ]
 
- * `gridname` 
+ * `gridname`
 
     `String` defaults to: `undef`
 
@@ -152,11 +152,11 @@ This class manages the configurtion of the Ganglia `gmond` daemon.
     }
 ```
 
- * `ganglia_ip` 
+ * `ganglia_ip`
 
     `String` defaults to: `127.0.0.1`
 
- * `ganglia_port` 
+ * `ganglia_port`
 
     `String` defaults to: `8652`
 
