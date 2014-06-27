@@ -39,6 +39,12 @@ Usage
 ### `ganglia::gmond`
 
 This class manages the configurtion of the Ganglia `gmond` daemon.
+Following options/settings are only taken into account for RHEL6/CentOS6 as of now: 
+- gmond globals: globals_deaf, globals_host_dmax and globals_send_metadata_interval
+- udp_send_channel setting: bind_hostname
+For other OSes, we have the following behavior:
+- gmond globals take the default values provided below
+- udp_send_channel->bind_hostname is not taken into account
 
 ```puppet
     # unicast
@@ -49,6 +55,7 @@ This class manages the configurtion of the Ganglia `gmond` daemon.
     $udp_send_channel = [
       { port => 8649, host => 'test1.example.org', ttl => 2 },
       { port => 8649, host => 'test2.example.org', ttl => 2 },
+	  { bind_hostname => "yes", host => 'test3.example.org', ttl => 1 },
     ]
     $tcp_accept_channel = [
       { port => 8649 },
@@ -66,6 +73,9 @@ This class manages the configurtion of the Ganglia `gmond` daemon.
     ]
 
     class{ 'ganglia::gmond':
+	  globals_deaf => 'yes',
+	  globals_host_dmax => '691200',	  
+      globals_send_metadata_interval => '60'	
       cluster_name       => 'example grid',
       cluster_owner      => 'ACME, Inc.',
       cluster_latlong    => 'N32.2332147 W110.9481163',
@@ -77,6 +87,18 @@ This class manages the configurtion of the Ganglia `gmond` daemon.
     }
 ```
 
+ * `globals_deaf`
+ 
+	`String` defaults to: `no`
+
+ * `globals_host_dmax`
+ 
+	`String` defaults to: `0`
+
+ * `globals_send_metadata_interval`
+ 
+	`String` defaults to: `300`	
+	
  * `cluster_name`
 
     `String` defaults to: `unspecified`
