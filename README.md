@@ -167,6 +167,7 @@ This class manages the configurtion of the Ganglia `gmond` daemon.
  
     `Array of Hash` defaults to:
     
+    ```
       [
         {
           cf      => 'AVERAGE',
@@ -187,6 +188,7 @@ This class manages the configurtion of the Ganglia `gmond` daemon.
           rows    => '52704'
         },
       ]
+    ```
       
     * consolidation function (cf) and can be AVERAGE | MIN | MAX | LAST
     * xfiles factor (xff) defines what part of a consolidation interval may be made up from *UNKNOWN* data while the consolidated value is still regarded as known. It is given as the ratio of allowed *UNKNOWN* PDPs to the number of PDPs in the interval. Thus, it ranges from 0 to 1 (exclusive).
