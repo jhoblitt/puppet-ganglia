@@ -113,7 +113,7 @@ gridname "<%= @gridname %>"
 #-------------------------------------------------------------------------------
 # User gmetad will setuid to (defaults to "nobody")
 # default: "nobody"
-# setuid_username "nobody"
+setuid_username "<%= @gmetad_user %>"
 #
 #-------------------------------------------------------------------------------
 # Umask to apply to created rrd files and grid directory structure
