@@ -72,12 +72,9 @@ module Puppet::Parser::Functions
       unless r.has_key?('xff')
         raise Puppet::ParseError, ("ganglia_validate_rras(): nested Hash must contain an xff key")
       end
-      # which is a float or an integer
-      unless r['xff'].is_a?(Float) || r['xff'].is_a?(Integer)
-        raise Puppet::ParseError, ("ganglia_validate_rras(): nested Hash xff key must be a Float or Integer between 0 and 1")
-      end
+      r['xff'] = Float(r['xff'])
       # must be between 0 and 1
-      if r['xff'] < 0 || r['xff'] > 1
+      unless (r['xff'] >= 0.0) && (r['xff'] <= 1.0)
         raise Puppet::ParseError, ("ganglia_validate_rras(): nested Hash xff key must be a Float or Integer between 0 and 1")
       end
 
@@ -85,10 +82,7 @@ module Puppet::Parser::Functions
       unless r.has_key?('steps')
         raise Puppet::ParseError, ("ganglia_validate_rras(): nested Hash must contain a steps key")
       end
-      # which is an integer
-      unless r['steps'].is_a?(Integer)
-        raise Puppet::ParseError, ("ganglia_validate_rras(): nested Hash steps key must be an Integer greater than 0")
-      end
+      r['steps'] = Integer(r['steps'])
       # and greater than zero
       unless r['steps'] > 0
         raise Puppet::ParseError, ("ganglia_validate_rras(): nested Hash steps key must be an Integer greater than 0")
@@ -98,17 +92,14 @@ module Puppet::Parser::Functions
       unless r.has_key?('rows')
         raise Puppet::ParseError, ("ganglia_validate_rras(): nested Hash must contain a rows key")
       end
-      # which is an integer
-      unless r['rows'].is_a?(Integer)
-        raise Puppet::ParseError, ("ganglia_validate_rras(): nested Hash rows key must be an Integer greater than 0")
-      end
+      r['rows'] = Integer(r['rows'])
       # and greater than zero
       unless r['rows'] > 0
         raise Puppet::ParseError, ("ganglia_validate_rras(): nested Hash rows key must be an Integer greater than 0")
       end
 
       # any other keys should be rejected
-      extras = c.keys - %w{ cf xff steps rows }
+      extras = r.keys - %w{ cf xff steps rows }
       if extras.length > 0
         raise Puppet::ParseError, ("ganglia_validate_rras(): nested Hash contains unknown keys (#{extras.sort.join(' ')})") 
       end
