@@ -77,7 +77,7 @@ module Puppet::Parser::Functions
         raise Puppet::ParseError, ("ganglia_validate_rras(): nested Hash xff key must be a Float or Integer between 0 and 1")
       end
       # must be between 0 and 1
-      unless r['xff'] >= 0 && r['xff'] <= 1
+      if r['xff'] < 0 || r['xff'] > 1
         raise Puppet::ParseError, ("ganglia_validate_rras(): nested Hash xff key must be a Float or Integer between 0 and 1")
       end
 
