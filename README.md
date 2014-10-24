@@ -124,10 +124,32 @@ This class manages the configurtion of the Ganglia `gmond` daemon.
         address  => ['test1.example.org', 'test2.example.org'],
       },
     ]
+    
+    $rras = [
+      {
+        cf      => 'AVERAGE',
+        xff     => '0.5',
+        steps   => '1',
+        rows    => '5856'
+      },
+      {
+        cf      => 'AVERAGE',
+        xff     => '0.5',
+        steps   => '4',
+        rows    => '20160'
+      },
+      {
+        cf      => 'AVERAGE',
+        xff     => '0.5',
+        steps   => '40',
+        rows    => '52704'
+      },
+    ]
 
     class{ 'ganglia::gmetad':
       clusters => $clusters,
       gridname => 'my grid',
+      rras     => $rras,
     }
 ```
 
@@ -140,6 +162,36 @@ This class manages the configurtion of the Ganglia `gmond` daemon.
  * `gridname`
 
     `String` defaults to: `undef`
+    
+ * `rras`
+ 
+    `Array of Hash` defaults to:
+    
+      [
+        {
+          cf      => 'AVERAGE',
+          xff     => '0.5',
+          steps   => '1',
+          rows    => '5856'
+        },
+        {
+          cf      => 'AVERAGE',
+          xff     => '0.5',
+          steps   => '4',
+          rows    => '20160'
+        },
+        {
+          cf      => 'AVERAGE',
+          xff     => '0.5',
+          steps   => '40',
+          rows    => '52704'
+        },
+      ]
+      
+    * consolidation function (cf) and can be AVERAGE | MIN | MAX | LAST
+    * xfiles factor (xff) defines what part of a consolidation interval may be made up from *UNKNOWN* data while the consolidated value is still regarded as known. It is given as the ratio of allowed *UNKNOWN* PDPs to the number of PDPs in the interval. Thus, it ranges from 0 to 1 (exclusive).
+    * steps defines how many of these primary data points are used to build a consolidated data point which then goes into the archive.
+    * rows defines how many generations of data values are kept in an RRA. Obviously, this has to be greater than zero.
 
 ### ganglia::web
 
