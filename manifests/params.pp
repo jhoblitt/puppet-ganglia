@@ -59,6 +59,8 @@ class ganglia::params {
           $gmond_service_erb    = 'ganglia/gmond.conf.el5.erb'
 
           $gmetad_service_config = '/etc/gmetad.conf'
+
+          $gmetad_case_sensitive_hostnames = 1
         }
         # fedora is also part of $::osfamily = redhat so we shouldn't default
         # to failing on el7.x +
@@ -69,6 +71,8 @@ class ganglia::params {
           $gmond_service_erb    = 'ganglia/gmond.conf.el6.erb'
 
           $gmetad_service_config = '/etc/ganglia/gmetad.conf'
+
+          $gmetad_case_sensitive_hostnames = 0
         }
         default: {
           fail("Module ${module_name} is not supported on operatingsystemmajrelease ${::operatingsystemmajrelease}")
@@ -90,6 +94,8 @@ class ganglia::params {
       $gmond_service_erb     = 'ganglia/gmond.conf.debian.erb'
 
       $gmetad_service_config = '/etc/ganglia/gmetad.conf'
+
+      $gmetad_case_sensitive_hostnames = 1
 
       # ubuntu 12.10 and below didn't have a status command in the init script
       if ! ($::operatingsystem == 'Ubuntu' and $::lsbmajdistrelease > 12) {
