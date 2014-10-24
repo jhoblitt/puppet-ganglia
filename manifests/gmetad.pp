@@ -48,6 +48,7 @@
 class ganglia::gmetad(
   $clusters = [ { 'name' => 'my cluster', 'address' => 'localhost' } ],
   $gridname = undef,
+  $rras = undef,
 ) inherits ganglia::params {
   ganglia_validate_clusters($clusters)
   validate_string($gridname)
