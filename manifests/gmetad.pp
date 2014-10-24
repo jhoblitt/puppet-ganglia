@@ -52,6 +52,7 @@ class ganglia::gmetad(
 ) inherits ganglia::params {
   ganglia_validate_clusters($clusters)
   validate_string($gridname)
+  ganglia_validate_rras($rras)
 
   anchor{ 'ganglia::gmetad::begin': } ->
   class{ 'ganglia::gmetad::install': } ->
