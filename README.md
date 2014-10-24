@@ -190,7 +190,7 @@ This class manages the configurtion of the Ganglia `gmond` daemon.
       ]
     ```
       
-    * consolidation function (cf) and can be AVERAGE | MIN | MAX | LAST
+    * consolidation function (cf) can be AVERAGE | MIN | MAX | LAST
     * xfiles factor (xff) defines what part of a consolidation interval may be made up from *UNKNOWN* data while the consolidated value is still regarded as known. It is given as the ratio of allowed *UNKNOWN* PDPs to the number of PDPs in the interval. Thus, it ranges from 0 to 1 (exclusive).
     * steps defines how many of these primary data points are used to build a consolidated data point which then goes into the archive.
     * rows defines how many generations of data values are kept in an RRA. Obviously, this has to be greater than zero.
