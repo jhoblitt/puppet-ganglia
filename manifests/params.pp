@@ -19,21 +19,21 @@ class ganglia::params {
   $rras = [
     {
       cf      => 'AVERAGE',
-      xff     => '0.5',
-      steps   => '1',
-      rows    => '5856'
+      xff     => 0.5,
+      steps   => 1,
+      rows    => 5856
     },
     {
       cf      => 'AVERAGE',
-      xff     => '0.5',
-      steps   => '4',
-      rows    => '20160'
+      xff     => 0.5,
+      steps   => 4,
+      rows    => 20160
     },
     {
       cf      => 'AVERAGE',
-      xff     => '0.5',
-      steps   => '40',
-      rows    => '52704'
+      xff     => 0.5,
+      steps   => 40,
+      rows    => 52704
     },
   ]
   
