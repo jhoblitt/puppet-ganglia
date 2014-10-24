@@ -59,7 +59,11 @@ module Puppet::Parser::Functions
       end
       # which is a string
       unless r['cf'].is_a?(String) 
-        raise Puppet::ParseError, ("ganglia_validate_rras(): nested Hash cf key must be a String")
+        raise Puppet::ParseError, ("ganglia_validate_rras(): nested Hash cf key must be a String of AVERAGE | MIN | MAX | LAST")
+      end
+      # and must be either AVERAGE, MIN, MAX or LAST
+      unless r['cf'] == 'AVERAGE' || r['cf'] == 'MIN' || r['cf'] == 'MAX' || r['cf'] == 'LAST'
+        raise Puppet::ParseError, ("ganglia_validate_rras(): nested Hash cf key must be a String of AVERAGE | MIN | MAX | LAST")
       end
       
       # validate values
