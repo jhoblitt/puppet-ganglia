@@ -14,6 +14,7 @@
 class ganglia::gmetad::install {
 
   package { $::ganglia::params::gmetad_package_name:
-    ensure => present,
+    ensure        => present,
+    allow_virtual => false,
   }
 }

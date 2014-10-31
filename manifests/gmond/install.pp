@@ -14,6 +14,7 @@
 class ganglia::gmond::install {
 
   package { $::ganglia::params::gmond_package_name:
-    ensure => present,
+    ensure        => present,
+    allow_virtual => false,
   }
 }

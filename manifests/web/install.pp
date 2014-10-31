@@ -14,6 +14,7 @@
 class ganglia::web::install {
 
   package { $::ganglia::params::web_package_name:
-    ensure => present,
+    ensure        => present,
+    allow_virtual => false,
   }
 }
