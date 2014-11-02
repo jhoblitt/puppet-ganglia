@@ -40,9 +40,13 @@
 data_source "<%= data_source['name'] -%>"<% if data_source['polling_interval'] then -%>
  <%= data_source['polling_interval'] -%>
 <%- end -%>
+<%- if data_source['address'].is_a?(Array) -%>
 <% data_source['address'].each do |address| -%>
  <%= address -%>
 <%- end %>
+<%- else -%>
+ <%= data_source['address'] -%>
+<% end -%>
 <% end -%>
 
 #
