@@ -13,8 +13,14 @@
 
 class ganglia::gmond::install {
 
-  package { $::ganglia::params::gmond_package_name:
-    ensure        => present,
-    allow_virtual => false,
+  if versioncmp($::puppetversion, '3.6.0') > 0 {
+    package { $::ganglia::params::gmond_package_name:
+      ensure        => present,
+      allow_virtual => false,
+    }
+  } else {
+    package { $::ganglia::params::gmond_package_name:
+      ensure => present,
+    }
   }
 }

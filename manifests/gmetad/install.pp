@@ -13,8 +13,14 @@
 
 class ganglia::gmetad::install {
 
-  package { $::ganglia::params::gmetad_package_name:
-    ensure        => present,
-    allow_virtual => false,
+  if versioncmp($::puppetversion, '3.6.0') > 0 {
+    package { $::ganglia::params::gmetad_package_name:
+      ensure        => present,
+      allow_virtual => false,
+    }
+  } else {
+    package { $::ganglia::params::gmetad_package_name:
+      ensure => present,
+    }
   }
 }
