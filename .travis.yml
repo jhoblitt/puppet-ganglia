@@ -4,7 +4,6 @@ rvm:
   - 1.9.3
   - 2.0.0
 env:
-  - PUPPET_GEM_VERSION="2.7.14"
   - PUPPET_GEM_VERSION="~> 2.7"
   - PUPPET_GEM_VERSION="~> 3.3"
 matrix:
@@ -12,12 +11,9 @@ matrix:
     - rvm: ruby-head
   exclude:
     - rvm: 1.9.3
-      env: PUPPET_GEM_VERSION="2.7.14"
-    - rvm: 2.0.0
-      env: PUPPET_GEM_VERSION="2.7.14"
-    - rvm: 1.9.3
       env: PUPPET_GEM_VERSION="~> 2.7"
     - rvm: 2.0.0
       env: PUPPET_GEM_VERSION="~> 2.7"
+  fast_finish: true
 notifications:
   email: false
