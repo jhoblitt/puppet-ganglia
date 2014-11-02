@@ -62,10 +62,18 @@ class ganglia::params {
 
           $gmetad_case_sensitive_hostnames = 1
         }
+        6: {
+          $gmond_service_config = '/etc/ganglia/gmond.conf'
+          $gmetad_user          = 'ganglia'
+          $gmond_service_erb    = 'ganglia/gmond.conf.el6.erb'
+
+          $gmetad_service_config = '/etc/ganglia/gmetad.conf'
+          $gmetad_service_erb    = 'ganglia/gmetad.conf.el6.erb'
+        }
         # fedora is also part of $::osfamily = redhat so we shouldn't default
         # to failing on el7.x +
         # match 7 .. 99
-        6, /^([7-9]|[1-9][0-9])$/: {
+        /^([7-9]|[1-9][0-9])$/: {
           $gmond_service_config = '/etc/ganglia/gmond.conf'
           $gmetad_user          = 'nobody'
           $gmond_service_erb    = 'ganglia/gmond.conf.el6.erb'
