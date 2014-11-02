@@ -69,6 +69,8 @@ class ganglia::params {
 
           $gmetad_service_config = '/etc/ganglia/gmetad.conf'
           $gmetad_service_erb    = 'ganglia/gmetad.conf.el6.erb'
+          
+          $gmetad_case_sensitive_hostnames = 0
         }
         # fedora is also part of $::osfamily = redhat so we shouldn't default
         # to failing on el7.x +
