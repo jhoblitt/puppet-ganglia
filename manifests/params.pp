@@ -68,8 +68,7 @@ class ganglia::params {
           $gmond_service_erb    = 'ganglia/gmond.conf.el6.erb'
 
           $gmetad_service_config = '/etc/ganglia/gmetad.conf'
-          $gmetad_service_erb    = 'ganglia/gmetad.conf.el6.erb'
-          
+
           $gmetad_case_sensitive_hostnames = 0
         }
         # fedora is also part of $::osfamily = redhat so we shouldn't default
