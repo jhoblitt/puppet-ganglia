@@ -58,6 +58,18 @@ describe 'ganglia_validate_rras', :type => :puppet_function do
     expect { subject.call([rras]) }.
       to raise_error(Puppet::ParseError, /must contain an xff key/)
   end
+  
+  it 'should fail when xff key is > 1 ' do
+    rras = [{ 'cf' => 'AVERAGE', xff => 1.1, 'steps' => 1, 'rows' => 5856 }]
+    expect { subject.call(rras]) }/
+      to raise_error(Puppet::ParseError, /xff key must be a Float or Integer between 0 and 1/)
+  end
+  
+  it 'should fail when xff key is < 0 ' do
+    rras = [{ 'cf' => 'AVERAGE', xff => -0.1, 'steps' => 1, 'rows' => 5856 }]
+    expect { subject.call(rras]) }/
+      to raise_error(Puppet::ParseError, /xff key must be a Float or Integer between 0 and 1/)
+  end
 
   it 'should fail when steps key is missing ' do
     rras = [{ 'cf' => 'AVERAGE', 'xff' => 0.5, 'rows' => 5856 }]
