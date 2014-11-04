@@ -47,10 +47,16 @@ describe 'ganglia_validate_rras', :type => :puppet_function do
       to raise_error(Puppet::ParseError, /cf key must be a String/)
   end
   
+  it 'should fail when cf key is not one of the four options' do
+    rras = [{ 'cf' => 'foo', 'xff' => 0.5, 'steps' => 1, 'rows' => 5856 }]
+    expect { subject.call([rras]) }.
+      to raise_error(Puppet::ParseError, /cf key must be a String/)
+  end
+  
   it 'should fail when xff key is missing ' do
     rras = [{ 'cf' => 'AVERAGE', 'steps' => 1, 'rows' => 5856 }]
     expect { subject.call([rras]) }.
-      to raise_error(Puppet::ParseError, /must contain a xff key/)
+      to raise_error(Puppet::ParseError, /must contain an xff key/)
   end
 
   it 'should fail when steps key is missing ' do
