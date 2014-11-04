@@ -82,7 +82,15 @@ module Puppet::Parser::Functions
       unless r.has_key?('steps')
         raise Puppet::ParseError, ("ganglia_validate_rras(): nested Hash must contain a steps key")
       end
-      r['steps'] = Integer(r['steps'])
+      
+      # convert steps to integer for checking
+      r['steps'] = Integer(r['steps']) rescue nil
+      
+      # steps must be an integer
+      unless r['steps'].is_a?(Integer)
+        raise Puppet::ParseError, ("ganglia_validate_rras(): nested Hash steps key must be an Integer greater than 0")
+      end
+      
       # and greater than zero
       unless r['steps'] > 0
         raise Puppet::ParseError, ("ganglia_validate_rras(): nested Hash steps key must be an Integer greater than 0")
@@ -92,7 +100,15 @@ module Puppet::Parser::Functions
       unless r.has_key?('rows')
         raise Puppet::ParseError, ("ganglia_validate_rras(): nested Hash must contain a rows key")
       end
-      r['rows'] = Integer(r['rows'])
+      
+      # convert rows to integer for checking
+      r['rows'] = Integer(r['rows']) rescue nil
+      
+      # rows must be an integer
+      unless r['rows'].is_a?(Integer)
+        raise Puppet::ParseError, ("ganglia_validate_rras(): nested Hash rows key must be an Integer greater than 0")
+      end
+      
       # and greater than zero
       unless r['rows'] > 0
         raise Puppet::ParseError, ("ganglia_validate_rras(): nested Hash rows key must be an Integer greater than 0")
