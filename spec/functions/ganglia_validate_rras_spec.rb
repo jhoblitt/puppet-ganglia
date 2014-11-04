@@ -44,7 +44,7 @@ describe 'ganglia_validate_rras', :type => :puppet_function do
   it 'should fail when cf key is not a string' do
     rras = [{ 'cf' => ['my cluster'], 'xff' => 0.5, 'steps' => 1, 'rows' => 5856 }]
     expect { subject.call([rras]) }.
-      to raise_error(Puppet::ParseError, /name key must be a String/)
+      to raise_error(Puppet::ParseError, /name cf must be a String/)
   end
   
   it 'should fail when xff key is missing ' do
