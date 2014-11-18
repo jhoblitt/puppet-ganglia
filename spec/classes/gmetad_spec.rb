@@ -22,7 +22,7 @@ describe 'ganglia::gmetad' do
     context '[]' do
       let(:params) {{ :clusters => [] }}
       it do
-        expect { should compile }.to raise_error(Puppet::Error, /Array may not be empty/)
+        should raise_error(Puppet::Error, /Array may not be empty/)
       end
     end # <invalid example>
 
@@ -37,7 +37,7 @@ describe 'ganglia::gmetad' do
 
       let(:params) {{ :clusters => clusters }}
       it do
-        expect { should compile }.to raise_error(Puppet::Error, /unknown keys/)
+        should raise_error(Puppet::Error, /unknown keys/)
       end
     end # <invalid example>
   end # clusters =>
