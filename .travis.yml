@@ -7,6 +7,7 @@ rvm:
 env:
   - PUPPET_GEM_VERSION="~> 2.7"
   - PUPPET_GEM_VERSION="~> 3.3"
+  - PUPPET_GEM_VERSION="~> 3.7" FUTURE_PARSER="yes"
 matrix:
   allow_failures:
     - rvm: ruby-head
