@@ -49,10 +49,19 @@ class ganglia::gmetad(
   $clusters = [ { 'name' => 'my cluster', 'address' => 'localhost' } ],
   $gridname = undef,
   $rras = $ganglia::params::rras,
+  $gmetad_package_name = $ganglia::params::gmetad_package_name,
+  $gmetad_service_name = $ganglia::params::gmetad_service_name,
+  $gmetad_service_config = $ganglia::params::gmetad_service_config,
+  $gmetad_user = $ganglia::params::gmetad_user,
+  $gmetad_case_sensitive_hostnames = $ganglia::params::gmetad_case_sensitive_hostnames
 ) inherits ganglia::params {
   ganglia_validate_clusters($clusters)
   validate_string($gridname)
   ganglia_validate_rras($rras)
+  validate_string($gmetad_package_name)
+  validate_string($gmetad_service_name)
+  validate_string($gmetad_service_config)
+  validate_string($gmetad_user)
 
   anchor{ 'ganglia::gmetad::begin': } ->
   class{ 'ganglia::gmetad::install': } ->
