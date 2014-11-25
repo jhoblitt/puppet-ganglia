@@ -7,12 +7,12 @@ globals {
   debug_level = 0
   max_udp_msg_len = 1472
   mute = no
-  deaf = <%= @globals_deaf %>
+  deaf = <%= scope.lookupvar('::ganglia::gmond::globals_deaf') %>
   allow_extra_data = yes
-  host_dmax = <%= @globals_host_dmax %> /*secs */
+  host_dmax = <%= scope.lookupvar('::ganglia::gmond::globals_host_dmax') %> /*secs */
   cleanup_threshold = 300 /*secs */
   gexec = no
-  send_metadata_interval = <%= @globals_send_metadata_interval %> /*secs */
+  send_metadata_interval = <%= scope.lookupvar('::ganglia::gmond::globals_send_metadata_interval') %> /*secs */
 }
 
 /*

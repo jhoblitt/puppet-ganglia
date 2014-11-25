@@ -7,8 +7,8 @@ globals {
   debug_level = 0
   max_udp_msg_len = 1472
   mute = no
-  deaf = <%= @globals_deaf %>
-  host_dmax = <%= @globals_host_dmax %> /*secs */
+  deaf = <%= scope.lookupvar('::ganglia::gmond::globals_deaf') %>
+  host_dmax = <%= scope.lookupvar('::ganglia::gmond::globals_host_dmax') %> /*secs */
   cleanup_threshold = 300 /*secs */
   gexec = no
 }
