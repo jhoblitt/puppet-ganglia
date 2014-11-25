@@ -41,8 +41,8 @@ $graphdir='./graph.d';
 # Although, it would be strange to alter the IP since the Round-Robin
 # databases need to be local to be read.
 #
-$ganglia_ip = "<%= @ganglia_ip %>";
-$ganglia_port = <%= @ganglia_port %>;
+$ganglia_ip = "<%= scope.lookupvar('::ganglia::web::ganglia_ip') %>";
+$ganglia_port = <%= scope.lookupvar('::ganglia::web::ganglia_port') %>;
 
 #
 # The maximum number of dynamic graphs to display.  If you set this
