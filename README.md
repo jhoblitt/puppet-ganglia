@@ -39,12 +39,6 @@ Usage
 ### `ganglia::gmond`
 
 This class manages the configurtion of the Ganglia `gmond` daemon.
-Following options/settings are only taken into account for RHEL6/CentOS6 as of now: 
-- gmond globals: globals_deaf, globals_host_dmax and globals_send_metadata_interval
-- udp_send_channel setting: bind_hostname
-For other OSes, we have the following behavior:
-- gmond globals take the default values provided below
-- udp_send_channel->bind_hostname is not taken into account
 
 ```puppet
     # unicast
@@ -55,7 +49,7 @@ For other OSes, we have the following behavior:
     $udp_send_channel = [
       { port => 8649, host => 'test1.example.org', ttl => 2 },
       { port => 8649, host => 'test2.example.org', ttl => 2 },
-	  { bind_hostname => "yes", host => 'test3.example.org', ttl => 1 },
+	    { bind_hostname => "yes", host => 'test3.example.org', ttl => 1 },
     ]
     $tcp_accept_channel = [
       { port => 8649 },
