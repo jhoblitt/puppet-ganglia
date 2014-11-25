@@ -104,6 +104,7 @@ class ganglia::gmond (
   $globals_deaf                   = 'no',
   $globals_host_dmax              = '0',
   $globals_send_metadata_interval = '300',
+  $globals_override_hostname      = undef,
   $cluster_name                   = 'unspecified',
   $cluster_owner                  = 'unspecified',
   $cluster_latlong                = 'unspecified',
@@ -120,6 +121,9 @@ class ganglia::gmond (
   validate_string($globals_deaf)
   validate_string($globals_host_dmax)
   validate_string($globals_send_metadata_interval)
+  if $globals_override_hostname {
+    validate_string($globals_override_hostname)
+  }
   validate_string($cluster_name)
   validate_string($cluster_owner)
   validate_string($cluster_latlong)

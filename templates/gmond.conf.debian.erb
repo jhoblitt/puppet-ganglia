@@ -12,6 +12,9 @@ globals {
   cleanup_threshold = 300 /*secs */
   gexec = no
   send_metadata_interval = <%= scope.lookupvar('::ganglia::gmond::globals_send_metadata_interval') %> /*secs */
+  <% unless scope.lookupvar('::ganglia::gmond::globals_override_hostname').nil? -%>
+  override_hostname = <%= scope.lookupvar('::ganglia::gmond::globals_override_hostname') %>
+  <% end -%>
 }
 
 /* If a cluster attribute is specified, then all gmond hosts are wrapped inside
