@@ -13,7 +13,14 @@
 
 class ganglia::web::install {
 
-  package { $::ganglia::params::web_package_name:
-    ensure => present,
+  if versioncmp($::puppetversion, '3.6.0') > 0 {
+    package { $::ganglia::params::web_package_name:
+      ensure        => present,
+      allow_virtual => false,
+    }
+  } else {
+    package { $::ganglia::params::web_package_name:
+      ensure => present,
+    }
   }
 }

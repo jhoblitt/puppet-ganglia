@@ -3,7 +3,7 @@
 globals {
   daemonize = yes
   setuid = yes
-  user = ganglia
+  user = nobody
   debug_level = 0
   max_udp_msg_len = 1472
   mute = no
@@ -69,7 +69,7 @@ udp_recv_channel {
   bind       = <%= channel['bind'] %>
   <%- end -%>
   <%- if channel['family'] then -%>
-  family     = <%= channel['family'] %> 
+  family     = <%= channel['family'] %>
   <%- end -%>
 }
 
@@ -84,7 +84,7 @@ tcp_accept_channel {
   port       = <%= channel['port'] %>
   <%- end -%>
   <%- if channel['family'] then -%>
-  family     = <%= channel['family'] %> 
+  family     = <%= channel['family'] %>
   <%- end -%>
 }
 

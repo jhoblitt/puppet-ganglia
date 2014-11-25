@@ -15,6 +15,29 @@ class ganglia::params {
 
   # files are the same for ubuntu and el5/el6
   $web_php_erb          = 'ganglia/conf.php.el6.erb'
+  
+  $rras = [
+    {
+      cf      => 'AVERAGE',
+      xff     => 0.5,
+      steps   => 1,
+      rows    => 5856
+    },
+    {
+      cf      => 'AVERAGE',
+      xff     => 0.5,
+      steps   => 4,
+      rows    => 20160
+    },
+    {
+      cf      => 'AVERAGE',
+      xff     => 0.5,
+      steps   => 40,
+      rows    => 52704
+    },
+  ]
+  
+  $gmetad_service_erb    = 'ganglia/gmetad.conf.erb'
 
   case $::osfamily {
     redhat: {
@@ -23,7 +46,6 @@ class ganglia::params {
 
       $gmetad_package_name  = 'ganglia-gmetad'
       $gmetad_service_name  = 'gmetad'
-      $gmetad_user          = 'ganglia'
 
       # paths are the same for el5.x & el6.x
       $web_package_name     = 'ganglia-web'
@@ -33,21 +55,33 @@ class ganglia::params {
         # the epel packages change uid/gids + install paths between 5 & 6
         5: {
           $gmond_service_config = '/etc/gmond.conf'
+          $gmetad_user          = 'ganglia'
           $gmond_service_erb    = 'ganglia/gmond.conf.el5.erb'
 
           $gmetad_service_config = '/etc/gmetad.conf'
-          # it looks like it's safe to use the same template for el5.x & el6.x
-          $gmetad_service_erb    = 'ganglia/gmetad.conf.el6.erb'
+
+          $gmetad_case_sensitive_hostnames = 1
+        }
+        6: {
+          $gmond_service_config = '/etc/ganglia/gmond.conf'
+          $gmetad_user          = 'ganglia'
+          $gmond_service_erb    = 'ganglia/gmond.conf.el6.erb'
+
+          $gmetad_service_config = '/etc/ganglia/gmetad.conf'
+
+          $gmetad_case_sensitive_hostnames = 0
         }
         # fedora is also part of $::osfamily = redhat so we shouldn't default
         # to failing on el7.x +
         # match 7 .. 99
-        6, /^([7-9]|[1-9][0-9])$/: {
+        /^([7-9]|[1-9][0-9])$/: {
           $gmond_service_config = '/etc/ganglia/gmond.conf'
+          $gmetad_user          = 'nobody'
           $gmond_service_erb    = 'ganglia/gmond.conf.el6.erb'
 
           $gmetad_service_config = '/etc/ganglia/gmetad.conf'
-          $gmetad_service_erb    = 'ganglia/gmetad.conf.el6.erb'
+
+          $gmetad_case_sensitive_hostnames = 0
         }
         default: {
           fail("Module ${module_name} is not supported on operatingsystemmajrelease ${::operatingsystemmajrelease}")
@@ -69,8 +103,8 @@ class ganglia::params {
       $gmond_service_erb     = 'ganglia/gmond.conf.debian.erb'
 
       $gmetad_service_config = '/etc/ganglia/gmetad.conf'
-      # it's the same file as el6 with only the default user comment changed
-      $gmetad_service_erb    = 'ganglia/gmetad.conf.el6.erb'
+
+      $gmetad_case_sensitive_hostnames = 1
 
       # ubuntu 12.10 and below didn't have a status command in the init script
       if ! ($::operatingsystem == 'Ubuntu' and $::lsbmajdistrelease > 12) {

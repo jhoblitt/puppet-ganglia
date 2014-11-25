@@ -63,10 +63,10 @@ For other OSes, we have the following behavior:
 
     # multicast
     $udp_recv_channel = [
-      { mcast_join => '239.2.11.71', port => 8649, ttl => 1 } 
+      { mcast_join => '239.2.11.71', port => 8649, ttl => 1 }
     ]
     $udp_send_channel = [
-      { mcast_join => '239.2.11.71', port => 8649, bind => '239.2.11.71' } 
+      { mcast_join => '239.2.11.71', port => 8649, bind => '239.2.11.71' }
     ]
     $tcp_accept_channel = [
       { port => 8649 },
@@ -131,7 +131,7 @@ For other OSes, we have the following behavior:
 
          [ { mcast_join => '239.2.11.71', port => 8649, bind => '239.2.11.71' } ]
 
- * `tcp_accept_channel` 
+ * `tcp_accept_channel`
 
     `Array of Hash` defaults to:
 
@@ -141,27 +141,81 @@ For other OSes, we have the following behavior:
 
 ```puppet
     $clusters = [
-      { 
-        name     => 'test', 
+      {
+        name     => 'test',
         address  => ['test1.example.org', 'test2.example.org'],
+      },
+    ]
+    
+    $rras = [
+      {
+        cf      => 'AVERAGE',
+        xff     => 0.5,
+        steps   => 1,
+        rows    => 5856
+      },
+      {
+        cf      => 'AVERAGE',
+        xff     => 0.5,
+        steps   => 4,
+        rows    => 20160
+      },
+      {
+        cf      => 'AVERAGE',
+        xff     => 0.5,
+        steps   => 40,
+        rows    => 52704
       },
     ]
 
     class{ 'ganglia::gmetad':
-      clusters => $clusters,   
-      gridname => 'my grid',   
+      clusters => $clusters,
+      gridname => 'my grid',
+      rras     => $rras,
     }
 ```
 
- * `clusters` 
+ * `clusters`
 
     `Array of Hash` defaults to:
 
         [ { 'name' => 'my cluster', 'address' => 'localhost' } ]
 
- * `gridname` 
+ * `gridname`
 
     `String` defaults to: `undef`
+    
+ * `rras`
+ 
+    `Array of Hash` defaults to:
+    
+    ```
+      [
+        {
+          cf      => 'AVERAGE',
+          xff     => 0.5,
+          steps   => 1,
+          rows    => 5856
+        },
+        {
+          cf      => 'AVERAGE',
+          xff     => 0.5,
+          steps   => 4,
+          rows    => 20160
+        },
+        {
+          cf      => 'AVERAGE',
+          xff     => 0.5,
+          steps   => 40,
+          rows    => 52704
+        },
+      ]
+    ```
+      
+    * consolidation function (cf) can be AVERAGE | MIN | MAX | LAST
+    * xfiles factor (xff) defines what part of a consolidation interval may be made up from *UNKNOWN* data while the consolidated value is still regarded as known. It is given as the ratio of allowed *UNKNOWN* PDPs to the number of PDPs in the interval. Thus, it ranges from 0 to 1 (exclusive).
+    * steps defines how many of these primary data points are used to build a consolidated data point which then goes into the archive.
+    * rows defines how many generations of data values are kept in an RRA. Obviously, this has to be greater than zero.
 
 ### ganglia::web
 
@@ -174,11 +228,11 @@ For other OSes, we have the following behavior:
     }
 ```
 
- * `ganglia_ip` 
+ * `ganglia_ip`
 
     `String` defaults to: `127.0.0.1`
 
- * `ganglia_port` 
+ * `ganglia_port`
 
     `String` defaults to: `8652`
 
