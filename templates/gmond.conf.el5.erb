@@ -7,8 +7,8 @@ globals {
   debug_level = 0
   max_udp_msg_len = 1472
   mute = no
-  deaf = no
-  host_dmax = 86400 /*secs */
+  deaf = <%= scope.lookupvar('::ganglia::gmond::globals_deaf') %>
+  host_dmax = <%= scope.lookupvar('::ganglia::gmond::globals_host_dmax') %> /*secs */
   cleanup_threshold = 300 /*secs */
   gexec = no
 }
@@ -33,6 +33,9 @@ host {
 <% unless scope.lookupvar('::ganglia::gmond::udp_send_channel').nil? -%>
 <% scope.lookupvar('::ganglia::gmond::udp_send_channel').each do |channel| -%>
 udp_send_channel {
+  <%- if channel['bind_hostname'] then -%>
+  bind_hostname = <%= channel['bind_hostname'] %>
+  <%- end -%>
   <%- if channel['mcast_join'] then -%>
   mcast_join = <%= channel['mcast_join'] %>
   <%- end -%>
