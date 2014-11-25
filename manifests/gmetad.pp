@@ -53,7 +53,7 @@ class ganglia::gmetad(
   $gmetad_service_name = $ganglia::params::gmetad_service_name,
   $gmetad_service_config = $ganglia::params::gmetad_service_config,
   $gmetad_user = $ganglia::params::gmetad_user,
-  $gmetad_case_sensitive_hostnames = $ganglia::params::gmetad_case_sensitive_hostnames
+  $gmetad_case_sensitive_hostnames = $ganglia::params::gmetad_case_sensitive_hostnames # lint:ignore:80chars
 ) inherits ganglia::params {
   ganglia_validate_clusters($clusters)
   validate_string($gridname)
