@@ -37,7 +37,9 @@ class ganglia::web(
   $ganglia_port = 8652,
 ) inherits ganglia::params {
   validate_string($ganglia_ip)
-  validate_string($ganglia_port)
+  if !(is_string($ganglia_port) or is_integer($ganglia_port)) {
+    fail('$ganglia_port is not a string or integer.')
+  }
 
   anchor{ 'ganglia::web::begin': } ->
   class{ 'ganglia::web::install': } ->
