@@ -27,7 +27,8 @@ describe 'ganglia::gmond' do
         with_content(/^  owner = "unspecified"$/).
         with_content(/^  latlong = "unspecified"$/).
         with_content(/^  url = "unspecified"$/).
-        with_content(/^  location = "unspecified"$/)
+        with_content(/^  location = "unspecified"$/).
+        without_content(/^  override_hostname =/)
     end
   end # default params
 
