@@ -3,6 +3,34 @@ require 'spec_helper'
 describe 'ganglia::gmond' do
   let(:facts) {{ :osfamily => 'RedHat', :operatingsystemmajrelease => 6 }}
 
+  context 'default params' do
+    it 'should manage gmond.conf' do
+      should contain_file('/etc/ganglia/gmond.conf').with(
+        :ensure => 'present',
+        :owner  => 'root',
+        :group  => 'root',
+        :mode   => '0644'
+      )
+    end
+
+    it 'should notify Class[ganglia::gmond::service]' do
+      should contain_file('/etc/ganglia/gmond.conf').
+        that_notifies('Class[ganglia::gmond::service]')
+    end
+
+    it 'should have default values in gmond.conf template' do
+      should contain_file('/etc/ganglia/gmond.conf').
+        with_content(/^  deaf = no$/).
+        with_content(/^  host_dmax = 0 /).
+        with_content(/^  send_metadata_interval = 300 /).
+        with_content(/^  name = "unspecified"$/).
+        with_content(/^  owner = "unspecified"$/).
+        with_content(/^  latlong = "unspecified"$/).
+        with_content(/^  url = "unspecified"$/).
+        with_content(/^  location = "unspecified"$/)
+    end
+  end # default params
+
   context 'with lots of params' do
     udp_recv_channel = [
       {'port' => 8649, 'bind' => 'localhost'},
@@ -33,4 +61,3 @@ describe 'ganglia::gmond' do
     end
   end
 end
-

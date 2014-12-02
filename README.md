@@ -68,8 +68,9 @@ This class manages the configurtion of the Ganglia `gmond` daemon.
 
     class{ 'ganglia::gmond':
       globals_deaf                   => 'yes',
-      globals_host_dmax              => '691200',    
-      globals_send_metadata_interval => '60'  
+      globals_host_dmax              => '691200',
+      globals_send_metadata_interval => '60',
+      globals_override_hostname      => 'web.example.org',
       cluster_name                   => 'example grid',
       cluster_owner                  => 'ACME, Inc.',
       cluster_latlong                => 'N32.2332147 W110.9481163',
@@ -91,7 +92,11 @@ This class manages the configurtion of the Ganglia `gmond` daemon.
 
  * `globals_send_metadata_interval`
  
-  `String` defaults to: `300`  
+  `String` defaults to: `300`
+  
+ * `globals_override_hostname`
+ 
+  `String` defaults to: undef
   
  * `cluster_name`
 
