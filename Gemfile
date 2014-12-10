@@ -17,6 +17,9 @@ group :development, :test do
     :require => false
   # rspec 3 spews warnings with rspec-puppet 1.0.1
   gem 'rspec-core', '~> 2.0',    :require => false
+end
+
+group :beaker do
   gem 'serverspec',              :require => false
   gem 'beaker',                  :require => false
   gem 'beaker-rspec',            :require => false
