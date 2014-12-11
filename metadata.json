@@ -1,0 +1,39 @@
+{
+  "name": "jhoblitt-ganglia",
+  "version": "1.4.0",
+  "source": "https://github.com/jhoblitt/puppet-ganglia.git",
+  "author": "Joshua Hoblitt <jhoblitt@cpan.org>",
+  "license": "Apache Version 2.0",
+  "summary": "Manages ganglia gmond & gmetad daemons + web front end",
+  "project_page": "https://github.com/jhoblitt/puppet-ganglia",
+  "issues_url": "https://github.com/jhoblitt/puppet-ganglia/issues",
+  "operatingsystem_support": [
+  {
+    "operatingsystem": "RedHat",
+    "operatingsystemrelease": [
+      "5",
+      "6"
+    ]
+  },
+  {
+    "operatingsystem": "CentOS",
+    "operatingsystemrelease": [
+      "5",
+      "6"
+    ]
+  },
+  {
+    "operatingsystem": "Debian",
+    "operatingsystemrelease": [
+      "6",
+      "7"
+    ]
+  }
+  ],
+  "dependencies": [
+    {
+      "name": "puppetlabs/stdlib",
+      "version_requirement": ">= 3.0.0"
+    }
+  ]
+}

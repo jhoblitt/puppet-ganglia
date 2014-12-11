@@ -1,6 +1,5 @@
-name    'jhoblitt-ganglia'
+name 'jhoblitt-ganglia'
 version '1.3.0'
-
 author 'Joshua Hoblitt <jhoblitt@cpan.org>'
 license 'Apache'
 project_page 'https://github.com/jhoblitt/puppet-ganglia'
