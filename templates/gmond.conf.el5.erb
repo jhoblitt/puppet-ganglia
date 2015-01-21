@@ -11,9 +11,9 @@ globals {
   host_dmax = <%= scope.lookupvar('::ganglia::gmond::globals_host_dmax') %> /*secs */
   cleanup_threshold = 300 /*secs */
   gexec = no
-  <% unless scope.lookupvar('::ganglia::gmond::globals_override_hostname').nil? -%>
+  <%- if scope.lookupvar('::ganglia::gmond::globals_override_hostname') != :undef -%>
   override_hostname = <%= scope.lookupvar('::ganglia::gmond::globals_override_hostname') %>
-  <% end -%>
+  <%- end -%>
 }
 
 /* If a cluster attribute is specified, then all gmond hosts are wrapped inside
