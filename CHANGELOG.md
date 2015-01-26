@@ -1,5 +1,191 @@
 
 #### [Current]
+ * [066f5b6](../../commit/066f5b6) - __(Joshua Hoblitt)__ bump version to v1.4.0
+ * [bd8073b](../../commit/bd8073b) - __(Joshua Hoblitt)__ remove Encoding gem kludge from spec_helper.rb
+ * [714991e](../../commit/714991e) - __(Joshua Hoblitt)__ replace Modulefile with metadata.json
+ * [8c528a4](../../commit/8c528a4) - __(Joshua Hoblitt)__ update spec_helper_acceptance to use #puppet_module_install
+
+Instead of custom scp logic
+
+ * [d87ab84](../../commit/d87ab84) - __(Joshua Hoblitt)__ change nodeset default to centos-65-x64
+ * [7b465f8](../../commit/7b465f8) - __(Joshua Hoblitt)__ update beaker nodesets from puppet-module_skel
+ * [56b414f](../../commit/56b414f) - __(Joshua Hoblitt)__ fix Gemfile w/s
+ * [58dba7b](../../commit/58dba7b) - __(Joshua Hoblitt)__ update fixtures stdlib to 4.2.0
+ * [668a7d4](../../commit/668a7d4) - __(Joshua Hoblitt)__ Merge pull request [#34](../../issues/34) from NoodlesNZ/overridehostname
+
+Fix problem with undef override_hostname
+ * [b38c558](../../commit/b38c558) - __(Nick Le Mouton)__ Fix problem with undef override_hostname
+ * [d8d443a](../../commit/d8d443a) - __(Joshua Hoblitt)__ Merge pull request [#32](../../issues/32) from NoodlesNZ/master
+
+Change ganglia_port default to string
+ * [92452ef](../../commit/92452ef) - __(Joshua Hoblitt)__ Merge pull request [#37](../../issues/37) from jhoblitt/feature/future_parser
+
+Feature/future parser
+ * [1978bdb](../../commit/1978bdb) - __(Joshua Hoblitt)__ enable travis container based builds
+ * [eda60cb](../../commit/eda60cb) - __(Joshua Hoblitt)__ update rspec-puppet to v2.0.0 git tag
+ * [4549e6c](../../commit/4549e6c) - __(Joshua Hoblitt)__ Merge pull request [#36](../../issues/36) from jhoblitt/feature/10_000-cuts-of-ruby-1.8.7
+
+exclude beaker gems from travis
+ * [098eb2c](../../commit/098eb2c) - __(Joshua Hoblitt)__ exclude beaker gems from travis
+ * [3ddba81](../../commit/3ddba81) - __(Nick Le Mouton)__ Fix port validation
+ * [9f896cc](../../commit/9f896cc) - __(Joshua Hoblitt)__ Merge pull request [#33](../../issues/33) from NoodlesNZ/overridehostname
+
+Added global_override_hostname
+ * [c5b21f5](../../commit/c5b21f5) - __(Nick Le Mouton)__ Add global_override_hostname Add gmond template interpolation
+ * [2aac7da](../../commit/2aac7da) - __(Joshua Hoblitt)__ Merge pull request [#30](../../issues/30) from NoodlesNZ/globals
+
+Additional work for PR [#18](../../issues/18)
+ * [cf9f899](../../commit/cf9f899) - __(Nick Le Mouton)__ Formatting etc
+ * [ced568a](../../commit/ced568a) - __(Joshua Hoblitt)__ Merge pull request [#31](../../issues/31) from jhoblitt/feature/test_template_content
+
+Add simple test coverage of gmetad.conf template
+ * [948b311](../../commit/948b311) - __(Joshua Hoblitt)__ fix linter 80char line warnings
+ * [a31d4ed](../../commit/a31d4ed) - __(Joshua Hoblitt)__ fail on linter warnings
+ * [8f2196d](../../commit/8f2196d) - __(Joshua Hoblitt)__ Add simple test coverage of gmetad.conf template
+
+Per issue [#2](../../issues/2)
+
+ * [3341c45](../../commit/3341c45) - __(Nick Le Mouton)__ Removed note about specific changes to RHEL6/CentOS6
+ * [90fd18f](../../commit/90fd18f) - __(Nick Le Mouton)__ Fixed scope
+ * [64bcedb](../../commit/64bcedb) - __(Nick Le Mouton)__ Merge remote-tracking branch 'upstream/master' into globals
+ * [63cad00](../../commit/63cad00) - __(Joshua Hoblitt)__ Merge pull request [#27](../../issues/27) from NoodlesNZ/master
+
+Fix scope problem for gmetad config
+ * [824cc2b](../../commit/824cc2b) - __(Nick Le Mouton)__ Fixing scope problems
+ * [1e1f655](../../commit/1e1f655) - __(Nick Le Mouton)__ Added additional params
+ * [d25a2c4](../../commit/d25a2c4) - __(Nick Le Mouton)__ Merge remote-tracking branch 'upstream/master' into globals
+ * [0203edb](../../commit/0203edb) - __(Joshua Hoblitt)__ Merge pull request [#29](../../issues/29) from NoodlesNZ/params
+
+Added additional parameters to gmetad
+ * [ef70409](../../commit/ef70409) - __(Nick Le Mouton)__ Added additional parameters to gmetad
+ * [9d9face](../../commit/9d9face) - __(Joshua Hoblitt)__ Merge pull request [#26](../../issues/26) from jhoblitt/feature/future_parser
+
+Feature/future parser
+ * [6f57915](../../commit/6f57915) - __(Joshua Hoblitt)__ add compatibility with rspec 1.0.1+ exception handling
+ * [a2a471f](../../commit/a2a471f) - __(Joshua Hoblitt)__ add future parser to travis matrix
+ * [a2e6d96](../../commit/a2e6d96) - __(Joshua Hoblitt)__ Merge pull request [#24](../../issues/24) from NoodlesNZ/master
+
+Added rspec test for ganglia_validate_rras()
+
+Closes [#24](../../issues/24)
+
+ * [1a0ef39](../../commit/1a0ef39) - __(Nick Le Mouton)__ Added rspec test for ganglia_validate_rras()
+ * [67db493](../../commit/67db493) - __(Joshua Hoblitt)__ Merge pull request [#22](../../issues/22) from NoodlesNZ/master
+
+Update gmetad.conf and add custom RRAs
+ * [4cf6433](../../commit/4cf6433) - __(Nick Le Mouton)__ Fixed gmetad_service_erb variable problem
+ * [23ca842](../../commit/23ca842) - __(Nick Le Mouton)__ Fixed el6 case_sensitive_hostnames
+ * [21ef612](../../commit/21ef612) - __(Joshua Hoblitt)__ Merge pull request [#23](../../issues/23) from jhoblitt/feature/beaker
+
+Feature/beaker
+ * [b2989ef](../../commit/b2989ef) - __(Joshua Hoblitt)__ restrict the allow_virtual param to puppet 3.6.1+
+
+The package type's allow_virtual param was added in puppet 3.6.1
+
+ * [3d5b5ec](../../commit/3d5b5ec) - __(Joshua Hoblitt)__ add ruby 2.1.4 to travis matrix
+ * [3d5faeb](../../commit/3d5faeb) - __(Joshua Hoblitt)__ update .gitignore
+ * [1a8ae2c](../../commit/1a8ae2c) - __(Joshua Hoblitt)__ remove stale ./tests dir
+ * [1e8d589](../../commit/1e8d589) - __(Joshua Hoblitt)__ remove puppet 2.7.14 from travis matrix
+ * [fcc8a60](../../commit/fcc8a60) - __(Joshua Hoblitt)__ fix gemetad.conf template on debian
+ * [4549c03](../../commit/4549c03) - __(Joshua Hoblitt)__ fix ganglia user name on el6.x
+ * [19f6e90](../../commit/19f6e90) - __(Joshua Hoblitt)__ pin puppet-lint version < 1.1.0
+
+To work around https://github.com/rodjek/puppet-lint/issues/331
+
+ * [bad9d02](../../commit/bad9d02) - __(Joshua Hoblitt)__ suppress the package types allow_virtual warning
+
+    Warning: The package type's allow_virtual parameter will be changing its default value from false to true in a future release. If you do not want to allow virtual packages, please explicitly set allow_virtual to false.
+
+ * [3cbefc9](../../commit/3cbefc9) - __(Joshua Hoblitt)__ add beaker support
+
+Largely cut'n'pasted from puppetlabs-concat
+
+ * [912be75](../../commit/912be75) - __(Joshua Hoblitt)__ remove rspec-system support
+ * [3c1997e](../../commit/3c1997e) - __(Nick Le Mouton)__ Fixed validation issues
+ * [aee3385](../../commit/aee3385) - __(Nick Le Mouton)__ Fixed validation for xff
+ * [1c241e2](../../commit/1c241e2) - __(Nick Le Mouton)__ Added validation function into class
+ * [0066ecf](../../commit/0066ecf) - __(Nick Le Mouton)__ Added validation for cf
+ * [8622e51](../../commit/8622e51) - __(Nick Le Mouton)__ Changed xff, steps and rows params in gmetad to float/integer, integer and integer respectively. This makes it easier to validate
+ * [48f9c24](../../commit/48f9c24) - __(Nick Le Mouton)__ Initial work for ganglia_validate_rras()
+ * [b23f94f](../../commit/b23f94f) - __(Nick Le Mouton)__ Fixed grammar
+ * [e935413](../../commit/e935413) - __(Nick Le Mouton)__ Fixed markdown
+ * [c892fd0](../../commit/c892fd0) - __(Nick Le Mouton)__ Added documentation on RRAs
+ * [d82d139](../../commit/d82d139) - __(Nick Le Mouton)__ Added gmeta_case_sensitive_hostnames
+ * [af4338d](../../commit/af4338d) - __(Nick Le Mouton)__ Re-added setuid_username
+ * [9a10187](../../commit/9a10187) - __(Nick Le Mouton)__ Fixed whitespace issue on params.pp
+ * [32b2c66](../../commit/32b2c66) - __(Nick Le Mouton)__ Fixed RRAs format
+ * [07e8425](../../commit/07e8425) - __(Nick Le Mouton)__ Use default rras for gmetad
+ * [4bcbfdd](../../commit/4bcbfdd) - __(Nick Le Mouton)__ Changed gmetad template to gmetad.conf.erb
+ * [61cdc03](../../commit/61cdc03) - __(Nick Le Mouton)__ Trying to use params defaults for rras
+ * [ef80fb6](../../commit/ef80fb6) - __(Nick Le Mouton)__ Changed name of gmetad template
+ * [e5cebcf](../../commit/e5cebcf) - __(Nick Le Mouton)__ Added custom RRAs to gmetad and updated gmetad.conf from ganglia repo
+ * [1095fc9](../../commit/1095fc9) - __(goungy)__ Renaming ganglia_globals_* variables to globals_* and adding description in the README
+
+Renaming ganglia_globals_* variables to globals_* and adding description
+in the README
+
+ * [e56d0e2](../../commit/e56d0e2) - __(Joshua Hoblitt)__ Merge pull request [#20](../../issues/20) from george-b/whitespace_removal
+
+Removes trailing whitespace
+ * [4b1bc5f](../../commit/4b1bc5f) - __(George Brown)__ Removes trailing whitespace
+
+A number of files contained trailing whitespace, this has been removed
+with the following perl one-liner.
+
+perl -pi -e 's/ +$//' *
+
+Not having whitespace prevents confusing diff outputs such as the
+following.
+
+https://github.com/jhoblitt/puppet-ganglia/pull/3#discussion-diff-7579522
+
+ * [04a083e](../../commit/04a083e) - __(Joshua Hoblitt)__ Merge pull request [#19](../../issues/19) from george-b/el6_fixes
+
+Sets user to nobody on EL6
+ * [2c701a4](../../commit/2c701a4) - __(Joshua Hoblitt)__ Merge pull request [#17](../../issues/17) from krunaldo/patch-1
+
+Removed lies from gmetad config for el6
+ * [a594b40](../../commit/a594b40) - __(George Brown)__ Sets user to nobody on EL6
+
+As raised in the following PR the user nobody is used rather than
+ganglia on EL6.
+
+https://github.com/jhoblitt/puppet-ganglia/pull/17
+
+This change updates the default parameter value for the gmetad user and
+alters the gmond template to reflect this.
+
+ * [925f5f3](../../commit/925f5f3) - __(goungy)__ [EL6] Adding possibility to set udp_send_channel >bind_hostname in gmond.conf
+
+[EL6] Adding possibility to set udp_send_channel >bind_hostname in
+gmond.conf
+
+ * [74c7db7](../../commit/74c7db7) - __(goungy)__ [EL6] Adding possibility to set ganglia->globals->send_metadata_interval for gmond.conf
+
+[EL6] Adding possibility to set ganglia->globals->send_metadata_interval
+for gmond.conf
+
+ * [097cff6](../../commit/097cff6) - __(goungy)__ [EL6] Adding possibility to set ganglia->globals->host_dmax parameter for gmond.conf
+
+[EL6] Adding possibility to set ganglia->globals->host_dmax parameter
+for gmond.conf
+
+ * [b6b5ab8](../../commit/b6b5ab8) - __(goungy)__ [EL6] Adding possibility to set ganglia->globals->deaf parameter for gmond.conf
+
+[EL6] Adding possibility to set ganglia->globals->deaf parameter for
+gmond.conf
+
+ * [972e5ad](../../commit/972e5ad) - __(Jonathan Beckman)__ Removed lies from gmetad config for el6
+
+By default EL6 ganglia runs as nobody and not ganglia.
+This fixes the issue by changing the user that ganglia is
+run as to correct one according to the rest of the manifest.
+
+#### v1.3.0
+ * [657828f](../../commit/657828f) - __(Joshua Hoblitt)__ Merge pull request [#15](../../issues/15) from jhoblitt/feature/v1.3.0
+
+bump version to v1.3.0
+ * [ef745e9](../../commit/ef745e9) - __(Joshua Hoblitt)__ bump version to v1.3.0
  * [221b474](../../commit/221b474) - __(Joshua Hoblitt)__ Merge pull request [#14](../../issues/14) from jhoblitt/feature/validate_gmetad_clusters
 
 Feature/validate gmetad clusters
