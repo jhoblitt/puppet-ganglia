@@ -27,14 +27,8 @@ RSpec.configure do |c|
   # Configure all nodes in nodeset
   c.before :suite do
     # Install module and dependencies
+    puppet_module_install(:source => proj_root, :module_name => 'ganglia')
     hosts.each do |host|
-      on host, "mkdir -p #{host['distmoduledir']}/ganglia"
-      result = on host, "echo #{host['distmoduledir']}/ganglia"
-      target = result.raw_output.chomp
-
-      %w(files lib manifests templates metadata.json).each do |file|
-        scp_to host, "#{proj_root}/#{file}", target
-      end
       on host, puppet('module', 'install', 'puppetlabs-stdlib'), {:acceptable_exit_codes => [0, 1]}
       on host, puppet('module', 'install', 'stahnma-epel'), {:acceptable_exit_codes => [0, 1]}
     end
