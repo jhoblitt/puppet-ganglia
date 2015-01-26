@@ -12,8 +12,8 @@ group :development, :test do
   gem 'puppet-lint', '>= 1.1.0', :require => false
   gem 'puppet-syntax',           :require => false
   gem 'rspec-puppet',
-    :git => 'https://github.com/rodjek/rspec-puppet.git',
-    :ref => 'v2.0.0',
+    :git     => 'https://github.com/rodjek/rspec-puppet.git',
+    :ref     => 'v2.0.0',
     :require => false
 end
 
