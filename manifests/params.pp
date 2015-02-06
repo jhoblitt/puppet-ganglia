@@ -53,7 +53,7 @@ class ganglia::params {
 
       case $::operatingsystemmajrelease {
         # the epel packages change uid/gids + install paths between 5 & 6
-        5: {
+        '5': {
           $gmond_service_config = '/etc/gmond.conf'
           $gmetad_user          = 'ganglia'
           $gmond_service_erb    = 'ganglia/gmond.conf.el5.erb'
@@ -62,7 +62,7 @@ class ganglia::params {
 
           $gmetad_case_sensitive_hostnames = 1
         }
-        6: {
+        '6': {
           $gmond_service_config = '/etc/ganglia/gmond.conf'
           $gmetad_user          = 'ganglia'
           $gmond_service_erb    = 'ganglia/gmond.conf.el6.erb'
