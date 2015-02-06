@@ -107,7 +107,7 @@ class ganglia::params {
       $gmetad_case_sensitive_hostnames = 1
 
       # ubuntu 12.10 and below didn't have a status command in the init script
-      if ! ($::operatingsystem == 'Ubuntu' and $::lsbmajdistrelease > 12) {
+      if ! ($::operatingsystem == 'Ubuntu' and $::lsbmajdistrelease > '12') {
         $gmond_status_command  = 'pgrep -u ganglia -f /usr/sbin/gmond'
         $gmetad_status_command = 'pgrep -u nobody -f /usr/sbin/gmetad'
       }
