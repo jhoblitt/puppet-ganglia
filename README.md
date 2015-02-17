@@ -222,8 +222,8 @@ This class manages the configurtion of the Ganglia `gmond` daemon.
     class{ 'ganglia::web': }
 
     class{ 'ganglia::web':
-      $ganglia_ip = '192.168.0.1',
-      $ganglia_port = 8652,
+      ganglia_ip   => '192.168.0.1',
+      ganglia_port => 8652,
     }
 ```
 
