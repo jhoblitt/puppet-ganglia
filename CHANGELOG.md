@@ -1,6 +1,28 @@
 
 #### [Current]
- * [066f5b6](../../commit/066f5b6) - __(Joshua Hoblitt)__ bump version to v1.4.0
+ * [3043ba4](../../commit/3043ba4) - __(Joshua Hoblitt)__ allow future parser to fail in travis matrix
+ * [79fcdbf](../../commit/79fcdbf) - __(Joshua Hoblitt)__ update rspec tests for puppet 3.7.x future parser compatibility
+ * [b50946b](../../commit/b50946b) - __(Joshua Hoblitt)__ pin rspec on Ruby 1.8.7 (rspec/rspec-core[#1864](../../issues/1864))
+ * [043ddf5](../../commit/043ddf5) - __(Joshua Hoblitt)__ use rspec-puppet 2.0.0 from gems instead of git
+ * [4795cdd](../../commit/4795cdd) - __(Joshua Hoblitt)__ add FACTER_GEM_VERSION to Gemfile
+ * [c1b2b4b](../../commit/c1b2b4b) - __(Joshua Hoblitt)__ Merge pull request [#45](../../issues/45) from cmurphy/fix_readme
+
+Fix web example in README
+ * [1e2cfaa](../../commit/1e2cfaa) - __(Colleen Murphy)__ Fix web example in README
+ * [5d7feb7](../../commit/5d7feb7) - __(Joshua Hoblitt)__ Merge pull request [#43](../../issues/43) from drewr/master
+
+::lsbmajdistrelease is a string now
+ * [ee82ae1](../../commit/ee82ae1) - __(Joshua Hoblitt)__ Merge pull request [#42](../../issues/42) from NoodlesNZ/futureparser
+
+Add fix for future parser in puppet 3.7.4
+ * [0f52488](../../commit/0f52488) - __(Drew Raines)__ ::lsbmajdistrelease is a string now
+ * [b300a84](../../commit/b300a84) - __(Nick Le Mouton)__ Add fix for future parser in puppet 3.7.4 (Future parser seems to treat facts as strings).
+
+#### v1.4.0
+ * [a55f203](../../commit/a55f203) - __(Joshua Hoblitt)__ Merge pull request [#40](../../issues/40) from jhoblitt/feature/v1.4.0
+
+Feature/v1.4.0
+ * [dc61baf](../../commit/dc61baf) - __(Joshua Hoblitt)__ bump version to v1.4.0
  * [bd8073b](../../commit/bd8073b) - __(Joshua Hoblitt)__ remove Encoding gem kludge from spec_helper.rb
  * [714991e](../../commit/714991e) - __(Joshua Hoblitt)__ replace Modulefile with metadata.json
  * [8c528a4](../../commit/8c528a4) - __(Joshua Hoblitt)__ update spec_helper_acceptance to use #puppet_module_install
