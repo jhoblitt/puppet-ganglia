@@ -1,7 +1,7 @@
 require 'spec_helper'
 
 describe 'ganglia::gmetad' do
-  let(:facts) {{ :osfamily => 'RedHat', :operatingsystemmajrelease => 6 }}
+  let(:facts) {{ :osfamily => 'RedHat', :operatingsystemmajrelease => '6' }}
 
   context 'default params' do
     it 'should manage gmetad.conf' do
