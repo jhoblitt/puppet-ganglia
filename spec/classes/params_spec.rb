@@ -45,7 +45,7 @@ describe 'ganglia::params', :type => :class do
     describe 'for operatingsystem ubuntu' do
       before do
         facts[:operatingsystem] = 'Ubuntu'
-        facts[:lsbmajdistrelease] = 12 
+        facts[:lsbmajdistrelease] = '12'
       end
 
       it { should contain_class('ganglia::params') }
