@@ -28,6 +28,41 @@ describe 'ganglia::gmetad' do
     end
   end # default params
 
+  context 'all_trusted' do
+    context 'default' do
+      it 'should disable all_trusted' do
+        should contain_file('/etc/ganglia/gmetad.conf').
+          with_content(/^all_trusted off$/)
+      end # should disable all_trusted
+    end # default
+
+    context 'all_trusted true' do
+      let(:params) {{ :all_trusted => true }}
+      it 'should enable all_trusted' do
+        should contain_file('/etc/ganglia/gmetad.conf').
+          with_content(/^all_trusted on$/)
+      end
+    end # all_trusted true
+  end # all_trusted
+
+  context 'trusted_hosts' do
+    context 'default' do
+      it 'should have an empty trusted_hosts' do
+        should contain_file('/etc/ganglia/gmetad.conf').
+          with_content(/^# trusted_hosts.*$/).
+          without_content(/^trusted_hosts.*$/)
+      end
+    end # default
+
+    context 'trusted_hosts list' do
+      let(:params) {{ :trusted_hosts => [ '1', '2' ] }}
+      it 'should enable trusted hosts' do
+        should contain_file('/etc/ganglia/gmetad.conf').
+          with_content(/^trusted_hosts 1 2$/)
+      end 
+    end # trusted_hosts list
+  end # trusted_hosts
+
   context 'clusters =>' do
     context '<good example>' do
       clusters = [
