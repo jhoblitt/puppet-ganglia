@@ -83,21 +83,21 @@ This class manages the configurtion of the Ganglia `gmond` daemon.
 ```
 
  * `globals_deaf`
- 
+
   `String` defaults to: `no`
 
  * `globals_host_dmax`
- 
+
   `String` defaults to: `0`
 
  * `globals_send_metadata_interval`
- 
+
   `String` defaults to: `300`
-  
+
  * `globals_override_hostname`
- 
+
   `String` defaults to: undef
-  
+
  * `cluster_name`
 
     `String` defaults to: `unspecified`
@@ -145,7 +145,7 @@ This class manages the configurtion of the Ganglia `gmond` daemon.
         address  => ['test1.example.org', 'test2.example.org'],
       },
     ]
-    
+
     $rras = [
       {
         cf      => 'AVERAGE',
@@ -167,12 +167,20 @@ This class manages the configurtion of the Ganglia `gmond` daemon.
       },
     ]
 
-    class{ 'ganglia::gmetad':
-      clusters => $clusters,
-      gridname => 'my grid',
-      rras     => $rras,
+
+      clusters      => $clusters,
+      gridname      => 'my grid',
+      rras          => $rras,
+      all_trusted   => false,
+      trusted_hosts => []
     }
 ```
+
+ * `all_trusted`
+
+    `Boolean` defaults to: false
+
+    * If set to true, we will allow all hosts that can query ganglia data via the xml query port.  Corresponds to the 'all\_trusted' field in gmetad.conf.
 
  * `clusters`
 
@@ -183,11 +191,11 @@ This class manages the configurtion of the Ganglia `gmond` daemon.
  * `gridname`
 
     `String` defaults to: `undef`
-    
+
  * `rras`
- 
+
     `Array of Hash` defaults to:
-    
+
     ```
       [
         {
@@ -210,11 +218,17 @@ This class manages the configurtion of the Ganglia `gmond` daemon.
         },
       ]
     ```
-      
+
     * consolidation function (cf) can be AVERAGE | MIN | MAX | LAST
     * xfiles factor (xff) defines what part of a consolidation interval may be made up from *UNKNOWN* data while the consolidated value is still regarded as known. It is given as the ratio of allowed *UNKNOWN* PDPs to the number of PDPs in the interval. Thus, it ranges from 0 to 1 (exclusive).
     * steps defines how many of these primary data points are used to build a consolidated data point which then goes into the archive.
     * rows defines how many generations of data values are kept in an RRA. Obviously, this has to be greater than zero.
+
+ * `trusted_hosts`
+
+    `Array of Strings` defaults to empty array
+
+    * Each string matches a hostname that is allowed to query ganglia data via the xml query port.  Corresponds to the 'trusted\_hosts' field in gmetad.conf.
 
 ### ganglia::web
 

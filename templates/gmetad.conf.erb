@@ -101,13 +101,22 @@ gridname "<%= scope.lookupvar('::ganglia::gmetad::gridname') %>"
 # List of machines this gmetad will share XML with. Localhost
 # is always trusted.
 # default: There is no default value
+<% if !scope.lookupvar('::ganglia::gmetad::trusted_hosts').nil? &&
+      !scope.lookupvar('::ganglia::gmetad::trusted_hosts').empty? -%>
+trusted_hosts <%= scope.lookupvar('::ganglia::gmetad::trusted_hosts').join(' ') %>
+<% else -%>
 # trusted_hosts 127.0.0.1 169.229.50.165 my.gmetad.org
+<% end %>
 #
 #-------------------------------------------------------------------------------
 # If you want any host which connects to the gmetad XML to receive
 # data, then set this value to "on"
 # default: off
-# all_trusted on
+<%- if scope.lookupvar('::ganglia::gmetad::all_trusted') -%>
+all_trusted on
+<% else -%>
+all_trusted off
+<%- end -%>
 #
 #-------------------------------------------------------------------------------
 # If you don't want gmetad to setuid then set this to off
