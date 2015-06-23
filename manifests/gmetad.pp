@@ -7,8 +7,8 @@
 # All parameteres are optional.
 #
 # [*all_trusted*]
-#   boolean, default false; if set to true, we will allow all hosts that 
-#   can query ganglia data via the xml query port.  Corresponds to the 
+#   boolean, default false; if set to true, we will allow all hosts that
+#   can query ganglia data via the xml query port.  Corresponds to the
 #   'all_trusted' field in gmetad.conf.
 #
 # [*clusters*]

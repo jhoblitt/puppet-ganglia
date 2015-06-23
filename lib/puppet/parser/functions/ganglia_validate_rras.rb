@@ -5,13 +5,13 @@ module Puppet::Parser::Functions
 
     * [{ cf => 'AVERAGE', xff => 0.5, steps => 1, rows => 5856 }]
     * [
-        { 
+        {
           cf => 'AVERAGE',
           xff => 0.5,
           steps => 1,
           rows => 5856
          },
-         { 
+         {
           cf => 'MAX',
           xff => 0.5,
           steps => 1,
@@ -23,7 +23,7 @@ module Puppet::Parser::Functions
     * xff (xfiles factor) must be a float between 0 and 1
     * steps must be an integer
     * rows must be an integer greater than zero
-    
+
     If all hashes are not defined then compilation will fail
 
     ENDHEREDOC
@@ -58,14 +58,14 @@ module Puppet::Parser::Functions
         raise Puppet::ParseError, ("ganglia_validate_rras(): nested Hash must contain a cf key")
       end
       # which is a string
-      unless r['cf'].is_a?(String) 
+      unless r['cf'].is_a?(String)
         raise Puppet::ParseError, ("ganglia_validate_rras(): nested Hash cf key must be a String of AVERAGE | MIN | MAX | LAST")
       end
       # and must be either AVERAGE, MIN, MAX or LAST
       unless r['cf'] == 'AVERAGE' || r['cf'] == 'MIN' || r['cf'] == 'MAX' || r['cf'] == 'LAST'
         raise Puppet::ParseError, ("ganglia_validate_rras(): nested Hash cf key must be a String of AVERAGE | MIN | MAX | LAST")
       end
-      
+
       # validate values
 
       # and must contain the xff key
@@ -82,33 +82,33 @@ module Puppet::Parser::Functions
       unless r.has_key?('steps')
         raise Puppet::ParseError, ("ganglia_validate_rras(): nested Hash must contain a steps key")
       end
-      
+
       # convert steps to integer for checking
       r['steps'] = Integer(r['steps']) rescue nil
-      
+
       # steps must be an integer
       unless r['steps'].is_a?(Integer)
         raise Puppet::ParseError, ("ganglia_validate_rras(): nested Hash steps key must be an Integer greater than 0")
       end
-      
+
       # and greater than zero
       unless r['steps'] > 0
         raise Puppet::ParseError, ("ganglia_validate_rras(): nested Hash steps key must be an Integer greater than 0")
       end
-      
+
       # and must contain the rows key
       unless r.has_key?('rows')
         raise Puppet::ParseError, ("ganglia_validate_rras(): nested Hash must contain a rows key")
       end
-      
+
       # convert rows to integer for checking
       r['rows'] = Integer(r['rows']) rescue nil
-      
+
       # rows must be an integer
       unless r['rows'].is_a?(Integer)
         raise Puppet::ParseError, ("ganglia_validate_rras(): nested Hash rows key must be an Integer greater than 0")
       end
-      
+
       # and greater than zero
       unless r['rows'] > 0
         raise Puppet::ParseError, ("ganglia_validate_rras(): nested Hash rows key must be an Integer greater than 0")
@@ -117,7 +117,7 @@ module Puppet::Parser::Functions
       # any other keys should be rejected
       extras = r.keys - %w{ cf xff steps rows }
       if extras.length > 0
-        raise Puppet::ParseError, ("ganglia_validate_rras(): nested Hash contains unknown keys (#{extras.sort.join(' ')})") 
+        raise Puppet::ParseError, ("ganglia_validate_rras(): nested Hash contains unknown keys (#{extras.sort.join(' ')})")
       end
     end
   end

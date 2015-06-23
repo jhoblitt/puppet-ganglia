@@ -59,15 +59,15 @@ describe 'ganglia::gmetad' do
       it 'should enable trusted hosts' do
         should contain_file('/etc/ganglia/gmetad.conf').
           with_content(/^trusted_hosts 1 2$/)
-      end 
+      end
     end # trusted_hosts list
   end # trusted_hosts
 
   context 'clusters =>' do
     context '<good example>' do
       clusters = [
-        { 
-          'name'    => 'test', 
+        {
+          'name'    => 'test',
           'address' => ['test1.example.org', 'test2.example.org'],
         },
       ]
@@ -89,8 +89,8 @@ describe 'ganglia::gmetad' do
 
     context '<invalid example>' do
       clusters = [
-        { 
-          'name'    => 'test', 
+        {
+          'name'    => 'test',
           'address' => ['test1.example.org', 'test2.example.org'],
           'foo'     => 1,
         },

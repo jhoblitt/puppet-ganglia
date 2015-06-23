@@ -117,4 +117,3 @@ describe 'ganglia_validate_clusters', :type => :puppet_function do
     subject.call([clusters])
   end
 end
-
