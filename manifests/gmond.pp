@@ -35,6 +35,7 @@
 #
 #   -bind_hostname
 #   -mcast_join
+#   -mcast_if
 #   -host
 #   -port
 #   -ttl
@@ -47,6 +48,7 @@
 #
 #   -channel
 #   -mcast_join
+#   -mcast_if
 #   -port
 #   -bind
 #   -family

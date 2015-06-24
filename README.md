@@ -57,7 +57,7 @@ This class manages the configurtion of the Ganglia `gmond` daemon.
 
     # multicast
     $udp_recv_channel = [
-      { mcast_join => '239.2.11.71', port => 8649, ttl => 1 }
+      { mcast_join => '239.2.11.71', mcast_if => 'eth0', port => 8649, ttl => 1 }
     ]
     $udp_send_channel = [
       { mcast_join => '239.2.11.71', port => 8649, bind => '239.2.11.71' }
