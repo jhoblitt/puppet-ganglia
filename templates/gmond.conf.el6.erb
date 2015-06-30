@@ -13,7 +13,7 @@ globals {
   cleanup_threshold = 300 /*secs */
   gexec = no
   send_metadata_interval = <%= scope.lookupvar('::ganglia::gmond::globals_send_metadata_interval') %> /*secs */
-  <%- if scope.lookupvar('::ganglia::gmond::globals_override_hostname') != :undef -%>
+  <%- if scope.lookupvar('::ganglia::gmond::globals_override_hostname') -%>
   override_hostname = <%= scope.lookupvar('::ganglia::gmond::globals_override_hostname') %>
   <%- end -%>
 }
