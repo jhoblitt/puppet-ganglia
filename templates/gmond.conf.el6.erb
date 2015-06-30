@@ -9,6 +9,7 @@ globals {
   mute = no
   deaf = <%= @globals_deaf %>
   allow_extra_data = yes
+  host_tmax = 20 /*secs */
   host_dmax = <%= @globals_host_dmax %> /*secs */
   cleanup_threshold = 300 /*secs */
   gexec = no
@@ -99,6 +100,24 @@ tcp_accept_channel {
 
 <% end -%>
 <% end -%>
+
+/* Channel to receive sFlow datagrams */
+#udp_recv_channel {
+#  port = 6343
+#}
+
+/* Optional sFlow settings */
+#sflow {
+# udp_port = 6343
+# accept_vm_metrics = yes
+# accept_jvm_metrics = yes
+# multiple_jvm_instances = no
+# accept_http_metrics = yes
+# multiple_http_instances = no
+# accept_memcache_metrics = yes
+# multiple_memcache_instances = no
+#}
+
 /* Each metrics module that is referenced by gmond must be specified and
    loaded. If the module has been statically linked with gmond, it does
    not require a load path. However all dynamically loadable modules must
@@ -137,8 +156,6 @@ modules {
   }
 }
 
-include ('/etc/ganglia/conf.d/*.conf')
-
 /* The old internal 2.5.x metric array has been replaced by the following
    collection_group directives.  What follows is the default behavior for
    collecting and sending metrics that is as close to 2.5.x behavior as
@@ -155,13 +172,10 @@ collection_group {
   }
 }
 
-/* This collection group will send general info about this host every
-   1200 secs.
-   This information doesn't change between reboots and is only collected
-   once. */
+/* This collection group will send general info about this host*/
 collection_group {
-  collect_once = yes
-  time_threshold = 1200
+  collect_every = 60
+  time_threshold = 60
   metric {
     name = "cpu_num"
     title = "CPU Count"
@@ -174,7 +188,6 @@ collection_group {
     name = "mem_total"
     title = "Memory Total"
   }
-  /* Should this be here? Swap can be added/removed between reboots. */
   metric {
     name = "swap_total"
     title = "Swap Space Total"
@@ -250,6 +263,11 @@ collection_group {
     name = "cpu_wio"
     value_threshold = "1.0"
     title = "CPU wio"
+  }
+  metric {
+    name = "cpu_steal"
+    value_threshold = "1.0"
+    title = "CPU steal"
   }
   /* The next two metrics are optional if you want more detail...
      ... since they are accounted for in cpu_system.
@@ -386,3 +404,6 @@ collection_group {
     title = "Maximum Disk Space Used"
   }
 }
+
+include ("/etc/ganglia/conf.d/*.conf")
+
