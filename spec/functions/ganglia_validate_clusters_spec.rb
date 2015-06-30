@@ -2,88 +2,88 @@ require 'spec_helper'
 
 describe 'ganglia_validate_clusters', :type => :puppet_function do
   it 'should fail with no params' do
-    expect { subject.call([]) }.
-      to raise_error(Puppet::ParseError)
+    should run.with_params().
+      and_raise_error(Puppet::ParseError, /wrong number of arguments/)
   end
 
   it 'should fail with > 1 param' do
-    expect { subject.call(['a', 'b']) }.
-      to raise_error(Puppet::ParseError, /wrong number of arguments/)
+    should run.with_params('a', 'b').
+      and_raise_error(Puppet::ParseError, /wrong number of arguments/)
   end
 
   [ true, false, {}, "foo", nil ].each do |input|
     it 'should fail when not called with an array' do
-      expect { subject.call([input]) }.
-        to raise_error(Puppet::ParseError, /is not an Array/)
+      should run.with_params(input).
+        and_raise_error(Puppet::ParseError, /is not an Array/)
     end
   end
 
   it 'should fail when passed an empty array' do
-    expect { subject.call([[]]) }.
-      to raise_error(Puppet::ParseError, /Array may not be empty/)
+    should run.with_params([]).
+      and_raise_error(Puppet::ParseError, /Array may not be empty/)
   end
 
   it 'should fail when passed an array of anything but hashes' do
     clusters = ['foo', 'bar']
-    expect { subject.call([clusters]) }.
-      to raise_error(Puppet::ParseError, /is not a Hash/)
+    should run.with_params(clusters).
+      and_raise_error(Puppet::ParseError, /is not a Hash/)
   end
 
   it 'should fail when passed an array of empty hashes' do
     clusters = [{}, {}]
-    expect { subject.call([clusters]) }.
-      to raise_error(Puppet::ParseError, /Hash may not be empty/)
+    should run.with_params(clusters).
+      and_raise_error(Puppet::ParseError, /Hash may not be empty/)
   end
 
   it 'should fail when name key is missing ' do
     clusters = [{ 'address' => 'localhost' }]
-    expect { subject.call([clusters]) }.
-      to raise_error(Puppet::ParseError, /must contain a name key/)
+    should run.with_params(clusters).
+      and_raise_error(Puppet::ParseError, /must contain a name key/)
   end
 
   it 'should fail when name key is not a string' do
     clusters = [{ 'name' => ['my cluster'], 'address' => 'localhost' }]
-    expect { subject.call([clusters]) }.
-      to raise_error(Puppet::ParseError, /name key must be a String/)
+    should run.with_params(clusters).
+      and_raise_error(Puppet::ParseError, /name key must be a String/)
   end
 
   it 'should fail when address key is missing' do
     clusters = [{ 'name' => 'my cluster' }]
-    expect { subject.call([clusters]) }.
-      to raise_error(Puppet::ParseError, /must contain an address key/)
+    should run.with_params(clusters).
+      and_raise_error(Puppet::ParseError, /must contain an address key/)
   end
 
   it 'should fail when address key is not a string|array' do
     clusters = [{ 'name' => 'my cluster', 'address' => {'a' => 1} }]
-    expect { subject.call([clusters]) }.
-      to raise_error(Puppet::ParseError, /address key must be a String or Array/)
+    should run.with_params(clusters).
+      and_raise_error(Puppet::ParseError, /address key must be a String or Array/)
   end
 
   it 'work with optional polling_interval key' do
     clusters = [{ 'name' => 'my cluster', 'address' => 'localhost', 'polling_interval' => '10' }]
-    subject.call([clusters])
+    should run.with_params(clusters).and_return(clusters)
   end
 
   it 'work with optional polling_interval key' do
     clusters = [{ 'name' => 'my cluster', 'address' => 'localhost', 'polling_interval' => 10 }]
-    subject.call([clusters])
+    should run.with_params(clusters).and_return(clusters)
   end
 
   it 'should fail when polling_interval key is not a String' do
     clusters = [{ 'name' => 'my cluster', 'address' => 'localhost', 'polling_interval' => [ 10 ] }]
-    expect { subject.call([clusters]) }.
-      to raise_error(Puppet::ParseError, /polling_interval key must be a String or Integer/)
+    should run.with_params(clusters).
+      and_raise_error(Puppet::ParseError, /polling_interval key must be a String or Integer/)
   end
 
   it 'should fail with unknown keys' do
     clusters = [{ 'name' => 'my cluster', 'address' => 'localhost', 'polling_interval' => 10, 'foo' => 1, 'bar' => 2 }]
-    expect { subject.call([clusters]) }.
-      to raise_error(Puppet::ParseError, /contains unknown keys \(bar foo\)/)
+    should run.with_params(clusters).
+      and_raise_error(Puppet::ParseError, /contains unknown keys \(bar foo\)/)
   end
 
   it 'work with reasonable input - simple example' do
     clusters = [{ 'name' => 'my cluster', 'address' => 'localhost' }]
-    subject.call([clusters])
+    should run.with_params(clusters).and_return(clusters)
   end
 
   it 'work with reasonable input - complex example' do
@@ -114,7 +114,6 @@ describe 'ganglia_validate_clusters', :type => :puppet_function do
         ],
       },
     ]
-    subject.call([clusters])
+    should run.with_params(clusters).and_return(clusters)
   end
 end
-

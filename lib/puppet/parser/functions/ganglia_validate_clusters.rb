@@ -82,7 +82,7 @@ module Puppet::Parser::Functions
         raise Puppet::ParseError, ("ganglia_validate_clusters(): nested Hash must contain a name key")
       end
       # which is a string
-      unless c['name'].is_a?(String) 
+      unless c['name'].is_a?(String)
         raise Puppet::ParseError, ("ganglia_validate_clusters(): nested Hash name key must be a String")
       end
 
@@ -106,7 +106,7 @@ module Puppet::Parser::Functions
       # any other keys should be rejected
       extras = c.keys - %w{ name address polling_interval }
       if extras.length > 0
-        raise Puppet::ParseError, ("ganglia_validate_clusters(): nested Hash contains unknown keys (#{extras.sort.join(' ')})") 
+        raise Puppet::ParseError, ("ganglia_validate_clusters(): nested Hash contains unknown keys (#{extras.sort.join(' ')})")
       end
     end
   end

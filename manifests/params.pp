@@ -15,7 +15,7 @@ class ganglia::params {
 
   # files are the same for ubuntu and el5/el6
   $web_php_erb          = 'ganglia/conf.php.el6.erb'
-  
+
   $rras = [
     {
       cf      => 'AVERAGE',
@@ -36,7 +36,7 @@ class ganglia::params {
       rows    => 52704
     },
   ]
-  
+
   $gmetad_service_erb    = 'ganglia/gmetad.conf.erb'
 
   case $::osfamily {

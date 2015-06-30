@@ -2,6 +2,11 @@ require 'puppetlabs_spec_helper/rake_tasks'
 require 'puppet-lint/tasks/puppet-lint'
 require 'puppet-syntax/tasks/puppet-syntax'
 
+begin
+  require 'puppet_blacksmith/rake_tasks'
+rescue LoadError
+end
+
 PuppetSyntax.exclude_paths = ['spec/fixtures/**/*']
 
 PuppetLint::RakeTask.new :lint do |config|
@@ -9,8 +14,12 @@ PuppetLint::RakeTask.new :lint do |config|
   config.fail_on_warnings = true
 end
 
+task :travis_lint do
+  sh "travis-lint"
+end
+
 task :default => [
-  :syntax,
+  :validate,
   :lint,
   :spec,
 ]

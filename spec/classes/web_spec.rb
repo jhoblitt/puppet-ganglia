@@ -6,9 +6,8 @@ describe 'ganglia::web' do
   context 'with out params' do
     let(:params) { { } }
     it do
-      should contain_class('ganglia::web') 
-      should contain_file('/etc/ganglia/conf.php') 
+      should contain_class('ganglia::web')
+      should contain_file('/etc/ganglia/conf.php')
     end
   end
 end
-
