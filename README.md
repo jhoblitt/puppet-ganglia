@@ -259,6 +259,7 @@ It has been tested on:
 
 * el5.x
 * el6.x
+* el7.x
 * ubuntu 12.04
 * ubuntu 13.04
 * debian 6.07
