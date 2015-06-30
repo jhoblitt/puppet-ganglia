@@ -1,8 +1,6 @@
 require 'spec_helper'
 
-describe 'ganglia::gmetad' do
-  let(:facts) {{ :osfamily => 'RedHat', :operatingsystemmajrelease => '6' }}
-
+shared_examples 'RedHat 6.x' do
   context 'default params' do
     it 'should manage gmetad.conf' do
       should contain_file('/etc/ganglia/gmetad.conf').with(
@@ -102,4 +100,16 @@ describe 'ganglia::gmetad' do
       end
     end # <invalid example>
   end # clusters =>
+end # RedHat
+
+describe 'ganglia::gmetad' do
+  context 'RedHat' do
+    %w{6 7}.each do |rel|
+      context rel do
+        let(:facts) {{ :osfamily => 'RedHat', :operatingsystemmajrelease => rel }}
+
+        it_behaves_like 'RedHat 6.x'
+      end
+    end
+  end
 end
