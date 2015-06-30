@@ -43,6 +43,9 @@ udp_send_channel {
   <%- if channel['mcast_join'] then -%>
   mcast_join = <%= channel['mcast_join'] %>
   <%- end -%>
+  <%- if channel['mcast_if'] then -%>
+  mcast_if   = <%= channel['mcast_if'] %>
+  <%- end -%>
   <%- if channel['host'] then -%>
   host       = <%= channel['host'] %>
   <%- end -%>
@@ -62,6 +65,9 @@ udp_send_channel {
 udp_recv_channel {
   <%- if channel['mcast_join'] then -%>
   mcast_join = <%= channel['mcast_join'] %>
+  <%- end -%>
+  <%- if channel['mcast_if'] then -%>
+  mcast_if   = <%= channel['mcast_if'] %>
   <%- end -%>
   <%- if channel['port'] then -%>
   port       = <%= channel['port'] %>
