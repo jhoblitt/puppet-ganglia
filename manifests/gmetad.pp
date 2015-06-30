@@ -76,9 +76,36 @@ class ganglia::gmetad(
   validate_array($trusted_hosts)
   validate_bool($all_trusted)
 
-  anchor{ 'ganglia::gmetad::begin': } ->
-  class{ 'ganglia::gmetad::install': } ->
-  class{ 'ganglia::gmetad::config': } ->
-  class{ 'ganglia::gmetad::service': } ->
-  anchor{ 'ganglia::gmetad::end': }
+  if ($::ganglia::params::gmetad_status_command) {
+    $hasstatus = false
+  } else {
+    $hasstatus = true
+  }
+
+  if versioncmp($::puppetversion, '3.6.0') > 0 {
+    package { $::ganglia::params::gmetad_package_name:
+      ensure        => present,
+      allow_virtual => false,
+    }
+  } else {
+    package { $::ganglia::params::gmetad_package_name:
+      ensure => present,
+    }
+  }
+
+  Package[$::ganglia::params::gmetad_package_name] ->
+  file { $::ganglia::params::gmetad_service_config:
+    ensure  => present,
+    owner   => 'root',
+    group   => 'root',
+    mode    => '0644',
+    content => template($::ganglia::params::gmetad_service_erb),
+  } ~>
+  service { $::ganglia::params::gmetad_service_name:
+    ensure     => running,
+    hasstatus  => $hasstatus,
+    hasrestart => true,
+    enable     => true,
+    status     => $::ganglia::params::gmetad_status_command,
+  }
 }

@@ -13,16 +13,16 @@ describe 'ganglia::gmetad' do
       )
     end
 
-    it 'should notify Class[ganglia::gmetad::service]' do
+    it do
       should contain_file('/etc/ganglia/gmetad.conf').
-        that_notifies('Class[ganglia::gmetad::service]')
+        that_notifies('Service[gmetad]')
     end
 
     it 'should have default values in gmetad.conf template' do
       should contain_file('/etc/ganglia/gmetad.conf').
         with_content(/^data_source "my cluster" localhost$/).
         with_content(/^RRAs "RRA:AVERAGE:0.5:1:5856" "RRA:AVERAGE:0.5:4:20160" "RRA:AVERAGE:0.5:40:52704" $/).
-        with_content(/^gridname "undef"$/).
+        with_content(/^# gridname "MyGrid"$/).
         with_content(/^setuid_username "ganglia"$/).
         with_content(/^case_sensitive_hostnames 0$/)
     end

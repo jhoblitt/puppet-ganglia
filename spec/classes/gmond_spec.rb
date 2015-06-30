@@ -13,9 +13,9 @@ describe 'ganglia::gmond' do
       )
     end
 
-    it 'should notify Class[ganglia::gmond::service]' do
+    it do
       should contain_file('/etc/ganglia/gmond.conf').
-        that_notifies('Class[ganglia::gmond::service]')
+        that_notifies('Service[gmond]')
     end
 
     it 'should have default values in gmond.conf template' do
