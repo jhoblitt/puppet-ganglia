@@ -55,26 +55,29 @@
 #
 
 class ganglia::gmetad(
-  $all_trusted = false,
-  $clusters = [ { 'name' => 'my cluster', 'address' => 'localhost' } ],
-  $gridname = undef,
-  $rras = $ganglia::params::rras,
-  $trusted_hosts = [],
-  $gmetad_package_name = $ganglia::params::gmetad_package_name,
-  $gmetad_service_name = $ganglia::params::gmetad_service_name,
-  $gmetad_service_config = $ganglia::params::gmetad_service_config,
-  $gmetad_user = $ganglia::params::gmetad_user,
-  $gmetad_case_sensitive_hostnames = $ganglia::params::gmetad_case_sensitive_hostnames # lint:ignore:80chars
+  $all_trusted                     = false,
+  $clusters                        = [
+    { 'name' => 'my cluster', 'address' => 'localhost' },
+  ],
+  $gridname                        = undef,
+  $rras                            = $::ganglia::params::rras,
+  $trusted_hosts                   = [],
+  $gmetad_package_name             = $::ganglia::params::gmetad_package_name,
+  $gmetad_service_name             = $::ganglia::params::gmetad_service_name,
+  $gmetad_service_config           = $::ganglia::params::gmetad_service_config,
+  $gmetad_user                     = $::ganglia::params::gmetad_user,
+  $gmetad_case_sensitive_hostnames =
+    $::ganglia::params::gmetad_case_sensitive_hostnames
 ) inherits ganglia::params {
+  validate_bool($all_trusted)
   ganglia_validate_clusters($clusters)
   validate_string($gridname)
   ganglia_validate_rras($rras)
+  validate_array($trusted_hosts)
   validate_string($gmetad_package_name)
   validate_string($gmetad_service_name)
   validate_string($gmetad_service_config)
   validate_string($gmetad_user)
-  validate_array($trusted_hosts)
-  validate_bool($all_trusted)
 
   if ($::ganglia::params::gmetad_status_command) {
     $hasstatus = false
