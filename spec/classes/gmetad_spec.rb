@@ -100,6 +100,37 @@ shared_examples 'RedHat 6.x' do
       end
     end # <invalid example>
   end # clusters =>
+
+  context 'gmetad_case_sensitive_hostnames' do
+    context 'default' do
+      it 'should have an empty trusted_hosts' do
+        should contain_file('/etc/ganglia/gmetad.conf').
+          with_content(/^case_sensitive_hostnames 0$/)
+      end
+    end # default
+
+    [0, 1].each do |value|
+      context 'good value' do
+        let(:params) {{ :gmetad_case_sensitive_hostnames => value }}
+
+        it do
+          should contain_file('/etc/ganglia/gmetad.conf').
+            with_content(/^case_sensitive_hostnames #{value}$/)
+        end
+      end
+    end # good value
+
+    [-1, 2].each do |value|
+      context 'bad value' do
+        let(:params) {{ :gmetad_case_sensitive_hostnames => value }}
+
+        it do
+          should raise_error(Puppet::Error,
+            /(to be greater or equal to 0|to be smaller or equal to 1)/)
+        end
+      end
+    end # value
+  end # gmetad_case_sensitive_hostnames
 end # RedHat
 
 describe 'ganglia::gmetad' do

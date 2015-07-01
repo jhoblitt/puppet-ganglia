@@ -78,6 +78,7 @@ class ganglia::gmetad(
   validate_string($gmetad_service_name)
   validate_string($gmetad_service_config)
   validate_string($gmetad_user)
+  validate_integer($gmetad_case_sensitive_hostnames, 1, 0)
 
   if ($::ganglia::params::gmetad_status_command) {
     $hasstatus = false
