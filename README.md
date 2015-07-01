@@ -15,6 +15,7 @@ Puppet ganglia Module
         * [`ganglia::web`](#gangliaweb)
 4. [Limitations](#limitations)
     * [Tested Platforms](#tested-platforms)
+    * [Puppet Version Compatibility](#puppet-version-compatibility)
     * [`$::osfamily == RedHat` and EPEL packages](#osfamily--redhat-and-epel-packages)
 5. [Versioning](#versioning)
 6. [Support](#support)
@@ -394,6 +395,13 @@ It has been tested on:
 * ubuntu 12.04
 * ubuntu 13.04
 * debian 6.07
+
+### Puppet Version Compatibility
+
+Versions | Puppet 2.7 | Puppet 3.x | Puppet 4.x
+:--------|:----------:|:----------:|:----------:
+**1.x**  | **yes**    | **yes**    | no
+**2.x**  | no         | **yes**    | **yes**
 
 ### `$::osfamily == RedHat` and EPEL packages
 
