@@ -8,15 +8,19 @@ Puppet ganglia Module
 1. [Overview](#overview)
 2. [Description](#description)
 3. [Usage](#usage)
-    * [`ganglia::gmond`](#gangliagmond)
-    * [`ganglia::gmetda`](#gangliagmetad)
-    * [`ganglia::web`](#gangliaweb)
+    * [Examples](#examples)
+    * [Classes](#classes)
+        * [`ganglia::gmond`](#gangliagmond)
+        * [`ganglia::gmetda`](#gangliagmetad)
+        * [`ganglia::web`](#gangliaweb)
 4. [Limitations](#limitations)
     * [Tested Platforms](#tested-platforms)
+    * [Puppet Version Compatibility](#puppet-version-compatibility)
     * [`$::osfamily == RedHat` and EPEL packages](#osfamily--redhat-and-epel-packages)
 5. [Versioning](#versioning)
 6. [Support](#support)
-7. [See Also](#see-also)
+7. [Contributing](#contributing)
+8. [See Also](#see-also)
 
 
 Overview
@@ -36,218 +40,346 @@ front end.
 Usage
 -----
 
-### `ganglia::gmond`
+### Examples
+
+```puppet
+  # unicast
+  $udp_recv_channel = [
+    { port => 8649, bind => 'localhost' },
+    { port => 8649, bind => '0.0.0.0' },
+  ]
+  $udp_send_channel = [
+    { port => 8649, host => 'test1.example.org', ttl => 2 },
+    { port => 8649, host => 'test2.example.org', ttl => 2 },
+    { bind_hostname => "yes", host => 'test3.example.org', ttl => 1 },
+  ]
+  $tcp_accept_channel = [
+    { port => 8649 },
+  ]
+
+  # multicast
+  $udp_recv_channel = [
+    { mcast_join => '239.2.11.71', mcast_if => 'eth0', port => 8649, ttl => 1 }
+  ]
+  $udp_send_channel = [
+    { mcast_join => '239.2.11.71', port => 8649, bind => '239.2.11.71' }
+  ]
+  $tcp_accept_channel = [
+    { port => 8649 },
+  ]
+
+  class{ 'ganglia::gmond':
+    globals_deaf                   => 'yes',
+    globals_host_dmax              => '691200',
+    globals_send_metadata_interval => '60',
+    globals_override_hostname      => 'web.example.org',
+    cluster_name                   => 'example grid',
+    cluster_owner                  => 'ACME, Inc.',
+    cluster_latlong                => 'N32.2332147 W110.9481163',
+    cluster_url                    => 'www.example.org',
+    host_location                  => 'example computer room',
+    udp_recv_channel               => $udp_recv_channel,
+    udp_send_channel               => $udp_send_channel,
+    tcp_accept_channel             => $tcp_accept_channel,
+  }
+```
+
+```puppet
+  $clusters = [
+    {
+      name     => 'test',
+      address  => ['test1.example.org', 'test2.example.org'],
+    },
+  ]
+
+  $rras = [
+    {
+      cf      => 'AVERAGE',
+      xff     => 0.5,
+      steps   => 1,
+      rows    => 5856
+    },
+    {
+      cf      => 'AVERAGE',
+      xff     => 0.5,
+      steps   => 4,
+      rows    => 20160
+    },
+    {
+      cf      => 'AVERAGE',
+      xff     => 0.5,
+      steps   => 40,
+      rows    => 52704
+    },
+  ]
+
+  class { 'ganglia::gmetad':
+    clusters      => $clusters,
+    gridname      => 'my grid',
+    rras          => $rras,
+    all_trusted   => false,
+    trusted_hosts => [],
+  }
+```
+
+```puppet
+  class{ 'ganglia::web':
+    $ganglia_ip = '192.168.0.1',
+    $ganglia_port = 8652,
+  }
+```
+
+### Classes
+
+#### `ganglia::gmond`
 
 This class manages the configurtion of the Ganglia `gmond` daemon.
 
 ```puppet
-    # unicast
-    $udp_recv_channel = [
-      { port => 8649, bind => 'localhost' },
-      { port => 8649, bind => '0.0.0.0' },
-    ]
-    $udp_send_channel = [
-      { port => 8649, host => 'test1.example.org', ttl => 2 },
-      { port => 8649, host => 'test2.example.org', ttl => 2 },
-      { bind_hostname => "yes", host => 'test3.example.org', ttl => 1 },
-    ]
-    $tcp_accept_channel = [
-      { port => 8649 },
-    ]
-
-    # multicast
-    $udp_recv_channel = [
-      { mcast_join => '239.2.11.71', mcast_if => 'eth0', port => 8649, ttl => 1 }
-    ]
-    $udp_send_channel = [
-      { mcast_join => '239.2.11.71', port => 8649, bind => '239.2.11.71' }
-    ]
-    $tcp_accept_channel = [
-      { port => 8649 },
-    ]
-
-    class{ 'ganglia::gmond':
-      globals_deaf                   => 'yes',
-      globals_host_dmax              => '691200',
-      globals_send_metadata_interval => '60',
-      globals_override_hostname      => 'web.example.org',
-      cluster_name                   => 'example grid',
-      cluster_owner                  => 'ACME, Inc.',
-      cluster_latlong                => 'N32.2332147 W110.9481163',
-      cluster_url                    => 'www.example.org',
-      host_location                  => 'example computer room',
-      udp_recv_channel               => $udp_recv_channel,
-      udp_send_channel               => $udp_send_channel,
-      tcp_accept_channel             => $tcp_accept_channel,
-    }
+# defaults
+class { 'ganglia::gmond':
+  globals_deaf                   => 'no',
+  globals_host_dmax              =>'0',
+  globals_send_metadata_interval => '300',
+  globals_override_hostname      => undef,
+  cluster_name                   => 'unspecified',
+  cluster_owner                  => 'unspecified',
+  cluster_latlong                => 'unspecified',
+  cluster_url                    => 'unspecified',
+  host_location                  => 'unspecified',
+  udp_send_channel               => [
+    { mcast_join => '239.2.11.71',> port => 8649, ttl => 1 }
+  ],
+  udp_recv_channel               => [
+    { mcast_join => '239.2.11.71',> port => 8649, bind => '239.2.11.71' }
+  ],
+  tcp_accept_channel             => [ { port => 8659 } ],
+}
 ```
 
- * `globals_deaf`
+##### `globals_deaf`
 
-  `String` defaults to: `no`
+`String` defaults to: `no`
 
- * `globals_host_dmax`
+##### `globals_host_dmax`
 
-  `String` defaults to: `0`
+`String` defaults to: `0`
 
- * `globals_send_metadata_interval`
+##### `globals_send_metadata_interval`
 
-  `String` defaults to: `300`
+`String` defaults to: `300`
 
- * `globals_override_hostname`
+##### `globals_override_hostname`
 
-  `String` defaults to: undef
+`String` defaults to: `undef`
 
- * `cluster_name`
+##### `cluster_name`
 
-    `String` defaults to: `unspecified`
+`String` defaults to: `unspecified`
 
- * `cluster_owner`
+##### `cluster_owner`
 
-    `String` defaults to: `unspecified`
+`String` defaults to: `unspecified`
 
- * `cluster_latlong`
+##### `cluster_latlong`
 
-    `String` defaults to: `unspecified`
+`String` defaults to: `unspecified`
 
- * `cluster_url`
+##### `cluster_url`
 
-    `String` defaults to: `unspecified`
+`String` defaults to: `unspecified`
 
- * `host_location`
+##### `host_location`
 
-    `String` defaults to: `unspecified`
+`String` defaults to: `unspecified`
 
- * `udp_send_channel`
+##### `udp_send_channel`
 
-    `Array of Hash` defaults to:
+`Array of Hash` defaults to:
 
-        [ { mcast_join => '239.2.11.71', port => 8649, ttl => 1 } ]
+    [ { mcast_join => '239.2.11.71', port => 8649, ttl => 1 } ]
 
- * `udp_recv_channel`
+Supported hash keys are (all optional):
 
-    `Array of Hash` defaults to:
+* `bind_hostname`
+* `mcast_join`
+* `mcast_if`
+* `host`
+* `port`
+* `ttl`
 
-         [ { mcast_join => '239.2.11.71', port => 8649, bind => '239.2.11.71' } ]
+##### `udp_recv_channel`
 
- * `tcp_accept_channel`
+`Array of Hash` defaults to:
 
-    `Array of Hash` defaults to:
+    { mcast_join => '239.2.11.71', port => 8649, bind => '239.2.11.71' } ]
 
-        [ { port => 8659 } ]
+Supported hash keys are (all optional):
 
-### ganglia::gmetad
+* `mcast_join`
+* `mcast_if`
+* `port`
+* `bind`
+* `family`
+
+##### `tcp_accept_channel`
+
+`Array of Hash` defaults to:
+
+    [ { port => 8659 } ]
+
+Supported hash keys are (all optional):
+
+* `port`
+* `family`
+
+#### ganglia::gmetad
+
+install and configure the ganglia gmetad daemon.
 
 ```puppet
-    $clusters = [
-      {
-        name     => 'test',
-        address  => ['test1.example.org', 'test2.example.org'],
-      },
-    ]
-
-    $rras = [
-      {
-        cf      => 'AVERAGE',
-        xff     => 0.5,
-        steps   => 1,
-        rows    => 5856
-      },
-      {
-        cf      => 'AVERAGE',
-        xff     => 0.5,
-        steps   => 4,
-        rows    => 20160
-      },
-      {
-        cf      => 'AVERAGE',
-        xff     => 0.5,
-        steps   => 40,
-        rows    => 52704
-      },
-    ]
-
-
-      clusters      => $clusters,
-      gridname      => 'my grid',
-      rras          => $rras,
-      all_trusted   => false,
-      trusted_hosts => []
-    }
+# defaults
+class { 'ganglia::gmetad':
+  all_trusted                     => false,
+  clusters                        => [
+    { 'name' => 'my cluster', 'address' => 'localhost' },
+  ],
+  gridname                        => undef,
+  rras                            => $::ganglia::params::rras,
+  trusted_hosts                   => [],
+  gmetad_package_name             => $::ganglia::params::gmetad_package_name,
+  gmetad_service_name             => $::ganglia::params::gmetad_service_name,
+  gmetad_service_config           => $::ganglia::params::gmetad_service_config,
+  gmetad_user                     => $::ganglia::params::gmetad_user,
+  gmetad_case_sensitive_hostnames =>
+    $::ganglia::params::gmetad_case_sensitive_hostnames
+}
 ```
 
- * `all_trusted`
+##### `all_trusted`
 
-    `Boolean` defaults to: false
+`Boolean` defaults to: false
 
-    * If set to true, we will allow all hosts that can query ganglia data via the xml query port.  Corresponds to the 'all\_trusted' field in gmetad.conf.
+If set to true, will allow any host to query ganglia data via the XML query
+port.  Corresponds to the `all_trusted` field in `gmetad.conf`.
 
- * `clusters`
+##### `clusters`
 
-    `Array of Hash` defaults to:
+`Array of Hash` defaults to:
 
-        [ { 'name' => 'my cluster', 'address' => 'localhost' } ]
+    [ { 'name' => 'my cluster', 'address' => 'localhost' } ]
 
- * `gridname`
+Supported hash keys are:
 
-    `String` defaults to: `undef`
+* `name` (required)
+* `polling_interval` (optional)
+* `address` (may be a `String` or `Array of String`
 
- * `rras`
+##### `gridname`
 
-    `Array of Hash` defaults to:
+`String` defaults to: `undef`
 
-    ```
-      [
-        {
-          cf      => 'AVERAGE',
-          xff     => 0.5,
-          steps   => 1,
-          rows    => 5856
-        },
-        {
-          cf      => 'AVERAGE',
-          xff     => 0.5,
-          steps   => 4,
-          rows    => 20160
-        },
-        {
-          cf      => 'AVERAGE',
-          xff     => 0.5,
-          steps   => 40,
-          rows    => 52704
-        },
-      ]
-    ```
+##### `rras`
 
-    * consolidation function (cf) can be AVERAGE | MIN | MAX | LAST
-    * xfiles factor (xff) defines what part of a consolidation interval may be made up from *UNKNOWN* data while the consolidated value is still regarded as known. It is given as the ratio of allowed *UNKNOWN* PDPs to the number of PDPs in the interval. Thus, it ranges from 0 to 1 (exclusive).
-    * steps defines how many of these primary data points are used to build a consolidated data point which then goes into the archive.
-    * rows defines how many generations of data values are kept in an RRA. Obviously, this has to be greater than zero.
-
- * `trusted_hosts`
-
-    `Array of Strings` defaults to empty array
-
-    * Each string matches a hostname that is allowed to query ganglia data via the xml query port.  Corresponds to the 'trusted\_hosts' field in gmetad.conf.
-
-### ganglia::web
+`Array of Hash` defaults to:
 
 ```puppet
-    class{ 'ganglia::web': }
-
-    class{ 'ganglia::web':
-      ganglia_ip   => '192.168.0.1',
-      ganglia_port => 8652,
-    }
+  [
+    {
+      cf      => 'AVERAGE',
+      xff     => 0.5,
+      steps   => 1,
+      rows    => 5856
+    },
+    {
+      cf      => 'AVERAGE',
+      xff     => 0.5,
+      steps   => 4,
+      rows    => 20160
+    },
+    {
+      cf      => 'AVERAGE',
+      xff     => 0.5,
+      steps   => 40,
+      rows    => 52704
+    },
+  ]
 ```
 
- * `ganglia_ip`
+Supported hash keys (all keys are required) are:
 
-    `String` defaults to: `127.0.0.1`
+* `cf`
 
- * `ganglia_port`
+consolidation function (cf) can be AVERAGE | MIN | MAX | LAST
 
-    `String` defaults to: `8652`
+* `xff`
+
+xfiles factor (xff) defines what part of a consolidation interval may be made
+up from *UNKNOWN* data while the consolidated value is still regarded as known.
+It is given as the ratio of allowed *UNKNOWN* PDPs to the number of PDPs in the
+interval. Thus, it ranges from 0 to 1 (exclusive).
+
+* `steps`
+
+steps defines how many of these primary data points are used to build a
+consolidated data point which then goes into the archive.
+
+* `rows`
+
+rows defines how many generations of data values are kept in an RRA.
+Obviously, this has to be greater than zero.
+
+##### `trusted_hosts`
+
+`Array of Strings` defaults to: '[]'
+
+Each string matches a hostname that is allowed to query ganglia data via the
+XML query port.  Corresponds to the `all_trusted` field in `gmetad.conf`.
+
+##### `gmetad_package_name`
+
+`String` defaults to: `$::ganglia::params::gmetad_package_name`
+
+##### `gmetad_service_name`
+
+`String` defaults to: `$::ganglia::params::gmetad_service_name`
+
+##### `gmetad_service_config`
+
+`String` defaults to: `$::ganglia::params::gmetad_service_config`
+
+##### `gmetad_user`
+
+`String` defaults to: `$::ganglia::params::gmetad_user`
+
+##### `gmetad_case_sensitive_hostnames`
+
+`Integer` defaults to: `$::ganglia::params::gmetad_case_sensitive_hostnames`
+
+Accepted values are `0` or `1`.
+
+#### ganglia::web
+
+Install and configure the ganglia web front end.
+
+```puppet
+# defaults
+class{ 'ganglia::web':
+  ganglia_ip   => '127.0.0.1',
+  ganglia_port => 8652,
+}
+```
+
+##### `ganglia_ip`
+
+`String` defaults to: `127.0.0.1`
+
+##### `ganglia_port`
+
+`String or Integer` defaults to: `Integer: 8652`
+
+Passing a `String` to `$ganglia_port` is deprecated.  Please use an `Integer`
+value.
 
 
 Limitations
@@ -263,6 +395,13 @@ It has been tested on:
 * ubuntu 12.04
 * ubuntu 13.04
 * debian 6.07
+
+### Puppet Version Compatibility
+
+Versions | Puppet 2.7 | Puppet 3.x | Puppet 4.x
+:--------|:----------:|:----------:|:----------:
+**1.x**  | **yes**    | **yes**    | no
+**2.x**  | no         | **yes**    | **yes**
 
 ### `$::osfamily == RedHat` and EPEL packages
 
@@ -331,6 +470,26 @@ Support
 
 Please log tickets and issues at
 [github](https://github.com/jhoblitt/puppet-ganglia/issues)
+
+
+Contributing
+------------
+
+1. Fork it on github
+2. Make a local clone of your fork
+3. Create a topic branch.  Eg, `feature/mousetrap`
+4. Make/commit changes
+    * Commit messages should be in [imperative tense](http://git-scm.com/book/ch5-2.html)
+    * Check that linter warnings or errors are not introduced - `bundle exec rake lint`
+    * Check that `Rspec-puppet` unit tests are not broken and coverage is added for new
+      features - `bundle exec rake spec`
+    * Documentation of API/features is updated as appropriate in the README
+    * If present, `beaker` acceptance tests should be run and potentially
+      updated - `bundle exec rake beaker`
+5. When the feature is complete, rebase / squash the branch history as
+   necessary to remove "fix typo", "oops", "whitespace" and other trivial commits
+6. Push the topic branch to github
+7. Open a Pull Request (PR) from the *topic branch* onto parent repo's `master` branch
 
 
 See Also
