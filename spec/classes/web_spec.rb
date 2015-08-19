@@ -7,7 +7,7 @@ describe 'ganglia::web' do
     context 'with out params' do
       it do
         should contain_file('/etc/ganglia/conf.php').
-          with_content(/\$ganglia_port = 8652;/)
+          with_content(/\$conf\['ganglia_port'\] = 8652;/)
       end
     end
 
@@ -17,7 +17,7 @@ describe 'ganglia::web' do
 
         it do
           should contain_file('/etc/ganglia/conf.php').
-            with_content(/\$ganglia_port = 42;/)
+            with_content(/\$conf\['ganglia_port'\] = 42;/)
         end
       end #Integer
 
@@ -26,7 +26,7 @@ describe 'ganglia::web' do
 
         it do
           should contain_file('/etc/ganglia/conf.php').
-            with_content(/\$ganglia_port = 42;/)
+            with_content(/\$conf\['ganglia_port'\] = 42;/)
         end
 
         it 'should be deprecated' do
