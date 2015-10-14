@@ -1,5 +1,13 @@
 
 #### [Current]
+ * [7ad4f41](../../commit/7ad4f41) - __(Joshua Hoblitt)__ Merge pull request [#57](../../issues/57) from NoodlesNZ/master
+
+Fixed conf.php for current ganglia web
+ * [5f4a366](../../commit/5f4a366) - __(Nick Le Mouton)__ Fixed conf.php for current ganglia web
+ * [c5710ac](../../commit/c5710ac) - __(Joshua Hoblitt)__ Merge pull request [#55](../../issues/55) from jhoblitt/feature/v2.0.0
+
+v2.0.0
+ * [12cbbb3](../../commit/12cbbb3) - __(Joshua Hoblitt)__ bump version to v2.0.0
  * [8029f6b](../../commit/8029f6b) - __(Joshua Hoblitt)__ add Puppet Version Compatibility subsection to README
  * [82f0d95](../../commit/82f0d95) - __(Joshua Hoblitt)__ migrate & revise API docs into README
 
