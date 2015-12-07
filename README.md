@@ -148,10 +148,10 @@ class { 'ganglia::gmond':
   cluster_url                    => 'unspecified',
   host_location                  => 'unspecified',
   udp_send_channel               => [
-    { mcast_join => '239.2.11.71',> port => 8649, ttl => 1 }
+    { mcast_join => '239.2.11.71'=> port => 8649, ttl => 1 }
   ],
   udp_recv_channel               => [
-    { mcast_join => '239.2.11.71',> port => 8649, bind => '239.2.11.71' }
+    { mcast_join => '239.2.11.71'=> port => 8649, bind => '239.2.11.71' }
   ],
   tcp_accept_channel             => [ { port => 8659 } ],
 }
