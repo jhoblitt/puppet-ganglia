@@ -138,22 +138,22 @@ This class manages the configurtion of the Ganglia `gmond` daemon.
 ```puppet
 # defaults
 class { 'ganglia::gmond':
-  globals_deaf                   => 'no',
-  globals_host_dmax              =>'0',
-  globals_send_metadata_interval => '300',
-  globals_override_hostname      => undef,
-  cluster_name                   => 'unspecified',
-  cluster_owner                  => 'unspecified',
-  cluster_latlong                => 'unspecified',
-  cluster_url                    => 'unspecified',
-  host_location                  => 'unspecified',
-  udp_send_channel               => [
-    { mcast_join => '239.2.11.71'=> port => 8649, ttl => 1 }
+  globals_deaf                    => 'no',
+  globals_host_dmax               =>'0',
+  globals_send_metadata_interval  => '300',
+  globals_override_hostname       => undef,
+  cluster_name                    => 'unspecified',
+  cluster_owner                   => 'unspecified',
+  cluster_latlong                 => 'unspecified',
+  cluster_url                     => 'unspecified',
+  host_location                   => 'unspecified',
+  udp_send_channel                => [
+    { mcast_join => '239.2.11.71' => port => 8649, ttl => 1 }
   ],
-  udp_recv_channel               => [
-    { mcast_join => '239.2.11.71'=> port => 8649, bind => '239.2.11.71' }
+  udp_recv_channel                => [
+    { mcast_join => '239.2.11.71 '=> port => 8649, bind => '239.2.11.71' }
   ],
-  tcp_accept_channel             => [ { port => 8659 } ],
+  tcp_accept_channel              => [ { port => 8659 } ],
 }
 ```
 
