@@ -66,6 +66,6 @@ class ganglia::gmond (
     status     => $::ganglia::params::gmond_status_command,
   }
   if ($operatingsystem == 'RedHat' or $operatingsystem == 'CentOS') and ($operatingsystemmajrelease == '7' or $operatingsystemmajrelease == '6') {
-    package { 'ganglia-gmond-python': ensure => present}
+    package { 'ganglia-gmond-python': ensure => present }
   }
 }
