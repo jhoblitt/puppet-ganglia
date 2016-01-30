@@ -124,8 +124,8 @@ Usage
 
 ```puppet
   class{ 'ganglia::web':
-    $ganglia_ip = '192.168.0.1',
-    $ganglia_port = 8652,
+    ganglia_ip => '192.168.0.1',
+    ganglia_port => 8652,
   }
 ```
 
