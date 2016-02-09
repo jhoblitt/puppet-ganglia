@@ -18,6 +18,9 @@ class ganglia::gmond (
   ],
   $tcp_accept_channel             = [ { port => 8659 } ],
   $gmond_package_name             = $::ganglia::params::gmond_package_name,
+  $gmond_service_name             = $::ganglia::params::gmond_service_name,
+  $gmond_service_config           = $::ganglia::params::gmond_service_config,
+  $gmond_status_command           = $::ganglia::params::gmond_status_command,
 ) inherits ganglia::params {
   validate_string($globals_deaf)
   validate_string($globals_host_dmax)
@@ -36,6 +39,9 @@ class ganglia::gmond (
   if !(is_string($gmond_package_name) or is_array($gmond_package_name)) {
     fail('$gmond_package_name is not a string or array.')
   }
+  validate_string($gmond_service_name)
+  validate_string($gmond_service_config)
+  validate_string($gmond_status_command)
 
   if ($::ganglia::params::gmond_status_command) {
     $hasstatus = false
@@ -55,18 +61,18 @@ class ganglia::gmond (
   }
 
   Package[$gmond_package_name] ->
-  file { $::ganglia::params::gmond_service_config:
+  file { $gmond_service_config:
     ensure  => present,
     owner   => 'root',
     group   => 'root',
     mode    => '0644',
     content => template($::ganglia::params::gmond_service_erb),
   } ~>
-  service { $::ganglia::params::gmond_service_name:
+  service { $gmond_service_name:
     ensure     => running,
     hasstatus  => $hasstatus,
     hasrestart => true,
     enable     => true,
-    status     => $::ganglia::params::gmond_status_command,
+    status     => $gmond_status_command,
   }
 }
