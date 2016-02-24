@@ -1,7 +1,7 @@
 require 'spec_helper'
 
 describe 'ganglia::gmond' do
-  let(:facts) {{ :osfamily => 'RedHat', :operatingsystemmajrelease => '6' }}
+  let(:facts) {{ :osfamily => 'RedHat', :operatingsystemmajrelease => '6', :puppetversion => Puppet.version }}
 
   context 'default params' do
     it 'should manage gmond.conf' do
