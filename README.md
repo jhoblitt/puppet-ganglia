@@ -68,6 +68,8 @@ Usage
     { port => 8649 },
   ]
 
+  $gmond_package_name = [ 'ganglia-gmond', 'ganglia-gmond-python' ]
+
   class{ 'ganglia::gmond':
     globals_deaf                   => 'yes',
     globals_host_dmax              => '691200',
@@ -81,6 +83,7 @@ Usage
     udp_recv_channel               => $udp_recv_channel,
     udp_send_channel               => $udp_send_channel,
     tcp_accept_channel             => $tcp_accept_channel,
+    gmond_package_name             => $gmond_package_name,
   }
 ```
 
@@ -154,6 +157,7 @@ class { 'ganglia::gmond':
     { mcast_join => '239.2.11.71', port => 8649, bind => '239.2.11.71' }
   ],
   tcp_accept_channel               => [ { port => 8659 } ],
+  gmond_package_name               => $::ganglia::params::gmond_package_name,
 }
 ```
 
@@ -232,6 +236,10 @@ Supported hash keys are (all optional):
 
 * `port`
 * `family`
+
+##### `gmond_package_name`
+
+`String or Array` defaults to: `$::ganglia::params::gmond_package_name`
 
 #### ganglia::gmetad
 

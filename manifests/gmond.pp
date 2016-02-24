@@ -17,6 +17,7 @@ class ganglia::gmond (
     { mcast_join => '239.2.11.71', port => 8649, bind => '239.2.11.71' }
   ],
   $tcp_accept_channel             = [ { port => 8659 } ],
+  $gmond_package_name             = $::ganglia::params::gmond_package_name,
 ) inherits ganglia::params {
   validate_string($globals_deaf)
   validate_string($globals_host_dmax)
@@ -32,6 +33,9 @@ class ganglia::gmond (
   validate_array($udp_send_channel)
   validate_array($udp_recv_channel)
   validate_array($tcp_accept_channel)
+  if !(is_string($gmond_package_name) or is_array($gmond_package_name)) {
+    fail('$gmond_package_name is not a string or array.')
+  }
 
   if ($::ganglia::params::gmond_status_command) {
     $hasstatus = false
@@ -40,17 +44,17 @@ class ganglia::gmond (
   }
 
   if versioncmp($::puppetversion, '3.6.0') > 0 {
-    package { $::ganglia::params::gmond_package_name:
+    package { $gmond_package_name:
       ensure        => present,
       allow_virtual => false,
     }
   } else {
-    package { $::ganglia::params::gmond_package_name:
+    package { $gmond_package_name:
       ensure => present,
     }
   }
 
-  Package[$::ganglia::params::gmond_package_name] ->
+  Package[$gmond_package_name] ->
   file { $::ganglia::params::gmond_service_config:
     ensure  => present,
     owner   => 'root',
