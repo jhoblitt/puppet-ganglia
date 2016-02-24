@@ -1,5 +1,26 @@
 
 #### [Current]
+ * [7818fc1](../../commit/7818fc1) - __(Joshua Hoblitt)__ Merge pull request [#65](../../issues/65) from jhoblitt/jthiltges-gmond-rpm-array
+
+rebase of [#63](../../issues/63) on current master
+ * [0a6cee9](../../commit/0a6cee9) - __(John Thiltges)__ Add rspec tests for gmond_package_name parameter in ganglia::gmond
+ * [8ea2139](../../commit/8ea2139) - __(John Thiltges)__ Add gmond_package_name as a parameter, allowing a string or array
+ * [285de69](../../commit/285de69) - __(Joshua Hoblitt)__ Merge pull request [#64](../../issues/64) from jthiltges/rspec-versioncmp
+
+Set puppetversion in the facts for rspec tests
+ * [fa5bef8](../../commit/fa5bef8) - __(John Thiltges)__ Set puppetversion in the facts for rspec tests
+ * [c51c22d](../../commit/c51c22d) - __(Joshua Hoblitt)__ Merge pull request [#62](../../issues/62) from hirocaster/fix-example
+
+Fix puppet syntax in example
+ * [75b0b1d](../../commit/75b0b1d) - __(hirocaster)__ Fix puppet syntax
+ * [8b37e2f](../../commit/8b37e2f) - __(Joshua Hoblitt)__ Merge pull request [#59](../../issues/59) from hwoodson/master
+
+Fixed a typo in the README.md
+ * [94d794c](../../commit/94d794c) - __(Heath Woodson)__ Removed excess space and extra => in the README.md
+ * [aae1f69](../../commit/aae1f69) - __(Heath Woodson)__ Fixed added a missing comma in the README.md
+ * [c6d20d6](../../commit/c6d20d6) - __(Heath Woodson)__ Fixed one more typo in the README.md
+ * [9045b5e](../../commit/9045b5e) - __(Heath Woodson)__ Fixed a typo in the README.md
+ * [0ecf032](../../commit/0ecf032) - __(Joshua Hoblitt)__ bump version to v2.1.0
  * [7ad4f41](../../commit/7ad4f41) - __(Joshua Hoblitt)__ Merge pull request [#57](../../issues/57) from NoodlesNZ/master
 
 Fixed conf.php for current ganglia web
