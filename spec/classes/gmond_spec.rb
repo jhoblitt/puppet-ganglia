@@ -16,6 +16,8 @@ describe 'ganglia::gmond' do
     it do
       should contain_file('/etc/ganglia/gmond.conf').
         that_notifies('Service[gmond]')
+      should contain_package('ganglia-gmond').
+        with_ensure('present')
     end
 
     it 'should have default values in gmond.conf template' do
@@ -93,6 +95,21 @@ describe 'ganglia::gmond' do
         with_content(/^\s*mcast_if\s+=\s+eth0/).
         with_content(/^\s*port\s+=\s+8649/).
         with_content(/^\s*ttl\s+=\s+1/)
+    end
+  end
+
+  context 'with gmond_package_name' do
+    gmond_package_name = [ 'ganglia-gmond', 'ganglia-gmond-python' ]
+    params = {
+      'gmond_package_name'  => gmond_package_name,
+    }
+
+    let(:params) { params }
+    it do
+      should contain_package('ganglia-gmond').
+        with_ensure('present')
+      should contain_package('ganglia-gmond-python').
+        with_ensure('present')
     end
   end
 end
