@@ -137,7 +137,7 @@ describe 'ganglia::gmetad' do
   context 'RedHat' do
     %w{6 7}.each do |rel|
       context rel do
-        let(:facts) {{ :osfamily => 'RedHat', :operatingsystemmajrelease => rel }}
+        let(:facts) {{ :osfamily => 'RedHat', :operatingsystemmajrelease => rel, :puppetversion => Puppet.version }}
 
         it_behaves_like 'RedHat 6.x'
       end
