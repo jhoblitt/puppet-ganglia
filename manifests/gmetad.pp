@@ -23,6 +23,7 @@ class ganglia::gmetad (
   Tuple $rras                          = $ganglia::params::rras,
   Array $trusted_hosts                 = [],
   String $gmetad_package_name          = $ganglia::params::gmetad_package_name,
+  String $gmetad_package_ensure        = 'present',
   String $gmetad_service_name          = $ganglia::params::gmetad_service_name,
   String $gmetad_service_config        = $ganglia::params::gmetad_service_config,
   String $gmetad_user                  = $ganglia::params::gmetad_user,
@@ -42,12 +43,14 @@ class ganglia::gmetad (
 
   if versioncmp($::puppetversion, '3.6.0') > 0 {
     package { $gmetad_package_name:
-      ensure        => present,
+      ensure        => $gmetad_package_ensure,
       allow_virtual => false,
+      notify        => Service[$gmetad_service_name],
     }
   } else {
     package { $gmetad_package_name:
-      ensure => present,
+      ensure => $gmetad_package_ensure,
+      notify => Service[$gmetad_service_name],
     }
   }
 

@@ -35,6 +35,7 @@ class ganglia::gmond (
   Tuple $udp_recv_channel                           = [{ mcast_join => '239.2.11.71', port => 8649, bind => '239.2.11.71' }],
   Tuple $tcp_accept_channel                         = [{ port => 8659 }],
   Variant[String, Tuple] $gmond_package_name        = $ganglia::params::gmond_package_name,
+  String $gmond_package_ensure                      = 'present',
   String $gmond_service_name                        = $ganglia::params::gmond_service_name,
   String $gmond_service_config                      = $ganglia::params::gmond_service_config,
   String $gmond_status_command                      = $ganglia::params::gmond_status_command,
@@ -48,12 +49,14 @@ class ganglia::gmond (
 
   if versioncmp($::puppetversion, '3.6.0') > 0 {
     package { $gmond_package_name:
-      ensure        => present,
+      ensure        => $gmond_package_ensure,
       allow_virtual => false,
+      notify        => Service[$gmond_service_name],
     }
   } else {
     package { $gmond_package_name:
-      ensure => present,
+      ensure => $gmond_package_ensure,
+      notify => Service[$gmond_service_name],
     }
   }
 
