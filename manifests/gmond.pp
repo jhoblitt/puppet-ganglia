@@ -18,6 +18,7 @@ class ganglia::gmond (
   ],
   $tcp_accept_channel             = [ { port => 8659 } ],
   $gmond_package_name             = $::ganglia::params::gmond_package_name,
+  $gmond_package_ensure           = 'present',
   $gmond_service_name             = $::ganglia::params::gmond_service_name,
   $gmond_service_config           = $::ganglia::params::gmond_service_config,
   $gmond_status_command           = $::ganglia::params::gmond_status_command,
@@ -39,6 +40,7 @@ class ganglia::gmond (
   if !(is_string($gmond_package_name) or is_array($gmond_package_name)) {
     fail('$gmond_package_name is not a string or array.')
   }
+  validate_string($gmond_package_ensure)
   validate_string($gmond_service_name)
   validate_string($gmond_service_config)
   validate_string($gmond_status_command)
@@ -51,12 +53,14 @@ class ganglia::gmond (
 
   if versioncmp($::puppetversion, '3.6.0') > 0 {
     package { $gmond_package_name:
-      ensure        => present,
+      ensure        => $gmond_package_ensure,
       allow_virtual => false,
+      notify        => Service[$gmond_service_name],
     }
   } else {
     package { $gmond_package_name:
-      ensure => present,
+      ensure => $gmond_package_ensure,
+      notify => Service[$gmond_service_name],
     }
   }
 
