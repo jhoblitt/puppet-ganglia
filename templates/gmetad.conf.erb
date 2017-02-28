@@ -146,7 +146,7 @@ setuid_username "<%= @gmetad_user %>"
 #-------------------------------------------------------------------------------
 # The number of threads answering XML requests
 # default: 4
-# server_threads 10
+server_threads <%= @server_threads %>
 #
 #-------------------------------------------------------------------------------
 # Where gmetad stores its round-robin databases
