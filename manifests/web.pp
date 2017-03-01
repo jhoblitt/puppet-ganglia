@@ -1,8 +1,9 @@
 # == Class: ganglia::web
 #
 class ganglia::web(
-  $ganglia_ip   = '127.0.0.1',
-  $ganglia_port = 8652,
+  $ganglia_ip       = '127.0.0.1',
+  $ganglia_port     = 8652,
+  $config_template  = $::ganglia::params::web_php_erb,
 ) inherits ganglia::params {
   validate_string($ganglia_ip)
   if !(is_string($ganglia_port) or is_integer($ganglia_port)) {
@@ -29,6 +30,6 @@ class ganglia::web(
     owner   => 'root',
     group   => 'root',
     mode    => '0644',
-    content => template($::ganglia::params::web_php_erb),
+    content => template($config_template),
   }
 }
