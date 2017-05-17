@@ -65,6 +65,26 @@ describe 'ganglia::gmond' do
     end
   end
 
+  context 'with tcp_accept_channel acls' do
+    tcp_accept_channel = [
+      {
+        'port' => 8649,
+        'acl'  => {
+          'default' => 'deny',
+          'access'  => [
+            {'ip' => '10.0.0.0', 'mask' => '8', 'action' => 'allow'},
+          ],
+        },
+      },
+    ]
+    params = {
+      'tcp_accept_channel'  => tcp_accept_channel,
+    }
+    let(:params) { params }
+
+    it { should compile.with_all_deps }
+  end
+
   context 'with multicast channels' do
     udp_recv_channel = [
       {'port' => 8649, 'mcast_join' => '239.2.11.72', 'mcast_if' => 'eth0', 'bind' => '239.2.11.72'},

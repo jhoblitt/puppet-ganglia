@@ -96,6 +96,28 @@ tcp_accept_channel {
   <%- if channel['family'] then -%>
   family     = <%= channel['family'] %>
   <%- end -%>
+  <%- if channel['acl'] -%>
+  acl {
+    <%- if channel['acl']['default'] -%>
+    default = "<%= channel['acl']['default'] %>"
+    <%- end -%>
+    <%- if channel['acl']['access'] && ! channel['acl']['access'].empty? -%>
+    <%- channel['acl']['access'].each do |access| -%>
+    access {
+      <%- if access['ip'] -%>
+      ip = <%= access['ip'] %>
+      <%- end -%>
+      <%- if access['mask'] -%>
+      mask = <%= access['mask'] %>
+      <%- end -%>
+      <%- if access['action'] -%>
+      action = "<%= access['action'] %>"
+      <%- end -%>
+    }
+    <%- end -%>
+    <%- end -%>
+  }
+  <%- end -%>
 }
 
 <% end -%>
