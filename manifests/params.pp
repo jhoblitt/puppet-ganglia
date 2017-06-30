@@ -51,6 +51,9 @@ class ganglia::params {
       $web_package_name     = 'ganglia-web'
       $web_php_config       = '/etc/ganglia/conf.php'
 
+      $gmond_status_command  = undef
+      $gmetad_status_command = undef
+
       case $::operatingsystem {
         'Fedora': {
           $gmond_service_config = '/etc/ganglia/gmond.conf'
@@ -111,6 +114,9 @@ class ganglia::params {
       if ! ($::operatingsystem == 'Ubuntu' and $::lsbmajdistrelease > '12') {
         $gmond_status_command  = 'pgrep -u ganglia -f /usr/sbin/gmond'
         $gmetad_status_command = 'pgrep -u nobody -f /usr/sbin/gmetad'
+      } else {
+        $gmond_status_command  = undef
+        $gmetad_status_command = undef
       }
     }
     default: {
