@@ -83,7 +83,7 @@ class ganglia::params {
               $gmetad_case_sensitive_hostnames = 0
             }
             default: {
-              fail("Module ${module_name} is not supported on operatingsystemmajrelease ${::operatingsystemmajrelease}") # lint:ignore:80chars
+              fail("Module ${module_name} is not supported on operatingsystemmajrelease ${::operatingsystemmajrelease}") # lint:ignore:140chars
             }
           }
         }

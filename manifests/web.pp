@@ -23,8 +23,8 @@ class ganglia::web(
     }
   }
 
-  Package[$::ganglia::params::web_package_name] ->
-  file { $::ganglia::params::web_php_config:
+  Package[$::ganglia::params::web_package_name]
+  -> file { $::ganglia::params::web_php_config:
     ensure  => present,
     owner   => 'root',
     group   => 'root',

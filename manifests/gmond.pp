@@ -60,15 +60,15 @@ class ganglia::gmond (
     }
   }
 
-  Package[$gmond_package_name] ->
-  file { $gmond_service_config:
+  Package[$gmond_package_name]
+  -> file { $gmond_service_config:
     ensure  => present,
     owner   => 'root',
     group   => 'root',
     mode    => '0644',
     content => template($::ganglia::params::gmond_service_erb),
-  } ~>
-  service { $gmond_service_name:
+  }
+  ~> service { $gmond_service_name:
     ensure     => running,
     hasstatus  => $hasstatus,
     hasrestart => true,

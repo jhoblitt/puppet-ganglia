@@ -45,15 +45,15 @@ class ganglia::gmetad(
     }
   }
 
-  Package[$gmetad_package_name] ->
-  file { $gmetad_service_config:
+  Package[$gmetad_package_name]
+  -> file { $gmetad_service_config:
     ensure  => present,
     owner   => 'root',
     group   => 'root',
     mode    => '0644',
     content => template($::ganglia::params::gmetad_service_erb),
-  } ~>
-  service { $gmetad_service_name:
+  }
+  ~> service { $gmetad_service_name:
     ensure     => running,
     hasstatus  => $hasstatus,
     hasrestart => true,
