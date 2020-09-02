@@ -23,6 +23,12 @@ describe 'ganglia::params', :type => :class do
       it { should contain_class('ganglia::params') }
     end
 
+    describe 'el8' do
+      before { facts[:operatingsystemmajrelease] = '8' }
+
+      it { should contain_class('ganglia::params') }
+    end
+
     describe 'el4.x' do
       before { facts[:operatingsystemmajrelease] = '4' }
 
