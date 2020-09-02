@@ -73,7 +73,7 @@ class ganglia::params {
 
               $gmetad_case_sensitive_hostnames = 1
             }
-            '6', '7': {
+            '6', '7', '8': {
               $gmond_service_config = '/etc/ganglia/gmond.conf'
               $gmetad_user          = 'ganglia'
               $gmond_service_erb    = 'ganglia/gmond.conf.el6.erb'
