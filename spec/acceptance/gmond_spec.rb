@@ -23,31 +23,30 @@ describe 'ganglia::gmond class' do
     EOS
 
     it 'applies the manifest twice with no stderr' do
-      apply_manifest(pp, :catch_failures => true)
-      apply_manifest(pp, :catch_changes => true)
+      apply_manifest(pp, catch_failures: true)
+      apply_manifest(pp, catch_changes: true)
     end
   end
 
   describe package(package_name) do
-    it { should be_installed }
+    it { is_expected.to be_installed }
   end
 
   describe service(service_name) do
-    it { should be_enabled }
+    it { is_expected.to be_enabled }
   end
 
   describe service(daemon_name) do
-    it { should be_running }
+    it { is_expected.to be_running }
   end
 
   # default udp_recv_channel
   describe port(8649) do
-    it { should be_listening.with('udp') }
+    it { is_expected.to be_listening.with('udp') }
   end
 
   # default tcp_accept_channel
   describe port(8659) do
-    it { should be_listening.with('tcp') }
+    it { is_expected.to be_listening.with('tcp') }
   end
-
 end

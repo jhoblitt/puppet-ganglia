@@ -27,5 +27,4 @@
 /inventory.yaml
 appveyor.yml
 .gitlab-ci.yml
-.travis.yml
 *.sublime-*

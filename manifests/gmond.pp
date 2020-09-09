@@ -1,49 +1,46 @@
-# == Class: ganglia::gmond
+# @summary ganglia::gmond
+#   Manages ganglia gmond & gmetad daemons + web front end
+#
+# @param [String] $globals_deaf
+# @param [String] $globals_host_dmax
+# @param [String] $globals_send_metadata_interval
+# @param [Optional[Stdlib::Fqdn]] $globals_override_hostname
+# @param [String] $cluster_name
+# @param [String] $cluster_owner
+# @param [String] $cluster_latlong
+# @param [Optional[Stdlib::Fqdn]] $cluster_url
+# @param [Optional[String]] $host_location
+# @param [Tuple] $udp_send_channel
+# @param [Tuple] $udp_recv_channel
+# @param [Tuple] $tcp_accept_channel
+# @param [Variant[String, Tuple]] $gmond_package_name
+# @param [String] $gmond_service_name
+# @param [String] $gmond_service_config
+# @param [String] $gmond_status_command
+# 
+# @see https://puppet.com/docs/puppet/6.17/style_guide.html#parameter-defaults
+# @see https://puppet.com/docs/puppet/6.17/hiera_migrate.html#module_data_params
 #
 class ganglia::gmond (
-  $globals_deaf                   = 'no',
-  $globals_host_dmax              = '0',
-  $globals_send_metadata_interval = '300',
-  $globals_override_hostname      = undef,
-  $cluster_name                   = 'unspecified',
-  $cluster_owner                  = 'unspecified',
-  $cluster_latlong                = 'unspecified',
-  $cluster_url                    = 'unspecified',
-  $host_location                  = 'unspecified',
-  $udp_send_channel               = [
-    { mcast_join => '239.2.11.71', port => 8649, ttl => 1 }
-  ],
-  $udp_recv_channel               = [
-    { mcast_join => '239.2.11.71', port => 8649, bind => '239.2.11.71' }
-  ],
-  $tcp_accept_channel             = [ { port => 8659 } ],
-  $gmond_package_name             = $::ganglia::params::gmond_package_name,
-  $gmond_service_name             = $::ganglia::params::gmond_service_name,
-  $gmond_service_config           = $::ganglia::params::gmond_service_config,
-  $gmond_status_command           = $::ganglia::params::gmond_status_command,
+  String $globals_deaf                              = 'no',
+  String $globals_host_dmax                         = '0',
+  String $globals_send_metadata_interval            = '300',
+  Optional[Stdlib::Fqdn] $globals_override_hostname = undef,
+  String $cluster_name                              = 'unspecified',
+  String $cluster_owner                             = 'unspecified',
+  String $cluster_latlong                           = 'unspecified',
+  Optional[Stdlib::Fqdn] $cluster_url               = undef,
+  Optional[String] $host_location                   = 'unspecified',
+  Tuple $udp_send_channel                           = [{ mcast_join => '239.2.11.71', port => 8649, ttl => 1 }],
+  Tuple $udp_recv_channel                           = [{ mcast_join => '239.2.11.71', port => 8649, bind => '239.2.11.71' }],
+  Tuple $tcp_accept_channel                         = [{ port => 8659 }],
+  Variant[String, Tuple] $gmond_package_name        = $ganglia::params::gmond_package_name,
+  String $gmond_service_name                        = $ganglia::params::gmond_service_name,
+  String $gmond_service_config                      = $ganglia::params::gmond_service_config,
+  String $gmond_status_command                      = $ganglia::params::gmond_status_command,
 ) inherits ganglia::params {
-  validate_string($globals_deaf)
-  validate_string($globals_host_dmax)
-  validate_string($globals_send_metadata_interval)
-  if $globals_override_hostname {
-    validate_string($globals_override_hostname)
-  }
-  validate_string($cluster_name)
-  validate_string($cluster_owner)
-  validate_string($cluster_latlong)
-  validate_string($cluster_url)
-  validate_string($host_location)
-  validate_array($udp_send_channel)
-  validate_array($udp_recv_channel)
-  validate_array($tcp_accept_channel)
-  if !(is_string($gmond_package_name) or is_array($gmond_package_name)) {
-    fail('$gmond_package_name is not a string or array.')
-  }
-  validate_string($gmond_service_name)
-  validate_string($gmond_service_config)
-  validate_string($gmond_status_command)
 
-  if ($::ganglia::params::gmond_status_command) {
+  if ($ganglia::params::gmond_status_command) {
     $hasstatus = false
   } else {
     $hasstatus = true
@@ -60,14 +57,15 @@ class ganglia::gmond (
     }
   }
 
-  Package[$gmond_package_name] ->
   file { $gmond_service_config:
     ensure  => present,
     owner   => 'root',
     group   => 'root',
     mode    => '0644',
-    content => template($::ganglia::params::gmond_service_erb),
-  } ~>
+    content => template($ganglia::params::gmond_service_erb),
+    require => Package[$gmond_package_name],
+    notify  => Service[$gmond_service_name]
+  }
   service { $gmond_service_name:
     ensure     => running,
     hasstatus  => $hasstatus,
