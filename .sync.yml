@@ -1,0 +1,18 @@
+---
+appveyor.yml:
+  delete: true
+.yardopts:
+  delete: true
+.gitignore:
+  required:
+    - 'appveyor.yml'
+    - '.gitlab-ci.yml'
+    - '.travis.yml'
+    - '*.sublime-*'
+Rakefile:
+  default_disabled_lint_checks:
+    - '140chars'
+    - 'arrow_alignment'
+spec/spec_helper.rb:
+  hiera_config: 'spec/fixtures/hiera.yaml'
+  mock_with: ':rspec'

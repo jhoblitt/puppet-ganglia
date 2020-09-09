@@ -13,7 +13,9 @@ globals {
   host_dmax = <%= @globals_host_dmax %> /*secs */
   cleanup_threshold = 300 /*secs */
   gexec = no
-  send_metadata_interval = <%= @globals_send_metadata_interval %> /*secs */
+  <%- if @globals_send_metadata_interval -%>
+  send_metadata_interval = 300 /* seconds */
+  <%- end -%>
   <%- if @globals_override_hostname -%>
   override_hostname = <%= @globals_override_hostname %>
   <%- end -%>
@@ -27,7 +29,11 @@ cluster {
   name = "<%= @cluster_name %>"
   owner = "<%= @cluster_owner %>"
   latlong = "<%= @cluster_latlong %>"
+  <% if @cluster_url -%>
   url = "<%= @cluster_url %>"
+  <% else -%>
+  url = "unspecified"
+  <% end -%>
 }
 
 /* The host section describes attributes of the host, like the location */

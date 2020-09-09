@@ -19,17 +19,17 @@ describe 'ganglia::gmetad class' do
     EOS
 
     it 'applies the manifest twice with no stderr' do
-      apply_manifest(pp, :catch_failures => true)
-      apply_manifest(pp, :catch_changes => true)
+      apply_manifest(pp, catch_failures: true)
+      apply_manifest(pp, catch_changes: true)
     end
   end
 
   describe package(package_name) do
-    it { should be_installed }
+    it { is_expected.to be_installed }
   end
 
   describe service(service_name) do
-    it { should be_running }
-    it { should be_enabled }
+    it { is_expected.to be_running }
+    it { is_expected.to be_enabled }
   end
 end

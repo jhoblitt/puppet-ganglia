@@ -1,16 +1,7 @@
-# == Class: ganglia::params
+# 
+# @summary ganglia::params
+#   provides parameters for the ganglia module
 #
-# provides parameters for the ganglia module
-#
-# === Authors
-#
-# Joshua Hoblitt <jhoblitt@cpan.org>
-#
-# === Copyright
-#
-# Copyright (C) 2012-2013 Joshua Hoblitt
-#
-
 class ganglia::params {
 
   # files are the same for ubuntu and el5/el6
@@ -38,8 +29,10 @@ class ganglia::params {
   ]
 
   $gmetad_service_erb    = 'ganglia/gmetad.conf.erb'
+  $default_gmetad_status  = 'pgrep -u ganglia -f /usr/sbin/gmetad'
+  $default_gmond_status   = 'pgrep -u ganglia -f /usr/sbin/gmond'
 
-  case $::osfamily {
+  case $facts['osfamily'] {
     redhat: {
       $gmond_package_name   = 'ganglia-gmond'
       $gmond_service_name   = 'gmond'
@@ -51,39 +44,45 @@ class ganglia::params {
       $web_package_name     = 'ganglia-web'
       $web_php_config       = '/etc/ganglia/conf.php'
 
-      case $::operatingsystem {
+      case $facts['operatingsystem'] {
         'Fedora': {
-          $gmond_service_config = '/etc/ganglia/gmond.conf'
-          $gmetad_user          = 'nobody'
-          $gmond_service_erb    = 'ganglia/gmond.conf.el6.erb'
+          $gmond_service_config  = '/etc/ganglia/gmond.conf'
+          $gmetad_user           = 'nobody'
+          $gmond_service_erb     = 'ganglia/gmond.conf.el6.erb'
 
           $gmetad_service_config = '/etc/ganglia/gmetad.conf'
 
-          $gmetad_case_sensitive_hostnames = 0
+          $gmetad_hostnames_case = 0
+          $gmetad_status_command = $default_gmetad_status
+          $gmond_status_command  = $default_gmond_status
         }
         default: {
-          case $::operatingsystemmajrelease {
+          case $facts['operatingsystemmajrelease'] {
             # the epel packages change uid/gids + install paths between 5 & 6
             '5': {
-              $gmond_service_config = '/etc/ganglia/gmond.conf'
-              $gmetad_user          = 'ganglia'
-              $gmond_service_erb    = 'ganglia/gmond.conf.el5.erb'
+              $gmond_service_config   = '/etc/ganglia/gmond.conf'
+              $gmetad_user            = 'ganglia'
+              $gmond_service_erb      = 'ganglia/gmond.conf.el5.erb'
 
-              $gmetad_service_config = '/etc/ganglia/gmetad.conf'
+              $gmetad_service_config  = '/etc/ganglia/gmetad.conf'
 
-              $gmetad_case_sensitive_hostnames = 1
+              $gmetad_hostnames_case  = 0
+              $gmond_status_command   = $default_gmond_status
+              $gmetad_status_command  = $default_gmetad_status
             }
             '6', '7', '8': {
               $gmond_service_config = '/etc/ganglia/gmond.conf'
               $gmetad_user          = 'ganglia'
               $gmond_service_erb    = 'ganglia/gmond.conf.el6.erb'
 
-              $gmetad_service_config = '/etc/ganglia/gmetad.conf'
+              $gmetad_service_config  = '/etc/ganglia/gmetad.conf'
 
-              $gmetad_case_sensitive_hostnames = 0
+              $gmetad_hostnames_case  = 0
+              $gmetad_status_command  = $default_gmetad_status
+              $gmond_status_command   = $default_gmond_status
             }
             default: {
-              fail("Module ${module_name} is not supported on operatingsystemmajrelease ${::operatingsystemmajrelease}") # lint:ignore:80chars
+              fail("Module ${module_name} is not supported on operatingsystemmajrelease ${::operatingsystemmajrelease}") # lint:ignore:140chars
             }
           }
         }
@@ -93,7 +92,7 @@ class ganglia::params {
       $gmond_package_name    = 'ganglia-monitor'
       $gmond_service_name    = 'ganglia-monitor'
 
-      $gmetad_package_name   = 'gmetad'
+      $gmetad_package_name   = 'ganglia-gmetad'
       $gmetad_service_name   = 'gmetad'
       $gmetad_user           = 'nobody'
 
@@ -105,16 +104,13 @@ class ganglia::params {
 
       $gmetad_service_config = '/etc/ganglia/gmetad.conf'
 
-      $gmetad_case_sensitive_hostnames = 1
+      $gmetad_hostnames_case = 1
 
-      # ubuntu 12.10 and below didn't have a status command in the init script
-      if ! ($::operatingsystem == 'Ubuntu' and $::lsbmajdistrelease > '12') {
-        $gmond_status_command  = 'pgrep -u ganglia -f /usr/sbin/gmond'
-        $gmetad_status_command = 'pgrep -u nobody -f /usr/sbin/gmetad'
-      }
+      $gmond_status_command  = 'pgrep -u ganglia -f /usr/sbin/gmond'
+      $gmetad_status_command = 'pgrep -u nobody -f /usr/sbin/gmetad'
     }
     default: {
-      fail("Module ${module_name} is not supported on ${::operatingsystem}")
+      fail("Module ${module_name} is not supported on ${facts['operatingsystem']}")
     }
   }
 }
