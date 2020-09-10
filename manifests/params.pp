@@ -33,7 +33,7 @@ class ganglia::params {
   $default_gmond_status   = 'pgrep -u ganglia -f /usr/sbin/gmond'
 
   case $facts['osfamily'] {
-    redhat: {
+    'redhat': {
       $gmond_package_name   = 'ganglia-gmond'
       $gmond_service_name   = 'gmond'
 
@@ -79,7 +79,7 @@ class ganglia::params {
         }
       }
     }
-    debian: {
+    'debian': {
       $gmond_package_name    = 'ganglia-monitor'
       $gmond_service_name    = 'ganglia-monitor'
 

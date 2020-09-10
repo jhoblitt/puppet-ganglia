@@ -10,7 +10,7 @@
   "dependencies": [
     {
       "name": "puppetlabs/stdlib",
-      "version_requirement": ">= 4.6.0 < 7.0.0"
+      "version_requirement": ">= 5.0.0 < 7.0.0"
     }
   ],
   "operatingsystem_support": [
@@ -60,6 +60,6 @@
     }
   ],
   "pdk-version": "1.18.1",
-  "template-url": "pdk-default#1.18.1",
+  "template-url": "https://github.com/puppetlabs/pdk-templates#1.18.1",
   "template-ref": "tags/1.18.1-0-g3d2e75c"
 }
