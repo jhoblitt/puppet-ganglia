@@ -5,15 +5,8 @@ class ganglia::web (
   Integer             $ganglia_port = 8652,
 ) inherits ganglia::params {
 
-  if versioncmp($::puppetversion, '3.6.0') > 0 {
-    package { $::ganglia::params::web_package_name:
-      ensure        => present,
-      allow_virtual => false,
-    }
-  } else {
-    package { $::ganglia::params::web_package_name:
-      ensure => present,
-    }
+  package { $::ganglia::params::web_package_name:
+    ensure => present,
   }
 
   file { $::ganglia::params::web_php_config:
