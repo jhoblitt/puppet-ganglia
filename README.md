@@ -1,7 +1,7 @@
 Puppet ganglia Module
 =====================
 
-[![Build Status](https://travis-ci.org/jhoblitt/puppet-ganglia.png)](https://travis-ci.org/jhoblitt/puppet-ganglia)
+[![Build Status](https://travis-ci.com/jhoblitt/puppet-ganglia.png)](https://travis-ci.com/jhoblitt/puppet-ganglia)
 
 #### Table of Contents
 
