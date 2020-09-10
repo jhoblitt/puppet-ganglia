@@ -18,7 +18,9 @@
 # @param gmond_service_name
 # @param gmond_service_config
 # @param gmond_status_command
-# 
+# @param gmond_python_package_name
+# @param gmond_python_package_ensure
+#
 # @see https://puppet.com/docs/puppet/6.17/style_guide.html#parameter-defaults
 # @see https://puppet.com/docs/puppet/6.17/hiera_migrate.html#module_data_params
 #
@@ -40,6 +42,8 @@ class ganglia::gmond (
   String $gmond_service_name                        = $ganglia::params::gmond_service_name,
   String $gmond_service_config                      = $ganglia::params::gmond_service_config,
   String $gmond_status_command                      = $ganglia::params::gmond_status_command,
+  String $gmond_python_package_name                 = $ganglia::params::gmond_python_package_name,
+  String $gmond_python_package_ensure               = 'present',
 ) inherits ganglia::params {
 
   if ($ganglia::params::gmond_status_command) {
@@ -50,6 +54,11 @@ class ganglia::gmond (
 
   package { $gmond_package_name:
     ensure => $gmond_package_ensure,
+    notify => Service[$gmond_service_name],
+  }
+
+  package { $gmond_python_package_name:
+    ensure => $gmond_python_package_ensure,
     notify => Service[$gmond_service_name],
   }
 

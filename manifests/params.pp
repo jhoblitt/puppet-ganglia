@@ -1,4 +1,4 @@
-# 
+#
 # @summary ganglia::params
 #   provides parameters for the ganglia module
 #
@@ -39,6 +39,9 @@ class ganglia::params {
 
       $gmetad_package_name  = 'ganglia-gmetad'
       $gmetad_service_name  = 'gmetad'
+
+      $gmond_python_package_name   = 'ganglia-gmond-python'
+      $gmond_python_package_ensure = 'absent'
 
       # paths are the same for el5.x & el6.x
       $web_package_name     = 'ganglia-web'
@@ -83,6 +86,9 @@ class ganglia::params {
       $gmetad_package_name   = 'ganglia-gmetad'
       $gmetad_service_name   = 'gmetad'
       $gmetad_user           = 'nobody'
+
+      $gmond_python_package_name   = 'ganglia-monitor-python'
+      $gmond_python_package_ensure = 'absent'
 
       $web_package_name      = 'ganglia-webfrontend'
       $web_php_config        = '/usr/share/ganglia-webfrontend/conf.php'
