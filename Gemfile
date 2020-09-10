@@ -38,6 +38,9 @@ group :development do
   gem "puppet-lint-no_erb_template-check", '~> 0.1.1',           require: false
   gem "puppet-lint-template_file_extension-check", '~> 0.1.2',   require: false
 end
+group :release do
+  gem "pdk", '~> 1.18.1', require: false
+end
 
 puppet_version = ENV['PUPPET_GEM_VERSION']
 facter_version = ENV['FACTER_GEM_VERSION']
