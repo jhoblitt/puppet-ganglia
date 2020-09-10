@@ -39,7 +39,7 @@ jobs:
       rvm: 2.5.7
       stage: spec
     -
-      env: DEPLOY_TO_FORGE=yes
+      env: PUPPET_VERSION="~> 5.0" CHECK=build DEPLOY_TO_FORGE=yes
       stage: deploy
 branches:
   only:
