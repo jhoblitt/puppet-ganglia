@@ -216,7 +216,7 @@ Supported hash keys are (all optional):
 
 `Array of Hash` defaults to:
 
-    { mcast_join => '239.2.11.71', port => 8649, bind => '239.2.11.71' } ]
+    [ { mcast_join => '239.2.11.71', port => 8649, bind => '239.2.11.71' } ]
 
 Supported hash keys are (all optional):
 
@@ -488,12 +488,12 @@ Contributing
 3. Create a topic branch.  Eg, `feature/mousetrap`
 4. Make/commit changes
     * Commit messages should be in [imperative tense](http://git-scm.com/book/ch5-2.html)
-    * Check that linter warnings or errors are not introduced - `bundle exec rake lint`
-    * Check that `Rspec-puppet` unit tests are not broken and coverage is added for new
-      features - `bundle exec rake spec`
+    * Check that linter warnings or errors are not introduced - `pdk validate [-a]`
+    * Check that `Rspec` unit tests are not broken and coverage is added for new
+      features - `pdk test unit`
     * Documentation of API/features is updated as appropriate in the README
     * If present, `beaker` acceptance tests should be run and potentially
-      updated - `bundle exec rake beaker`
+      updated - `pdk bundle exec rake beaker`
 5. When the feature is complete, rebase / squash the branch history as
    necessary to remove "fix typo", "oops", "whitespace" and other trivial commits
 6. Push the topic branch to github

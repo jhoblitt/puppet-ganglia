@@ -1,22 +1,23 @@
 # @summary ganglia::gmond
 #   Manages ganglia gmond & gmetad daemons + web front end
 #
-# @param [String] $globals_deaf
-# @param [String] $globals_host_dmax
-# @param [String] $globals_send_metadata_interval
-# @param [Optional[Stdlib::Fqdn]] $globals_override_hostname
-# @param [String] $cluster_name
-# @param [String] $cluster_owner
-# @param [String] $cluster_latlong
-# @param [Optional[Stdlib::Fqdn]] $cluster_url
-# @param [Optional[String]] $host_location
-# @param [Tuple] $udp_send_channel
-# @param [Tuple] $udp_recv_channel
-# @param [Tuple] $tcp_accept_channel
-# @param [Variant[String, Tuple]] $gmond_package_name
-# @param [String] $gmond_service_name
-# @param [String] $gmond_service_config
-# @param [String] $gmond_status_command
+# @param globals_deaf
+# @param globals_host_dmax
+# @param globals_send_metadata_interval
+# @param globals_override_hostname
+# @param cluster_name
+# @param cluster_owner
+# @param cluster_latlong
+# @param cluster_url
+# @param host_location
+# @param udp_send_channel
+# @param udp_recv_channel
+# @param tcp_accept_channel
+# @param gmond_package_name
+# @param gmond_package_ensure
+# @param gmond_service_name
+# @param gmond_service_config
+# @param gmond_status_command
 # 
 # @see https://puppet.com/docs/puppet/6.17/style_guide.html#parameter-defaults
 # @see https://puppet.com/docs/puppet/6.17/hiera_migrate.html#module_data_params

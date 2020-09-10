@@ -1,17 +1,17 @@
 # @summary ganglia::gmetad
 #   Manages ganglia gmond & gmetad daemons + web front end
 # 
-# @param [Boolean] all_trusted defaults to: false
-# @param [Tuple] clusters defaults to: [ { 'name' => 'my cluster', 'address' => 'localhost' } ]
-# @param [String] gridname defaults to: `undef`
-# @param [Tuple] rras see README.md
-# @param [Array] trusted_hosts `Array of Strings` defaults to: '[]'
-# @param [String] gmetad_package_name
-# @param [String] gmetad_service_name
-# @param [String] gmetad_service_config
-# @param [String] gmetad_user
-# @param [Integer] gmetad_hostnames_case defaults to: 0
-# @param [String] gmetad_status_command
+# @param all_trusted
+# @param clusters
+# @param gridname
+# @param rras see README.md
+# @param trusted_hosts
+# @param gmetad_package_name
+# @param gmetad_service_name
+# @param gmetad_service_config
+# @param gmetad_user
+# @param gmetad_hostnames_case
+# @param gmetad_status_command
 #
 # @see https://puppet.com/docs/puppet/6.17/style_guide.html#parameter-defaults
 # @see https://puppet.com/docs/puppet/6.17/hiera_migrate.html#module_data_params
