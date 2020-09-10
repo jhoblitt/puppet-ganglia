@@ -41,17 +41,9 @@ class ganglia::gmetad (
     $hasstatus = true
   }
 
-  if versioncmp($::puppetversion, '3.6.0') > 0 {
-    package { $gmetad_package_name:
-      ensure        => $gmetad_package_ensure,
-      allow_virtual => false,
-      notify        => Service[$gmetad_service_name],
-    }
-  } else {
-    package { $gmetad_package_name:
-      ensure => $gmetad_package_ensure,
-      notify => Service[$gmetad_service_name],
-    }
+  package { $gmetad_package_name:
+    ensure => $gmetad_package_ensure,
+    notify => Service[$gmetad_service_name],
   }
 
   file { $gmetad_service_config:

@@ -47,17 +47,9 @@ class ganglia::gmond (
     $hasstatus = true
   }
 
-  if versioncmp($::puppetversion, '3.6.0') > 0 {
-    package { $gmond_package_name:
-      ensure        => $gmond_package_ensure,
-      allow_virtual => false,
-      notify        => Service[$gmond_service_name],
-    }
-  } else {
-    package { $gmond_package_name:
-      ensure => $gmond_package_ensure,
-      notify => Service[$gmond_service_name],
-    }
+  package { $gmond_package_name:
+    ensure => $gmond_package_ensure,
+    notify => Service[$gmond_service_name],
   }
 
   file { $gmond_service_config:
