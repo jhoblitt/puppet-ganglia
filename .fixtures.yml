@@ -2,6 +2,6 @@ fixtures:
   forge_modules:
     stdlib:
       repo: puppetlabs-stdlib
-      ref: 6.0.0
+      ref: "5.0.0"
   symlinks:
     ganglia: "#{source_dir}"
