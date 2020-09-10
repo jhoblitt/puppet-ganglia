@@ -4,12 +4,6 @@ describe 'ganglia::params', type: :class do
   describe 'for osfamily RedHat' do
     let(:facts) { { osfamily: 'RedHat' } }
 
-    describe 'el5.x' do
-      before(:each) { facts[:operatingsystemmajrelease] = '5' }
-
-      it { is_expected.to contain_class('ganglia::params') }
-    end
-
     describe 'el6.x' do
       before(:each) { facts[:operatingsystemmajrelease] = '6' }
 
