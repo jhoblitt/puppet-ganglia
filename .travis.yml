@@ -47,3 +47,14 @@ branches:
     - /^v\d/
 notifications:
   email: false
+deploy:
+  provider: puppetforge
+  username: puppet
+  password:
+    secure: "whG1hlsH4KREOkHopzdPRc965y005VzSwTpSzFw9ho30QSvvwv/jAJ7izbkrYwaTHGlOC5S1Wk3k0UsuVp0NE69zErnOFplqHo0BLI40uuhTCQQ4Qm6i/+44AtmjtFGO//cWs4fr6yyVC9kyIvsP+3rx/qt6GNxoltbNkvb7Hco="
+  on:
+    tags: true
+    # all_branches is required to use tags
+    all_branches: true
+    # Only publish the build marked with "DEPLOY_TO_FORGE"
+    condition: "$DEPLOY_TO_FORGE = yes"
