@@ -397,7 +397,6 @@ Limitations
 
 It has been tested on:
 
-* el5.x
 * el6.x
 * el7.x
 * ubuntu 12.04
@@ -406,10 +405,11 @@ It has been tested on:
 
 ### Puppet Version Compatibility
 
-Versions | Puppet 2.7 | Puppet 3.x | Puppet 4.x
-:--------|:----------:|:----------:|:----------:
-**1.x**  | **yes**    | **yes**    | no
-**2.x**  | no         | **yes**    | **yes**
+Versions | Puppet 2.7 | Puppet 3.x | Puppet 4.x | Puppet 5.x | Puppet 6.x |
+:--------|:----------:|:----------:|:----------:|:----------:|:----------:|
+**1.x**  | **yes**    | **yes**    | no         | no         | no         |
+**2.x**  | no         | **yes**    | **yes**    | no         | no         |
+**3.x**  | no         | no         | no         | **yes**    | **yes**    |
 
 ### `$::osfamily == RedHat` and EPEL packages
 
