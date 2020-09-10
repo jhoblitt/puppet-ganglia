@@ -10,6 +10,11 @@ appveyor.yml:
     - 'appveyor.yml'
     - '.gitlab-ci.yml'
     - '*.sublime-*'
+.travis.yml:
+  before_deploy:
+    - 'bundle exec rake build'
+  user: 'jhoblitt'
+  secure: 'whG1hlsH4KREOkHopzdPRc965y005VzSwTpSzFw9ho30QSvvwv/jAJ7izbkrYwaTHGlOC5S1Wk3k0UsuVp0NE69zErnOFplqHo0BLI40uuhTCQQ4Qm6i/+44AtmjtFGO//cWs4fr6yyVC9kyIvsP+3rx/qt6GNxoltbNkvb7Hco='
 Rakefile:
   default_disabled_lint_checks:
     - '140chars'
@@ -37,3 +42,6 @@ Gemfile:
         version: '~> 0.1.1'
       - gem: 'puppet-lint-template_file_extension-check'
         version: '~> 0.1.2'
+    ':release':
+      - gem: 'pdk'
+        version: '~> 1.18.1'
