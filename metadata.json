@@ -7,6 +7,12 @@
   "source": "https://github.com/jhoblitt/puppet-ganglia.git",
   "project_page": "https://github.com/jhoblitt/puppet-ganglia",
   "issues_url": "https://github.com/jhoblitt/puppet-ganglia/issues",
+  "dependencies": [
+    {
+      "name": "puppetlabs/stdlib",
+      "version_requirement": ">= 4.6.0 < 7.0.0"
+    }
+  ],
   "operatingsystem_support": [
     {
       "operatingsystem": "RedHat",
@@ -45,16 +51,18 @@
     {
       "operatingsystem": "Ubuntu",
       "operatingsystemrelease": [
-        "10.04",
-        "12.04",
-        "14.04"
+        "14.04",
+        "18.04"
       ]
     }
   ],
-  "dependencies": [
+  "requirements": [
     {
-      "name": "puppetlabs/stdlib",
-      "version_requirement": ">= 4.6.0 < 7.0.0"
+      "name": "puppet",
+      "version_requirement": ">= 4.10.0 < 7.0.0"
     }
-  ]
+  ],
+  "pdk-version": "1.18.1",
+  "template-url": "pdk-default#1.18.1",
+  "template-ref": "tags/1.18.1-0-g3d2e75c"
 }

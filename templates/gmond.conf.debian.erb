@@ -24,7 +24,11 @@ cluster {
   name = "<%= @cluster_name %>"
   owner = "<%= @cluster_owner %>"
   latlong = "<%= @cluster_latlong %>"
+  <% if @cluster_url -%>
   url = "<%= @cluster_url %>"
+  <% else -%>
+  url = "unspecified"
+  <% end -%>
 }
 
 /* The host section describes attributes of the host, like the location */
