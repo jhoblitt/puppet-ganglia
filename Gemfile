@@ -29,6 +29,14 @@ group :development do
   gem "puppet-module-win-default-r#{minor_version}", '~> 0.4',   require: false, platforms: [:mswin, :mingw, :x64_mingw]
   gem "puppet-module-win-dev-r#{minor_version}", '~> 0.4',       require: false, platforms: [:mswin, :mingw, :x64_mingw]
   gem "github_changelog_generator",                              require: false
+  gem "puppet-lint-trailing_newline-check", '~> 1.1.0',          require: false
+  gem "puppet-lint-variable_contains_upcase", '~> 1.2.0',        require: false
+  gem "puppet-lint-strict_indent-check", '~> 2.0.7',             require: false
+  gem "puppet-lint-unquoted_string-check", '~> 2.0.0',           require: false
+  gem "puppet-lint-package_ensure-check", '~> 0.2.0',            require: false
+  gem "puppet-lint-resource_reference_syntax", '~> 1.1.0',       require: false
+  gem "puppet-lint-no_erb_template-check", '~> 0.1.1',           require: false
+  gem "puppet-lint-template_file_extension-check", '~> 0.1.2',   require: false
 end
 
 puppet_version = ENV['PUPPET_GEM_VERSION']
