@@ -64,14 +64,16 @@ describe 'ganglia::gmond' do
           { 'port' => 8649 },
         ]
         params = {
-          'cluster_name'        => 'example grid',
-          'cluster_owner'       => 'ACME, Inc.',
-          'cluster_latlong'     => 'N32.2332147 W110.9481163',
-          'cluster_url'         => 'www.example.org',
-          'host_location'       => 'Example Computer Room',
-          'udp_recv_channel'    => udp_recv_channel,
-          'udp_send_channel'    => udp_send_channel,
-          'tcp_accept_channel'  => tcp_accept_channel,
+          'cluster_name'            => 'example grid',
+          'cluster_owner'           => 'ACME, Inc.',
+          'cluster_latlong'         => 'N32.2332147 W110.9481163',
+          'cluster_url'             => 'www.example.org',
+          'host_location'           => 'Example Computer Room',
+          'globals_user'            => 'ganglia',
+          'globals_max_udp_msg_len' => 1472,
+          'udp_recv_channel'        => udp_recv_channel,
+          'udp_send_channel'        => udp_send_channel,
+          'tcp_accept_channel'      => tcp_accept_channel,
         }
 
         let(:params) { params }
@@ -79,6 +81,8 @@ describe 'ganglia::gmond' do
         it do
           is_expected.to contain_class('ganglia::gmond')
           is_expected.to contain_file('/etc/ganglia/gmond.conf')
+            .with_content(%r{^\s*max_udp_msg_len\s+=\s+1472})
+            .with_content(%r{^\s*user\s+=\s+ganglia})
         end
       end
 

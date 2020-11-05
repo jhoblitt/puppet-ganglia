@@ -5,6 +5,8 @@
 # @param globals_host_dmax
 # @param globals_send_metadata_interval
 # @param globals_override_hostname
+# @param globals_user
+# @param globals_max_udp_msg_len
 # @param cluster_name
 # @param cluster_owner
 # @param cluster_latlong
@@ -27,6 +29,8 @@ class ganglia::gmond (
   String $globals_host_dmax                         = '0',
   String $globals_send_metadata_interval            = '300',
   Optional[Stdlib::Fqdn] $globals_override_hostname = undef,
+  String $globals_user                              = 'ganglia',
+  Integer $globals_max_udp_msg_len                  = 1472,
   String $cluster_name                              = 'unspecified',
   String $cluster_owner                             = 'unspecified',
   String $cluster_latlong                           = 'unspecified',
