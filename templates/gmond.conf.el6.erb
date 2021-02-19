@@ -3,9 +3,13 @@
 globals {
   daemonize = yes
   setuid = yes
-  user = nobody
+  <%- if @globals_user -%>
+  user = <%= @globals_user %>
+  <%- else -%>
+  user = ganglia
+  <%- end -%>
   debug_level = 0
-  max_udp_msg_len = 1472
+  max_udp_msg_len = <%= @globals_max_udp_msg_len %>
   mute = no
   deaf = <%= @globals_deaf %>
   allow_extra_data = yes
