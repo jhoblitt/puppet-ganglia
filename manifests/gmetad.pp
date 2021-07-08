@@ -18,10 +18,10 @@
 #
 class ganglia::gmetad (
   Enum['on', 'off'] $all_trusted       = 'off',
-  Tuple[Hash] $clusters                = [{ 'name' => 'my cluster', 'address' => 'localhost' }],
+  Array[Hash] $clusters                = [{ 'name' => 'my cluster', 'address' => 'localhost' }],
   $gridname                            = undef,
-  Tuple $rras                          = $ganglia::params::rras,
-  Array $trusted_hosts                 = [],
+  Array[Hash] $rras                    = $ganglia::params::rras,
+  Array[String] $trusted_hosts         = [],
   String $gmetad_package_name          = $ganglia::params::gmetad_package_name,
   String $gmetad_package_ensure        = 'present',
   String $gmetad_service_name          = $ganglia::params::gmetad_service_name,
