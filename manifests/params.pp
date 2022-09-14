@@ -32,7 +32,7 @@ class ganglia::params {
   $default_gmond_status   = 'pgrep -u ganglia -f /usr/sbin/gmond'
 
   case $facts['os']['family'] {
-    'redhat': {
+    'RedHat': {
       $gmond_package_name   = 'ganglia-gmond'
       $gmond_service_name   = 'gmond'
 
@@ -69,13 +69,13 @@ class ganglia::params {
               $gmond_status_command   = $default_gmond_status
             }
             default: {
-              fail("Module ${module_name} is not supported on operatingsystemmajrelease ${facts['os']['release']['major']}") # lint:ignore:140chars
+              fail("Module ${module_name} is not supported on os.release.major ${facts['os']['release']['major']}") # lint:ignore:140chars
             }
           }
         }
       }
     }
-    'debian': {
+    'Debian': {
       $gmond_package_name    = 'ganglia-monitor'
       $gmond_service_name    = 'ganglia-monitor'
 
@@ -97,7 +97,7 @@ class ganglia::params {
       $gmetad_status_command = 'pgrep -u nobody -f /usr/sbin/gmetad'
     }
     default: {
-      fail("Module ${module_name} is not supported on ${facts['os']['name']}")
+      fail("Module ${module_name} is not supported on os.family ${facts['os']['family']}")
     }
   }
 }

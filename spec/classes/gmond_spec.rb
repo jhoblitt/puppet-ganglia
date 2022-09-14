@@ -12,7 +12,7 @@ describe 'ganglia::gmond' do
 
       it 'manages gmond.conf' do
         is_expected.to contain_file('/etc/ganglia/gmond.conf').with(
-          ensure: 'present',
+          ensure: 'file',
           owner: 'root',
           group: 'root',
           mode: '0644',

@@ -12,7 +12,7 @@ describe 'ganglia::gmetad' do
 
       it 'manages gmetad.conf' do
         is_expected.to contain_file('/etc/ganglia/gmetad.conf').with(
-          ensure: 'present',
+          ensure: 'file',
           owner: 'root',
           group: 'root',
           mode: '0644',
