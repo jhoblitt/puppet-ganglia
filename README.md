@@ -18,7 +18,6 @@ Table of Contents
     * [`ganglia::gmetda`](#gangliagmetad)
     * [`ganglia::web`](#gangliaweb)
 4. [Limitations](#limitations)
-  * [Tested Platforms](#tested-platforms)
   * [Puppet Version Compatibility](#puppet-version-compatibility)
   * [`$::osfamily == RedHat` and EPEL packages](#osfamily--redhat-and-epel-packages)
 5. [Versioning](#versioning)
@@ -400,16 +399,6 @@ value.
 
 Limitations
 -----------
-
-### Tested Platforms
-
-It has been tested on:
-
-* el6.x
-* el7.x
-* ubuntu 12.04
-* ubuntu 13.04
-* debian 6.07
 
 ### Puppet Version Compatibility
 
