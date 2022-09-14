@@ -1,7 +1,11 @@
 Puppet ganglia Module
 =====================
 
-[![Build Status](https://travis-ci.com/jhoblitt/puppet-ganglia.png)](https://travis-ci.com/jhoblitt/puppet-ganglia)
+[![CI](https://github.com/jhoblitt/puppet-ganglia/actions/workflows/ci.yml/badge.svg)](https://github.com/jhoblitt/puppet-ganglia/actions/workflows/ci.yml)
+[![markdownlint](https://github.com/jhoblitt/puppet-ganglia/actions/workflows/markdownlint.yaml/badge.svg)](https://github.com/jhoblitt/puppet-ganglia/actions/workflows/markdownlint.yaml)
+[![shellcheck](https://github.com/jhoblitt/puppet-ganglia/actions/workflows/shellcheck.yaml/badge.svg)](https://github.com/jhoblitt/puppet-ganglia/actions/workflows/shellcheck.yaml)
+[![yamllint](https://github.com/jhoblitt/puppet-ganglia/actions/workflows/yamllint.yaml/badge.svg)](https://github.com/jhoblitt/puppet-ganglia/actions/workflows/yamllint.yaml)
+
 
 #### Table of Contents
 
