@@ -69,7 +69,7 @@ class ganglia::params {
               $gmond_status_command   = $default_gmond_status
             }
             default: {
-              fail("Module ${module_name} is not supported on operatingsystemmajrelease ${facts['facts['os']['release']['major']']}") # lint:ignore:140chars
+              fail("Module ${module_name} is not supported on operatingsystemmajrelease ${facts['os']['release']['major']}") # lint:ignore:140chars
             }
           }
         }

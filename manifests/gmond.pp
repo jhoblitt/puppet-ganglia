@@ -20,7 +20,7 @@
 # @param gmond_service_name
 # @param gmond_service_config
 # @param gmond_status_command
-# 
+#
 # @see https://puppet.com/docs/puppet/6.17/style_guide.html#parameter-defaults
 # @see https://puppet.com/docs/puppet/6.17/hiera_migrate.html#module_data_params
 #
@@ -35,7 +35,7 @@ class ganglia::gmond (
   String $cluster_owner                             = 'unspecified',
   String $cluster_latlong                           = 'unspecified',
   Optional[Stdlib::Fqdn] $cluster_url               = undef,
-  Optional[String] $host_location                   = 'unspecified',
+  String $host_location                             = 'unspecified',
   Tuple $udp_send_channel                           = [{ mcast_join => '239.2.11.71', port => 8649, ttl => 1 }],
   Tuple $udp_recv_channel                           = [{ mcast_join => '239.2.11.71', port => 8649, bind => '239.2.11.71' }],
   Tuple $tcp_accept_channel                         = [{ port => 8659 }],

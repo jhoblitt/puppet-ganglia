@@ -1,5 +1,12 @@
 # @summary ganglia::web
 #   Sets php web package and config for Ganglia
+#
+# @param ganglia_ip
+#   IP address of web daemon
+#
+# @param ganglia_port
+#   Port of web daemon
+#
 class ganglia::web (
   Stdlib::IP::Address $ganglia_ip   = '127.0.0.1',
   Integer             $ganglia_port = 8652,
