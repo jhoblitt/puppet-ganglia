@@ -31,7 +31,6 @@ class ganglia::gmetad (
   String $gmetad_status_command        = $ganglia::params::gmetad_status_command,
 
 ) inherits ganglia::params {
-
   ganglia_validate_clusters($clusters)
   ganglia_validate_rras($rras)
 
@@ -47,11 +46,11 @@ class ganglia::gmetad (
   }
 
   file { $gmetad_service_config:
-    ensure  => present,
+    ensure  => file,
     owner   => 'root',
     group   => 'root',
     mode    => '0644',
-    content => template($::ganglia::params::gmetad_service_erb),
+    content => template($ganglia::params::gmetad_service_erb),
     require => Package[$gmetad_package_name],
     notify  => Service[$gmetad_service_name],
   }

@@ -1,9 +1,8 @@
-# 
+#
 # @summary ganglia::params
 #   provides parameters for the ganglia module
 #
 class ganglia::params {
-
   # files are the same for ubuntu and el5/el6
   $web_php_erb          = 'ganglia/conf.php.el6.erb'
 
@@ -32,7 +31,7 @@ class ganglia::params {
   $default_gmetad_status  = 'pgrep -u ganglia -f /usr/sbin/gmetad'
   $default_gmond_status   = 'pgrep -u ganglia -f /usr/sbin/gmond'
 
-  case $facts['osfamily'] {
+  case $facts['os']['family'] {
     'redhat': {
       $gmond_package_name   = 'ganglia-gmond'
       $gmond_service_name   = 'gmond'
@@ -44,7 +43,7 @@ class ganglia::params {
       $web_package_name     = 'ganglia-web'
       $web_php_config       = '/etc/ganglia/conf.php'
 
-      case $facts['operatingsystem'] {
+      case $facts['os']['name'] {
         'Fedora': {
           $gmond_service_config  = '/etc/ganglia/gmond.conf'
           $gmetad_user           = 'nobody'
@@ -70,7 +69,7 @@ class ganglia::params {
               $gmond_status_command   = $default_gmond_status
             }
             default: {
-              fail("Module ${module_name} is not supported on operatingsystemmajrelease ${::operatingsystemmajrelease}") # lint:ignore:140chars
+              fail("Module ${module_name} is not supported on operatingsystemmajrelease ${facts['facts['os']['release']['major']']}") # lint:ignore:140chars
             }
           }
         }
@@ -98,7 +97,7 @@ class ganglia::params {
       $gmetad_status_command = 'pgrep -u nobody -f /usr/sbin/gmetad'
     }
     default: {
-      fail("Module ${module_name} is not supported on ${facts['operatingsystem']}")
+      fail("Module ${module_name} is not supported on ${facts['os']['name']}")
     }
   }
 }

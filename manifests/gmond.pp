@@ -45,7 +45,6 @@ class ganglia::gmond (
   String $gmond_service_config                      = $ganglia::params::gmond_service_config,
   String $gmond_status_command                      = $ganglia::params::gmond_status_command,
 ) inherits ganglia::params {
-
   if ($ganglia::params::gmond_status_command) {
     $hasstatus = false
   } else {
@@ -58,13 +57,13 @@ class ganglia::gmond (
   }
 
   file { $gmond_service_config:
-    ensure  => present,
+    ensure  => file,
     owner   => 'root',
     group   => 'root',
     mode    => '0644',
     content => template($ganglia::params::gmond_service_erb),
     require => Package[$gmond_package_name],
-    notify  => Service[$gmond_service_name]
+    notify  => Service[$gmond_service_name],
   }
   service { $gmond_service_name:
     ensure     => running,
