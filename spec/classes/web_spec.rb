@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 require 'spec_helper'
 
 describe 'ganglia::web' do
@@ -6,17 +8,17 @@ describe 'ganglia::web' do
       let(:facts) { os_facts }
 
       conf_file = case os_facts[:os]['family']
-      when 'RedHat'
-        '/etc/ganglia/conf.php'
-      when 'Debian'
-        '/usr/share/ganglia-webfrontend/conf.php'
-      end
+                  when 'RedHat'
+                    '/etc/ganglia/conf.php'
+                  when 'Debian'
+                    '/usr/share/ganglia-webfrontend/conf.php'
+                  end
 
       context 'parameters' do
         context 'with out params' do
           it do
-            is_expected.to contain_file(conf_file)
-              .with_content(%r{\$conf\['ganglia_port'\] = 8652;})
+            is_expected.to contain_file(conf_file).
+              with_content(%r{\$conf\['ganglia_port'\] = 8652;})
           end
         end
 
@@ -25,10 +27,10 @@ describe 'ganglia::web' do
             let(:params) { { ganglia_port: 42 } }
 
             it do
-              is_expected.to contain_file(conf_file)
-                .with_content(%r{\$conf\['ganglia_port'\] = 42;})
+              is_expected.to contain_file(conf_file).
+                with_content(%r{\$conf\['ganglia_port'\] = 42;})
             end
-          end # Integer
+          end
 
           context 'String' do
             let(:params) { { ganglia_port: '42' } }
@@ -37,8 +39,8 @@ describe 'ganglia::web' do
               is_expected.to raise_error(Puppet::PreformattedError, %r{expects an Integer value})
             end
           end
-        end # ganglia_port
-      end # parameters
+        end
+      end
     end
   end
 end

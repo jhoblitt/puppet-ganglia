@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 require 'spec_helper'
 
 describe 'ganglia::params', type: :class do
@@ -40,13 +42,13 @@ describe 'ganglia::params', type: :class do
     let(:facts) { { os: { 'family' => 'Debian' } } }
 
     describe 'for operatingsystem debian' do
-      before(:each) { facts[:os]['name'] = 'Debian' }
+      before { facts[:os]['name'] = 'Debian' }
 
       it { is_expected.to contain_class('ganglia::params') }
     end
 
     describe 'for operatingsystem ubuntu' do
-      before(:each) do
+      before do
         facts[:operatingsystem] = 'Ubuntu'
         facts[:lsbmajdistrelease] = '12'
       end
@@ -66,8 +68,8 @@ describe 'ganglia::params', type: :class do
     end
 
     it 'fails' do
-      expect { is_expected.to contain_class('ganglia::params') }
-        .to raise_error(Puppet::Error, %r{not supported on os.family Solaris})
+      expect { is_expected.to contain_class('ganglia::params') }.
+        to raise_error(Puppet::Error, %r{not supported on os.family Solaris})
     end
   end
 end

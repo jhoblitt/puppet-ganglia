@@ -15,23 +15,23 @@ describe 'ganglia::gmetad' do
           ensure: 'file',
           owner: 'root',
           group: 'root',
-          mode: '0644',
+          mode: '0644'
         )
       end
 
       # it { should contain_file('/etc/ganglia/gmetad.conf').that_notifies('Service[gmetad]') }
 
       it 'has default values in gmetad.conf template' do
-        is_expected.to contain_file('/etc/ganglia/gmetad.conf')
-          .with_content(%r{^data_source "my cluster" localhost$})
-          .with_content(%r{^RRAs "RRA:AVERAGE:0.5:1:5856" "RRA:AVERAGE:0.5:4:20160" "RRA:AVERAGE:0.5:40:52704" $})
-          .with_content(%r{^# gridname "MyGrid"$})
-          .that_notifies('Service[gmetad]')
+        is_expected.to contain_file('/etc/ganglia/gmetad.conf').
+          with_content(%r{^data_source "my cluster" localhost$}).
+          with_content(%r{^RRAs "RRA:AVERAGE:0.5:1:5856" "RRA:AVERAGE:0.5:4:20160" "RRA:AVERAGE:0.5:40:52704" $}).
+          with_content(%r{^# gridname "MyGrid"$}).
+          that_notifies('Service[gmetad]')
       end
 
       it 'disables all_trusted' do
-        is_expected.to contain_file('/etc/ganglia/gmetad.conf')
-          .with_content(%r{^all_trusted off$})
+        is_expected.to contain_file('/etc/ganglia/gmetad.conf').
+          with_content(%r{^all_trusted off$})
       end
 
       context 'with all_trusted on' do
@@ -42,8 +42,8 @@ describe 'ganglia::gmetad' do
         end
 
         it 'enables all_trusted' do
-          is_expected.to contain_file('/etc/ganglia/gmetad.conf')
-            .with_content(%r{^all_trusted on$})
+          is_expected.to contain_file('/etc/ganglia/gmetad.conf').
+            with_content(%r{^all_trusted on$})
         end
       end
 
@@ -51,15 +51,15 @@ describe 'ganglia::gmetad' do
       case os_facts[:osfamily]
       when 'Debian'
         it 'has Debian default values in gmetad.conf template' do
-          is_expected.to contain_file('/etc/ganglia/gmetad.conf')
-            .with_content(%r{^case_sensitive_hostnames 1$})
-            .with_content(%r{^setuid_username "nobody"$})
+          is_expected.to contain_file('/etc/ganglia/gmetad.conf').
+            with_content(%r{^case_sensitive_hostnames 1$}).
+            with_content(%r{^setuid_username "nobody"$})
         end
       when 'RedHat'
         it 'has RedHat default values on in gmetad.conf template' do
-          is_expected.to contain_file('/etc/ganglia/gmetad.conf')
-            .with_content(%r{^case_sensitive_hostnames 0$})
-            .with_content(%r{^setuid_username "ganglia"$})
+          is_expected.to contain_file('/etc/ganglia/gmetad.conf').
+            with_content(%r{^case_sensitive_hostnames 0$}).
+            with_content(%r{^setuid_username "ganglia"$})
         end
       end
 
@@ -67,22 +67,22 @@ describe 'ganglia::gmetad' do
       context 'trusted_hosts' do
         context 'default' do
           it 'has an empty trusted_hosts' do
-            is_expected.to contain_file('/etc/ganglia/gmetad.conf')
-              .with_content(%r{^# trusted_hosts.*$})
-              .without_content(%r{^trusted_hosts.*$})
+            is_expected.to contain_file('/etc/ganglia/gmetad.conf').
+              with_content(%r{^# trusted_hosts.*$}).
+              without_content(%r{^trusted_hosts.*$})
           end
         end
 
         context 'trusted_hosts list' do
           let(:params) do
             {
-              trusted_hosts: ['1', '2'],
+              trusted_hosts: %w[1 2],
             }
           end
 
           it 'enables trusted hosts' do
-            is_expected.to contain_file('/etc/ganglia/gmetad.conf')
-              .with_content(%r{^trusted_hosts 1 2$})
+            is_expected.to contain_file('/etc/ganglia/gmetad.conf').
+              with_content(%r{^trusted_hosts 1 2$})
           end
         end
       end
@@ -94,8 +94,8 @@ describe 'ganglia::gmetad' do
             let(:params) { { gmetad_hostnames_case: value } }
 
             it do
-              is_expected.to contain_file('/etc/ganglia/gmetad.conf')
-                .with_content(%r{^case_sensitive_hostnames #{value}$})
+              is_expected.to contain_file('/etc/ganglia/gmetad.conf').
+                with_content(%r{^case_sensitive_hostnames #{value}$})
             end
           end
         end
@@ -124,8 +124,8 @@ describe 'ganglia::gmetad' do
           let(:params) { { clusters: clusters } }
 
           it 'has data_source in template' do
-            is_expected.to contain_file('/etc/ganglia/gmetad.conf')
-              .with_content(%r{^data_source "test" test1.example.org test2.example.org$})
+            is_expected.to contain_file('/etc/ganglia/gmetad.conf').
+              with_content(%r{^data_source "test" test1.example.org test2.example.org$})
           end
         end
 
