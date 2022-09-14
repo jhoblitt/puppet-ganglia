@@ -6,32 +6,30 @@ Puppet ganglia Module
 [![shellcheck](https://github.com/jhoblitt/puppet-ganglia/actions/workflows/shellcheck.yaml/badge.svg)](https://github.com/jhoblitt/puppet-ganglia/actions/workflows/shellcheck.yaml)
 [![yamllint](https://github.com/jhoblitt/puppet-ganglia/actions/workflows/yamllint.yaml/badge.svg)](https://github.com/jhoblitt/puppet-ganglia/actions/workflows/yamllint.yaml)
 
-
-#### Table of Contents
+Table of Contents
+-----------------
 
 1. [Overview](#overview)
 2. [Description](#description)
 3. [Usage](#usage)
-    * [Examples](#examples)
-    * [Classes](#classes)
-        * [`ganglia::gmond`](#gangliagmond)
-        * [`ganglia::gmetda`](#gangliagmetad)
-        * [`ganglia::web`](#gangliaweb)
+  * [Examples](#examples)
+  * [Classes](#classes)
+    * [`ganglia::gmond`](#gangliagmond)
+    * [`ganglia::gmetda`](#gangliagmetad)
+    * [`ganglia::web`](#gangliaweb)
 4. [Limitations](#limitations)
-    * [Tested Platforms](#tested-platforms)
-    * [Puppet Version Compatibility](#puppet-version-compatibility)
-    * [`$::osfamily == RedHat` and EPEL packages](#osfamily--redhat-and-epel-packages)
+  * [Tested Platforms](#tested-platforms)
+  * [Puppet Version Compatibility](#puppet-version-compatibility)
+  * [`$::osfamily == RedHat` and EPEL packages](#osfamily--redhat-and-epel-packages)
 5. [Versioning](#versioning)
 6. [Support](#support)
 7. [Contributing](#contributing)
 8. [See Also](#see-also)
 
-
 Overview
 --------
 
 Manages ganglia gmond & gmetad daemons + web front end
-
 
 Description
 -----------
@@ -39,7 +37,6 @@ Description
 This is a puppet module for installation and configuration of the
 [`ganglia`](http://ganglia.sourceforge.net/) `gmond` & `gmetad` daemons + web
 front end.
-
 
 Usage
 -----
@@ -205,7 +202,9 @@ class { 'ganglia::gmond':
 
 `Array of Hash` defaults to:
 
-    [ { mcast_join => '239.2.11.71', port => 8649, ttl => 1 } ]
+```puppet
+[ { mcast_join => '239.2.11.71', port => 8649, ttl => 1 } ]
+```
 
 Supported hash keys are (all optional):
 
@@ -220,7 +219,9 @@ Supported hash keys are (all optional):
 
 `Array of Hash` defaults to:
 
-    [ { mcast_join => '239.2.11.71', port => 8649, bind => '239.2.11.71' } ]
+```puppet
+[ { mcast_join => '239.2.11.71', port => 8649, bind => '239.2.11.71' } ]
+```
 
 Supported hash keys are (all optional):
 
@@ -234,7 +235,9 @@ Supported hash keys are (all optional):
 
 `Array of Hash` defaults to:
 
-    [ { port => 8659 } ]
+```puppet
+[ { port => 8659 } ]
+```
 
 Supported hash keys are (all optional):
 
@@ -279,7 +282,9 @@ port.  Corresponds to the `all_trusted` field in `gmetad.conf`.
 
 `Array of Hash` defaults to:
 
-    [ { 'name' => 'my cluster', 'address' => 'localhost' } ]
+```puppet
+[ { 'name' => 'my cluster', 'address' => 'localhost' } ]
+```
 
 Supported hash keys are:
 
@@ -393,7 +398,6 @@ class{ 'ganglia::web':
 Passing a `String` to `$ganglia_port` is deprecated.  Please use an `Integer`
 value.
 
-
 Limitations
 -----------
 
@@ -469,20 +473,17 @@ configure gmetad to pull a gmond agent from each of these new clusters.
     }
 ```
 
-
 Versioning
 ----------
 
 This module is versioned according to the [Semantic Versioning
 2.0.0](http://semver.org/spec/v2.0.0.html) specification.
 
-
 Support
 -------
 
 Please log tickets and issues at
 [github](https://github.com/jhoblitt/puppet-ganglia/issues)
-
 
 Contributing
 ------------
@@ -491,20 +492,19 @@ Contributing
 2. Make a local clone of your fork
 3. Create a topic branch.  Eg, `feature/mousetrap`
 4. Make/commit changes
-    * Commit messages should be in [imperative tense](http://git-scm.com/book/ch5-2.html)
-    * Check that linter warnings or errors are not introduced - `pdk validate [-a]`
-    * Check that `Rspec` unit tests are not broken and coverage is added for new
-      features - `pdk test unit`
-    * Documentation of API/features is updated as appropriate in the README
-    * If present, `beaker` acceptance tests should be run and potentially
-      updated - `pdk bundle exec rake beaker`
+  * Commit messages should be in [imperative tense](http://git-scm.com/book/ch5-2.html)
+  * Check that linter warnings or errors are not introduced - `pdk validate [-a]`
+  * Check that `Rspec` unit tests are not broken and coverage is added for new
+    features - `pdk test unit`
+  * Documentation of API/features is updated as appropriate in the README
+  * If present, `beaker` acceptance tests should be run and potentially
+    updated - `pdk bundle exec rake beaker`
 5. When the feature is complete, rebase / squash the branch history as
    necessary to remove "fix typo", "oops", "whitespace" and other trivial commits
 6. Push the topic branch to github
 7. Open a Pull Request (PR) from the *topic branch* onto parent repo's `master` branch
 
-
 See Also
 --------
 
- * [Ganglia](http://ganglia.sourceforge.net/)
+* [Ganglia](http://ganglia.sourceforge.net/)
