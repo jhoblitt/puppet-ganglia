@@ -18,19 +18,18 @@
 # @see https://puppet.com/docs/puppet/6.17/hiera_migrate.html#module_data_params
 #
 class ganglia::gmetad (
-  Enum['on', 'off'] $all_trusted       = 'off',
-  Array[Hash] $clusters                = [{ 'name' => 'my cluster', 'address' => 'localhost' }],
-  Optional[String[1]] $gridname        = undef,
-  Array[Hash] $rras                    = $ganglia::params::rras,
-  Array[String] $trusted_hosts         = [],
-  String $gmetad_package_name          = $ganglia::params::gmetad_package_name,
-  String $gmetad_package_ensure        = 'present',
-  String $gmetad_service_name          = $ganglia::params::gmetad_service_name,
-  String $gmetad_service_config        = $ganglia::params::gmetad_service_config,
-  String $gmetad_user                  = $ganglia::params::gmetad_user,
-  Integer[0, 1] $gmetad_hostnames_case = $ganglia::params::gmetad_hostnames_case,
-  String $gmetad_status_command        = $ganglia::params::gmetad_status_command,
-
+  Enum['on', 'off'] $all_trusted                            = 'off',
+  Array[Hash] $clusters                                     = [{ 'name' => 'my cluster', 'address' => 'localhost' }],
+  Optional[String[1]] $gridname                             = undef,
+  Array[Hash] $rras                                         = $ganglia::params::rras,
+  Array[String[1]] $trusted_hosts                           = [],
+  Variant[String[1], Array[String[1]]] $gmetad_package_name = $ganglia::params::gmetad_package_name,
+  String[1] $gmetad_package_ensure                          = 'present',
+  String[1] $gmetad_service_name                            = $ganglia::params::gmetad_service_name,
+  String[1] $gmetad_service_config                          = $ganglia::params::gmetad_service_config,
+  String[1] $gmetad_user                                    = $ganglia::params::gmetad_user,
+  Integer[0, 1] $gmetad_hostnames_case                      = $ganglia::params::gmetad_hostnames_case,
+  String[1] $gmetad_status_command                          = $ganglia::params::gmetad_status_command,
 ) inherits ganglia::params {
   ganglia_validate_clusters($clusters)
   ganglia_validate_rras($rras)
