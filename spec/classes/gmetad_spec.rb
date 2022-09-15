@@ -133,7 +133,7 @@ describe 'ganglia::gmetad' do
           let(:params) { { clusters: [] } }
 
           it 'is expected to fail with wrong size' do
-            is_expected.to raise_error(Puppet::Error, %r{expects size to be 1, got 0})
+            is_expected.to raise_error(Puppet::PreformattedError)
           end
         end
 
