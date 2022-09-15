@@ -57,8 +57,8 @@ class ganglia::params {
           $gmond_status_command  = $default_gmond_status
         }
         default: {
-          case $facts['operatingsystemmajrelease'] {
-            '6', '7', '8': {
+          case $facts['os']['release']['major'] {
+            '7', '8': {
               $gmond_service_config = '/etc/ganglia/gmond.conf'
               $gmetad_user          = 'ganglia'
               $gmond_service_erb    = 'ganglia/gmond.conf.el6.erb'
