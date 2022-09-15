@@ -80,7 +80,7 @@ class ganglia::params {
       $gmond_package_name    = 'ganglia-monitor'
       $gmond_service_name    = 'ganglia-monitor'
 
-      $gmetad_package_name   = 'ganglia-gmetad'
+      $gmetad_package_name   = 'gmetad'
       $gmetad_service_name   = 'gmetad'
       $gmetad_user           = 'nobody'
 

@@ -11,7 +11,7 @@ describe 'ganglia::gmond class' do
     # with the executable name of gmond.
     package_name = 'ganglia-monitor'
     service_name = 'ganglia-monitor'
-    daemon_name  = 'gmond'
+    daemon_name  = 'ganglia-monitor'
   end
 
   describe 'running puppet code' do
