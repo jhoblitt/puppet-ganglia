@@ -12,10 +12,10 @@ describe 'ganglia::gmond' do
 
       it 'manages gmond.conf' do
         is_expected.to contain_file('/etc/ganglia/gmond.conf').with(
-          ensure: 'present',
+          ensure: 'file',
           owner: 'root',
           group: 'root',
-          mode: '0644',
+          mode: '0644'
         )
       end
 
@@ -23,32 +23,32 @@ describe 'ganglia::gmond' do
       case os_facts[:osfamily]
       when 'Debian'
         it do
-          is_expected.to contain_file('/etc/ganglia/gmond.conf')
-            .that_notifies('Service[ganglia-monitor]')
-          is_expected.to contain_package('ganglia-monitor')
-            .with_ensure('present')
+          is_expected.to contain_file('/etc/ganglia/gmond.conf').
+            that_notifies('Service[ganglia-monitor]')
+          is_expected.to contain_package('ganglia-monitor').
+            with_ensure('present')
         end
       when 'RedHat'
         it do
-          is_expected.to contain_file('/etc/ganglia/gmond.conf')
-            .that_notifies('Service[gmond]')
-          is_expected.to contain_package('ganglia-gmond')
-            .with_ensure('present')
+          is_expected.to contain_file('/etc/ganglia/gmond.conf').
+            that_notifies('Service[gmond]')
+          is_expected.to contain_package('ganglia-gmond').
+            with_ensure('present')
         end
       end
 
       it 'has default values in gmond.conf template' do
-        is_expected.to contain_file('/etc/ganglia/gmond.conf')
-          .with_content(%r{^(\s+)deaf = no$})
-          .with_content(%r{^(\s+)host_dmax = 0 })
-          .with_content(%r{^(\s+)send_metadata_interval = 300 })
-          .with_content(%r{^(\s+)name = "unspecified"$})
-          .with_content(%r{^(\s+)owner = "unspecified"$})
-          .with_content(%r{^(\s+)latlong = "unspecified"$})
-          .with_content(%r{^(\s+)url = "unspecified"$})
-          .with_content(%r{^(\s+)location = "unspecified"$})
-          .without_content(%r{^(\s+)override_hostname =})
-          .without_content(%r{^(\s+)mcast_if})
+        is_expected.to contain_file('/etc/ganglia/gmond.conf').
+          with_content(%r{^(\s+)deaf = no$}).
+          with_content(%r{^(\s+)host_dmax = 0 }).
+          with_content(%r{^(\s+)send_metadata_interval = 300 }).
+          with_content(%r{^(\s+)name = "unspecified"$}).
+          with_content(%r{^(\s+)owner = "unspecified"$}).
+          with_content(%r{^(\s+)latlong = "unspecified"$}).
+          with_content(%r{^(\s+)url = "unspecified"$}).
+          with_content(%r{^(\s+)location = "unspecified"$}).
+          without_content(%r{^(\s+)override_hostname =}).
+          without_content(%r{^(\s+)mcast_if})
       end
 
       context 'with lots of params' do
@@ -80,9 +80,9 @@ describe 'ganglia::gmond' do
 
         it do
           is_expected.to contain_class('ganglia::gmond')
-          is_expected.to contain_file('/etc/ganglia/gmond.conf')
-            .with_content(%r{^\s*max_udp_msg_len\s+=\s+1472})
-            .with_content(%r{^\s*user\s+=\s+ganglia})
+          is_expected.to contain_file('/etc/ganglia/gmond.conf').
+            with_content(%r{^\s*max_udp_msg_len\s+=\s+1472}).
+            with_content(%r{^\s*user\s+=\s+ganglia})
         end
       end
 
@@ -97,31 +97,31 @@ describe 'ganglia::gmond' do
           { 'port' => 8649 },
         ]
         params = {
-          'cluster_name'        => 'example grid',
-          'cluster_owner'       => 'ACME, Inc.',
-          'cluster_latlong'     => 'N32.2332147 W110.9481163',
-          'cluster_url'         => 'www.example.org',
-          'host_location'       => 'Example Computer Room',
-          'udp_recv_channel'    => udp_recv_channel,
-          'udp_send_channel'    => udp_send_channel,
-          'tcp_accept_channel'  => tcp_accept_channel,
+          'cluster_name' => 'example grid',
+          'cluster_owner' => 'ACME, Inc.',
+          'cluster_latlong' => 'N32.2332147 W110.9481163',
+          'cluster_url' => 'www.example.org',
+          'host_location' => 'Example Computer Room',
+          'udp_recv_channel' => udp_recv_channel,
+          'udp_send_channel' => udp_send_channel,
+          'tcp_accept_channel' => tcp_accept_channel,
         }
 
         let(:params) { params }
 
         it do
           is_expected.to contain_class('ganglia::gmond')
-          is_expected.to contain_file('/etc/ganglia/gmond.conf')
-            .with_content(%r{^\s*bind_hostname\s+=\s+yes})
-            .with_content(%r{^\s*mcast_join\s+=\s+239\.2\.11\.72})
-            .with_content(%r{^\s*mcast_if\s+=\s+eth0})
-            .with_content(%r{^\s*port\s+=\s+8649})
-            .with_content(%r{^\s*ttl\s+=\s+1})
+          is_expected.to contain_file('/etc/ganglia/gmond.conf').
+            with_content(%r{^\s*bind_hostname\s+=\s+yes}).
+            with_content(%r{^\s*mcast_join\s+=\s+239\.2\.11\.72}).
+            with_content(%r{^\s*mcast_if\s+=\s+eth0}).
+            with_content(%r{^\s*port\s+=\s+8649}).
+            with_content(%r{^\s*ttl\s+=\s+1})
         end
       end
 
       context 'with gmond_package_name' do
-        gmond_package_name = ['ganglia-gmond', 'ganglia-gmond-python']
+        gmond_package_name = %w[ganglia-gmond ganglia-gmond-python]
         params = {
           'gmond_package_name' => gmond_package_name,
         }
@@ -129,10 +129,10 @@ describe 'ganglia::gmond' do
         let(:params) { params }
 
         it do
-          is_expected.to contain_package('ganglia-gmond')
-            .with_ensure('present')
-          is_expected.to contain_package('ganglia-gmond-python')
-            .with_ensure('present')
+          is_expected.to contain_package('ganglia-gmond').
+            with_ensure('present')
+          is_expected.to contain_package('ganglia-gmond-python').
+            with_ensure('present')
         end
       end
     end

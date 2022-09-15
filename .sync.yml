@@ -1,47 +1,30 @@
 ---
-appveyor.yml:
+.puppet-lint.rc:
+  enabled_lint_checks:
+    - parameter_documentation
+    - parameter_types
+
+spec/spec_helper_acceptance.rb:
+  unmanaged: false
+
+.github/CONTRIBUTING.md:
   delete: true
-.yardopts:
+.github/ISSUE_TEMPLATE.md:
   delete: true
-.gitlab-ci.yml:
+.github/PULL_REQUEST_TEMPLATE.md:
   delete: true
-.gitignore:
-  required:
-    - 'appveyor.yml'
-    - '.gitlab-ci.yml'
-    - '*.sublime-*'
-.travis.yml:
-  before_deploy:
-    - 'bundle exec rake build'
-  user: 'jhoblitt'
-  secure: 'whG1hlsH4KREOkHopzdPRc965y005VzSwTpSzFw9ho30QSvvwv/jAJ7izbkrYwaTHGlOC5S1Wk3k0UsuVp0NE69zErnOFplqHo0BLI40uuhTCQQ4Qm6i/+44AtmjtFGO//cWs4fr6yyVC9kyIvsP+3rx/qt6GNxoltbNkvb7Hco='
-Rakefile:
-  default_disabled_lint_checks:
-    - '140chars'
-    - 'arrow_alignment'
-spec/spec_helper.rb:
-  hiera_config: 'spec/fixtures/hiera.yaml'
-  mock_with: ':rspec'
+.github/SECURITY.md:
+  delete: true
+
 Gemfile:
   optional:
-    ':development':
-      - gem: 'github_changelog_generator'
-      - gem: 'puppet-lint-trailing_newline-check'
-        version: '~> 1.1.0'
-      - gem: 'puppet-lint-variable_contains_upcase'
-        version: '~> 1.2.0'
-      - gem: 'puppet-lint-strict_indent-check'
-        version: '~> 2.0.7'
-      - gem: 'puppet-lint-unquoted_string-check'
-        version: '~> 2.0.0'
-      - gem: 'puppet-lint-package_ensure-check'
-        version: '~> 0.2.0'
-      - gem: 'puppet-lint-resource_reference_syntax'
-        version: '~> 1.1.0'
-      - gem: 'puppet-lint-no_erb_template-check'
-        version: '~> 0.1.1'
-      - gem: 'puppet-lint-template_file_extension-check'
-        version: '~> 0.1.2'
-    ':release':
-      - gem: 'pdk'
-        version: '~> 1.18.1'
+    ':test':
+      - gem: puppet-lint-legacy_facts-check
+      - gem: puppet-lint-package_ensure-check
+      - gem: puppet-lint-resource_reference_syntax
+      - gem: puppet-lint-strict_indent-check
+      - gem: puppet-lint-template_file_extension-check
+      - gem: puppet-lint-top_scope_facts-check
+      - gem: puppet-lint-trailing_newline-check
+      - gem: puppet-lint-unquoted_string-check
+      - gem: puppet-lint-variable_contains_upcase

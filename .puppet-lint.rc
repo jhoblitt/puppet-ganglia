@@ -1,3 +1,1 @@
---relative
---no-140chars-check
---no-arrow_alignment-check
+--fail-on-warnings

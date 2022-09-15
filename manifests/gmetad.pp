@@ -1,12 +1,13 @@
 # @summary ganglia::gmetad
 #   Manages ganglia gmond & gmetad daemons + web front end
-# 
+#
 # @param all_trusted
 # @param clusters
 # @param gridname
 # @param rras see README.md
 # @param trusted_hosts
 # @param gmetad_package_name
+# @param gmetad_package_ensure
 # @param gmetad_service_name
 # @param gmetad_service_config
 # @param gmetad_user
@@ -19,7 +20,7 @@
 class ganglia::gmetad (
   Enum['on', 'off'] $all_trusted       = 'off',
   Tuple[Hash] $clusters                = [{ 'name' => 'my cluster', 'address' => 'localhost' }],
-  $gridname                            = undef,
+  Optional[String[1]] $gridname        = undef,
   Tuple $rras                          = $ganglia::params::rras,
   Array $trusted_hosts                 = [],
   String $gmetad_package_name          = $ganglia::params::gmetad_package_name,
@@ -31,7 +32,6 @@ class ganglia::gmetad (
   String $gmetad_status_command        = $ganglia::params::gmetad_status_command,
 
 ) inherits ganglia::params {
-
   ganglia_validate_clusters($clusters)
   ganglia_validate_rras($rras)
 
@@ -47,11 +47,11 @@ class ganglia::gmetad (
   }
 
   file { $gmetad_service_config:
-    ensure  => present,
+    ensure  => file,
     owner   => 'root',
     group   => 'root',
     mode    => '0644',
-    content => template($::ganglia::params::gmetad_service_erb),
+    content => template($ganglia::params::gmetad_service_erb),
     require => Package[$gmetad_package_name],
     notify  => Service[$gmetad_service_name],
   }

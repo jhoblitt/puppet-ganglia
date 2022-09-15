@@ -20,7 +20,7 @@
 # @param gmond_service_name
 # @param gmond_service_config
 # @param gmond_status_command
-# 
+#
 # @see https://puppet.com/docs/puppet/6.17/style_guide.html#parameter-defaults
 # @see https://puppet.com/docs/puppet/6.17/hiera_migrate.html#module_data_params
 #
@@ -35,7 +35,7 @@ class ganglia::gmond (
   String $cluster_owner                             = 'unspecified',
   String $cluster_latlong                           = 'unspecified',
   Optional[Stdlib::Fqdn] $cluster_url               = undef,
-  Optional[String] $host_location                   = 'unspecified',
+  String $host_location                             = 'unspecified',
   Tuple $udp_send_channel                           = [{ mcast_join => '239.2.11.71', port => 8649, ttl => 1 }],
   Tuple $udp_recv_channel                           = [{ mcast_join => '239.2.11.71', port => 8649, bind => '239.2.11.71' }],
   Tuple $tcp_accept_channel                         = [{ port => 8659 }],
@@ -45,7 +45,6 @@ class ganglia::gmond (
   String $gmond_service_config                      = $ganglia::params::gmond_service_config,
   String $gmond_status_command                      = $ganglia::params::gmond_status_command,
 ) inherits ganglia::params {
-
   if ($ganglia::params::gmond_status_command) {
     $hasstatus = false
   } else {
@@ -58,13 +57,13 @@ class ganglia::gmond (
   }
 
   file { $gmond_service_config:
-    ensure  => present,
+    ensure  => file,
     owner   => 'root',
     group   => 'root',
     mode    => '0644',
     content => template($ganglia::params::gmond_service_erb),
     require => Package[$gmond_package_name],
-    notify  => Service[$gmond_service_name]
+    notify  => Service[$gmond_service_name],
   }
   service { $gmond_service_name:
     ensure     => running,
