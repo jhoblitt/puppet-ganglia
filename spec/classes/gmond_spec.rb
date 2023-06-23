@@ -20,7 +20,7 @@ describe 'ganglia::gmond' do
       end
 
       # OS Specific tests
-      case os_facts[:osfamily]
+      case os_facts[:os]['family']
       when 'Debian'
         it do
           is_expected.to contain_file('/etc/ganglia/gmond.conf').

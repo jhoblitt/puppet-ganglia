@@ -48,7 +48,7 @@ describe 'ganglia::gmetad' do
       end
 
       # OS Specific tests
-      case os_facts[:osfamily]
+      case os_facts[:os]['family']
       when 'Debian'
         it 'has Debian default values in gmetad.conf template' do
           is_expected.to contain_file('/etc/ganglia/gmetad.conf').

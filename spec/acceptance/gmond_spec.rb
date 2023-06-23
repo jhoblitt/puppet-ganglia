@@ -3,7 +3,7 @@
 require 'spec_helper_acceptance'
 
 describe 'ganglia::gmond class' do
-  case fact 'osfamily'
+  case fact('os.family')
   when 'RedHat'
     package_name = 'ganglia-gmond'
     service_name = 'gmond'
@@ -18,7 +18,7 @@ describe 'ganglia::gmond class' do
 
   describe 'running puppet code' do
     pp = <<-EOS
-      if $::osfamily == 'RedHat' {
+      if fact('os.family') == 'RedHat' {
         class { 'epel': } -> Class['ganglia::gmond']
       }
       class { 'ganglia::gmond': }

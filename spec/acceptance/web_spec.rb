@@ -3,7 +3,7 @@
 require 'spec_helper_acceptance'
 
 describe 'ganglia::web class' do
-  case fact 'osfamily'
+  case fact('os.family')
   when 'RedHat'
     package_name = 'ganglia-web'
   when 'Debian'
@@ -12,7 +12,7 @@ describe 'ganglia::web class' do
 
   describe 'running puppet code' do
     pp = <<-EOS
-      if $::osfamily == 'RedHat' {
+      if fact('os.family') == 'RedHat' {
         class { 'epel': } -> Class['ganglia::web']
       }
       class { 'ganglia::web': }
