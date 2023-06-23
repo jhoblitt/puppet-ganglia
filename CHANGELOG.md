@@ -4,6 +4,20 @@ All notable changes to this project will be documented in this file.
 Each new release typically also includes the latest modulesync defaults.
 These should not affect the functionality of the module.
 
+## [v5.0.0](https://github.com/jhoblitt/puppet-ganglia/tree/v5.0.0) (2023-06-23)
+
+[Full Changelog](https://github.com/jhoblitt/puppet-ganglia/compare/v4.0.0...v5.0.0)
+
+**Breaking changes:**
+
+- drop support for ubuntu 18.04 [\#120](https://github.com/jhoblitt/puppet-ganglia/pull/120) ([jhoblitt](https://github.com/jhoblitt))
+- drop support for debian 8 & 9 [\#119](https://github.com/jhoblitt/puppet-ganglia/pull/119) ([jhoblitt](https://github.com/jhoblitt))
+- drop support for puppet6 [\#118](https://github.com/jhoblitt/puppet-ganglia/pull/118) ([jhoblitt](https://github.com/jhoblitt))
+
+**Implemented enhancements:**
+
+- add puppet8 support [\#121](https://github.com/jhoblitt/puppet-ganglia/pull/121) ([jhoblitt](https://github.com/jhoblitt))
+
 ## [v4.0.0](https://github.com/jhoblitt/puppet-ganglia/tree/v4.0.0) (2022-09-15)
 
 [Full Changelog](https://github.com/jhoblitt/puppet-ganglia/compare/v3.0.4...v4.0.0)
@@ -201,8 +215,8 @@ These should not affect the functionality of the module.
 - Feature/future parser [\#26](https://github.com/jhoblitt/puppet-ganglia/pull/26) ([jhoblitt](https://github.com/jhoblitt))
 - Feature/beaker [\#23](https://github.com/jhoblitt/puppet-ganglia/pull/23) ([jhoblitt](https://github.com/jhoblitt))
 - Update gmetad.conf and add custom RRAs [\#22](https://github.com/jhoblitt/puppet-ganglia/pull/22) ([NoodlesNZ](https://github.com/NoodlesNZ))
-- Removes trailing whitespace [\#20](https://github.com/jhoblitt/puppet-ganglia/pull/20) ([george-b](https://github.com/george-b))
-- Sets user to nobody on EL6 [\#19](https://github.com/jhoblitt/puppet-ganglia/pull/19) ([george-b](https://github.com/george-b))
+- Removes trailing whitespace [\#20](https://github.com/jhoblitt/puppet-ganglia/pull/20) ([g0xA52A2A](https://github.com/g0xA52A2A))
+- Sets user to nobody on EL6 [\#19](https://github.com/jhoblitt/puppet-ganglia/pull/19) ([g0xA52A2A](https://github.com/g0xA52A2A))
 - Add possibility to set ganglia-\>globals-\>{deaf, host\_dmax, send\_metadata\_interval} as well as use udp\_send\_channel-\>bind\_hostname [\#18](https://github.com/jhoblitt/puppet-ganglia/pull/18) ([goungy](https://github.com/goungy))
 - Removed lies from gmetad config for el6 [\#17](https://github.com/jhoblitt/puppet-ganglia/pull/17) ([krunaldo](https://github.com/krunaldo))
 
