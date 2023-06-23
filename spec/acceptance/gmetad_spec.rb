@@ -3,7 +3,7 @@
 require 'spec_helper_acceptance'
 
 describe 'ganglia::gmetad class' do
-  case fact 'osfamily'
+  case fact('os.family')
   when 'RedHat'
     package_name = 'ganglia-gmetad'
     service_name = 'gmetad'
@@ -14,7 +14,7 @@ describe 'ganglia::gmetad class' do
 
   describe 'running puppet code' do
     pp = <<-EOS
-      if $::osfamily == 'RedHat' {
+      if fact('os.family') == 'RedHat' {
         class { 'epel': } -> Class['ganglia::gmetad']
       }
       class { 'ganglia::gmetad': }
