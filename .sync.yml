@@ -5,6 +5,7 @@
   - parameter_types
 spec/spec_helper_acceptance.rb:
   unmanaged: false
+  configure_beaker: ~
 ".github/CONTRIBUTING.md":
   delete: true
 ".github/ISSUE_TEMPLATE.md":
