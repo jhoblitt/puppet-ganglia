@@ -1,6 +1,6 @@
 {
   "name": "jhoblitt-ganglia",
-  "version": "4.0.1-rc0",
+  "version": "4.1.0",
   "author": "Joshua Hoblitt <josh@hoblitt.com>",
   "summary": "Manages ganglia gmond & gmetad daemons + web front end",
   "license": "Apache-2.0",
