@@ -1,7 +1,7 @@
 {
   "name": "jhoblitt-ganglia",
   "version": "4.0.1-rc0",
-  "author": "jhoblitt",
+  "author": "Joshua Hoblitt <josh@hoblitt.com>",
   "summary": "Manages ganglia gmond & gmetad daemons + web front end",
   "license": "Apache-2.0",
   "source": "https://github.com/jhoblitt/puppet-ganglia.git",

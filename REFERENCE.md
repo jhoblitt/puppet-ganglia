@@ -6,13 +6,13 @@
 
 ### Classes
 
-* [`ganglia::gmetad`](#gangliagmetad): ganglia::gmetad
+* [`ganglia::gmetad`](#ganglia--gmetad): ganglia::gmetad
 Manages ganglia gmond & gmetad daemons + web front end
-* [`ganglia::gmond`](#gangliagmond): ganglia::gmond
+* [`ganglia::gmond`](#ganglia--gmond): ganglia::gmond
 Manages ganglia gmond & gmetad daemons + web front end
-* [`ganglia::params`](#gangliaparams): ganglia::params
+* [`ganglia::params`](#ganglia--params): ganglia::params
 provides parameters for the ganglia module
-* [`ganglia::web`](#gangliaweb): ganglia::web
+* [`ganglia::web`](#ganglia--web): ganglia::web
 Sets php web package and config for Ganglia
 
 ### Functions
@@ -22,7 +22,7 @@ Sets php web package and config for Ganglia
 
 ## Classes
 
-### <a name="gangliagmetad"></a>`ganglia::gmetad`
+### <a name="ganglia--gmetad"></a>`ganglia::gmetad`
 
 ganglia::gmetad
 Manages ganglia gmond & gmetad daemons + web front end
@@ -35,20 +35,20 @@ Manages ganglia gmond & gmetad daemons + web front end
 
 The following parameters are available in the `ganglia::gmetad` class:
 
-* [`all_trusted`](#all_trusted)
-* [`clusters`](#clusters)
-* [`gridname`](#gridname)
-* [`rras`](#rras)
-* [`trusted_hosts`](#trusted_hosts)
-* [`gmetad_package_name`](#gmetad_package_name)
-* [`gmetad_package_ensure`](#gmetad_package_ensure)
-* [`gmetad_service_name`](#gmetad_service_name)
-* [`gmetad_service_config`](#gmetad_service_config)
-* [`gmetad_user`](#gmetad_user)
-* [`gmetad_hostnames_case`](#gmetad_hostnames_case)
-* [`gmetad_status_command`](#gmetad_status_command)
+* [`all_trusted`](#-ganglia--gmetad--all_trusted)
+* [`clusters`](#-ganglia--gmetad--clusters)
+* [`gridname`](#-ganglia--gmetad--gridname)
+* [`rras`](#-ganglia--gmetad--rras)
+* [`trusted_hosts`](#-ganglia--gmetad--trusted_hosts)
+* [`gmetad_package_name`](#-ganglia--gmetad--gmetad_package_name)
+* [`gmetad_package_ensure`](#-ganglia--gmetad--gmetad_package_ensure)
+* [`gmetad_service_name`](#-ganglia--gmetad--gmetad_service_name)
+* [`gmetad_service_config`](#-ganglia--gmetad--gmetad_service_config)
+* [`gmetad_user`](#-ganglia--gmetad--gmetad_user)
+* [`gmetad_hostnames_case`](#-ganglia--gmetad--gmetad_hostnames_case)
+* [`gmetad_status_command`](#-ganglia--gmetad--gmetad_status_command)
 
-##### <a name="all_trusted"></a>`all_trusted`
+##### <a name="-ganglia--gmetad--all_trusted"></a>`all_trusted`
 
 Data type: `Enum['on', 'off']`
 
@@ -56,7 +56,7 @@ Data type: `Enum['on', 'off']`
 
 Default value: `'off'`
 
-##### <a name="clusters"></a>`clusters`
+##### <a name="-ganglia--gmetad--clusters"></a>`clusters`
 
 Data type: `Array[Hash]`
 
@@ -64,15 +64,15 @@ Data type: `Array[Hash]`
 
 Default value: `[{ 'name' => 'my cluster', 'address' => 'localhost' }]`
 
-##### <a name="gridname"></a>`gridname`
+##### <a name="-ganglia--gmetad--gridname"></a>`gridname`
 
 Data type: `Optional[String[1]]`
 
 
 
-Default value: ``undef``
+Default value: `undef`
 
-##### <a name="rras"></a>`rras`
+##### <a name="-ganglia--gmetad--rras"></a>`rras`
 
 Data type: `Array[Hash]`
 
@@ -80,7 +80,7 @@ see README.md
 
 Default value: `$ganglia::params::rras`
 
-##### <a name="trusted_hosts"></a>`trusted_hosts`
+##### <a name="-ganglia--gmetad--trusted_hosts"></a>`trusted_hosts`
 
 Data type: `Array[String[1]]`
 
@@ -88,7 +88,7 @@ Data type: `Array[String[1]]`
 
 Default value: `[]`
 
-##### <a name="gmetad_package_name"></a>`gmetad_package_name`
+##### <a name="-ganglia--gmetad--gmetad_package_name"></a>`gmetad_package_name`
 
 Data type: `Variant[String[1], Array[String[1]]]`
 
@@ -96,7 +96,7 @@ Data type: `Variant[String[1], Array[String[1]]]`
 
 Default value: `$ganglia::params::gmetad_package_name`
 
-##### <a name="gmetad_package_ensure"></a>`gmetad_package_ensure`
+##### <a name="-ganglia--gmetad--gmetad_package_ensure"></a>`gmetad_package_ensure`
 
 Data type: `String[1]`
 
@@ -104,7 +104,7 @@ Data type: `String[1]`
 
 Default value: `'present'`
 
-##### <a name="gmetad_service_name"></a>`gmetad_service_name`
+##### <a name="-ganglia--gmetad--gmetad_service_name"></a>`gmetad_service_name`
 
 Data type: `String[1]`
 
@@ -112,7 +112,7 @@ Data type: `String[1]`
 
 Default value: `$ganglia::params::gmetad_service_name`
 
-##### <a name="gmetad_service_config"></a>`gmetad_service_config`
+##### <a name="-ganglia--gmetad--gmetad_service_config"></a>`gmetad_service_config`
 
 Data type: `String[1]`
 
@@ -120,7 +120,7 @@ Data type: `String[1]`
 
 Default value: `$ganglia::params::gmetad_service_config`
 
-##### <a name="gmetad_user"></a>`gmetad_user`
+##### <a name="-ganglia--gmetad--gmetad_user"></a>`gmetad_user`
 
 Data type: `String[1]`
 
@@ -128,7 +128,7 @@ Data type: `String[1]`
 
 Default value: `$ganglia::params::gmetad_user`
 
-##### <a name="gmetad_hostnames_case"></a>`gmetad_hostnames_case`
+##### <a name="-ganglia--gmetad--gmetad_hostnames_case"></a>`gmetad_hostnames_case`
 
 Data type: `Integer[0, 1]`
 
@@ -136,7 +136,7 @@ Data type: `Integer[0, 1]`
 
 Default value: `$ganglia::params::gmetad_hostnames_case`
 
-##### <a name="gmetad_status_command"></a>`gmetad_status_command`
+##### <a name="-ganglia--gmetad--gmetad_status_command"></a>`gmetad_status_command`
 
 Data type: `String[1]`
 
@@ -144,7 +144,7 @@ Data type: `String[1]`
 
 Default value: `$ganglia::params::gmetad_status_command`
 
-### <a name="gangliagmond"></a>`ganglia::gmond`
+### <a name="ganglia--gmond"></a>`ganglia::gmond`
 
 ganglia::gmond
 Manages ganglia gmond & gmetad daemons + web front end
@@ -157,27 +157,27 @@ Manages ganglia gmond & gmetad daemons + web front end
 
 The following parameters are available in the `ganglia::gmond` class:
 
-* [`globals_deaf`](#globals_deaf)
-* [`globals_host_dmax`](#globals_host_dmax)
-* [`globals_send_metadata_interval`](#globals_send_metadata_interval)
-* [`globals_override_hostname`](#globals_override_hostname)
-* [`globals_user`](#globals_user)
-* [`globals_max_udp_msg_len`](#globals_max_udp_msg_len)
-* [`cluster_name`](#cluster_name)
-* [`cluster_owner`](#cluster_owner)
-* [`cluster_latlong`](#cluster_latlong)
-* [`cluster_url`](#cluster_url)
-* [`host_location`](#host_location)
-* [`udp_send_channel`](#udp_send_channel)
-* [`udp_recv_channel`](#udp_recv_channel)
-* [`tcp_accept_channel`](#tcp_accept_channel)
-* [`gmond_package_name`](#gmond_package_name)
-* [`gmond_package_ensure`](#gmond_package_ensure)
-* [`gmond_service_name`](#gmond_service_name)
-* [`gmond_service_config`](#gmond_service_config)
-* [`gmond_status_command`](#gmond_status_command)
+* [`globals_deaf`](#-ganglia--gmond--globals_deaf)
+* [`globals_host_dmax`](#-ganglia--gmond--globals_host_dmax)
+* [`globals_send_metadata_interval`](#-ganglia--gmond--globals_send_metadata_interval)
+* [`globals_override_hostname`](#-ganglia--gmond--globals_override_hostname)
+* [`globals_user`](#-ganglia--gmond--globals_user)
+* [`globals_max_udp_msg_len`](#-ganglia--gmond--globals_max_udp_msg_len)
+* [`cluster_name`](#-ganglia--gmond--cluster_name)
+* [`cluster_owner`](#-ganglia--gmond--cluster_owner)
+* [`cluster_latlong`](#-ganglia--gmond--cluster_latlong)
+* [`cluster_url`](#-ganglia--gmond--cluster_url)
+* [`host_location`](#-ganglia--gmond--host_location)
+* [`udp_send_channel`](#-ganglia--gmond--udp_send_channel)
+* [`udp_recv_channel`](#-ganglia--gmond--udp_recv_channel)
+* [`tcp_accept_channel`](#-ganglia--gmond--tcp_accept_channel)
+* [`gmond_package_name`](#-ganglia--gmond--gmond_package_name)
+* [`gmond_package_ensure`](#-ganglia--gmond--gmond_package_ensure)
+* [`gmond_service_name`](#-ganglia--gmond--gmond_service_name)
+* [`gmond_service_config`](#-ganglia--gmond--gmond_service_config)
+* [`gmond_status_command`](#-ganglia--gmond--gmond_status_command)
 
-##### <a name="globals_deaf"></a>`globals_deaf`
+##### <a name="-ganglia--gmond--globals_deaf"></a>`globals_deaf`
 
 Data type: `String[1]`
 
@@ -185,7 +185,7 @@ Data type: `String[1]`
 
 Default value: `'no'`
 
-##### <a name="globals_host_dmax"></a>`globals_host_dmax`
+##### <a name="-ganglia--gmond--globals_host_dmax"></a>`globals_host_dmax`
 
 Data type: `String[1]`
 
@@ -193,7 +193,7 @@ Data type: `String[1]`
 
 Default value: `'0'`
 
-##### <a name="globals_send_metadata_interval"></a>`globals_send_metadata_interval`
+##### <a name="-ganglia--gmond--globals_send_metadata_interval"></a>`globals_send_metadata_interval`
 
 Data type: `String[1]`
 
@@ -201,15 +201,15 @@ Data type: `String[1]`
 
 Default value: `'300'`
 
-##### <a name="globals_override_hostname"></a>`globals_override_hostname`
+##### <a name="-ganglia--gmond--globals_override_hostname"></a>`globals_override_hostname`
 
 Data type: `Optional[Stdlib::Fqdn]`
 
 
 
-Default value: ``undef``
+Default value: `undef`
 
-##### <a name="globals_user"></a>`globals_user`
+##### <a name="-ganglia--gmond--globals_user"></a>`globals_user`
 
 Data type: `String[1]`
 
@@ -217,7 +217,7 @@ Data type: `String[1]`
 
 Default value: `'ganglia'`
 
-##### <a name="globals_max_udp_msg_len"></a>`globals_max_udp_msg_len`
+##### <a name="-ganglia--gmond--globals_max_udp_msg_len"></a>`globals_max_udp_msg_len`
 
 Data type: `Integer`
 
@@ -225,7 +225,7 @@ Data type: `Integer`
 
 Default value: `1472`
 
-##### <a name="cluster_name"></a>`cluster_name`
+##### <a name="-ganglia--gmond--cluster_name"></a>`cluster_name`
 
 Data type: `String[1]`
 
@@ -233,7 +233,7 @@ Data type: `String[1]`
 
 Default value: `'unspecified'`
 
-##### <a name="cluster_owner"></a>`cluster_owner`
+##### <a name="-ganglia--gmond--cluster_owner"></a>`cluster_owner`
 
 Data type: `String[1]`
 
@@ -241,7 +241,7 @@ Data type: `String[1]`
 
 Default value: `'unspecified'`
 
-##### <a name="cluster_latlong"></a>`cluster_latlong`
+##### <a name="-ganglia--gmond--cluster_latlong"></a>`cluster_latlong`
 
 Data type: `String[1]`
 
@@ -249,15 +249,15 @@ Data type: `String[1]`
 
 Default value: `'unspecified'`
 
-##### <a name="cluster_url"></a>`cluster_url`
+##### <a name="-ganglia--gmond--cluster_url"></a>`cluster_url`
 
 Data type: `Optional[Variant[Stdlib::HTTPUrl,Stdlib::Fqdn]]`
 
 
 
-Default value: ``undef``
+Default value: `undef`
 
-##### <a name="host_location"></a>`host_location`
+##### <a name="-ganglia--gmond--host_location"></a>`host_location`
 
 Data type: `String[1]`
 
@@ -265,7 +265,7 @@ Data type: `String[1]`
 
 Default value: `'unspecified'`
 
-##### <a name="udp_send_channel"></a>`udp_send_channel`
+##### <a name="-ganglia--gmond--udp_send_channel"></a>`udp_send_channel`
 
 Data type: `Array[Hash]`
 
@@ -273,7 +273,7 @@ Data type: `Array[Hash]`
 
 Default value: `[{ mcast_join => '239.2.11.71', port => 8649, ttl => 1 }]`
 
-##### <a name="udp_recv_channel"></a>`udp_recv_channel`
+##### <a name="-ganglia--gmond--udp_recv_channel"></a>`udp_recv_channel`
 
 Data type: `Array[Hash]`
 
@@ -281,7 +281,7 @@ Data type: `Array[Hash]`
 
 Default value: `[{ mcast_join => '239.2.11.71', port => 8649, bind => '239.2.11.71' }]`
 
-##### <a name="tcp_accept_channel"></a>`tcp_accept_channel`
+##### <a name="-ganglia--gmond--tcp_accept_channel"></a>`tcp_accept_channel`
 
 Data type: `Array[Hash]`
 
@@ -289,7 +289,7 @@ Data type: `Array[Hash]`
 
 Default value: `[{ port => 8659 }]`
 
-##### <a name="gmond_package_name"></a>`gmond_package_name`
+##### <a name="-ganglia--gmond--gmond_package_name"></a>`gmond_package_name`
 
 Data type: `Variant[String[1], Array[String[1]]]`
 
@@ -297,7 +297,7 @@ Data type: `Variant[String[1], Array[String[1]]]`
 
 Default value: `$ganglia::params::gmond_package_name`
 
-##### <a name="gmond_package_ensure"></a>`gmond_package_ensure`
+##### <a name="-ganglia--gmond--gmond_package_ensure"></a>`gmond_package_ensure`
 
 Data type: `String[1]`
 
@@ -305,7 +305,7 @@ Data type: `String[1]`
 
 Default value: `'present'`
 
-##### <a name="gmond_service_name"></a>`gmond_service_name`
+##### <a name="-ganglia--gmond--gmond_service_name"></a>`gmond_service_name`
 
 Data type: `String[1]`
 
@@ -313,7 +313,7 @@ Data type: `String[1]`
 
 Default value: `$ganglia::params::gmond_service_name`
 
-##### <a name="gmond_service_config"></a>`gmond_service_config`
+##### <a name="-ganglia--gmond--gmond_service_config"></a>`gmond_service_config`
 
 Data type: `String[1]`
 
@@ -321,7 +321,7 @@ Data type: `String[1]`
 
 Default value: `$ganglia::params::gmond_service_config`
 
-##### <a name="gmond_status_command"></a>`gmond_status_command`
+##### <a name="-ganglia--gmond--gmond_status_command"></a>`gmond_status_command`
 
 Data type: `String[1]`
 
@@ -329,12 +329,12 @@ Data type: `String[1]`
 
 Default value: `$ganglia::params::gmond_status_command`
 
-### <a name="gangliaparams"></a>`ganglia::params`
+### <a name="ganglia--params"></a>`ganglia::params`
 
 ganglia::params
 provides parameters for the ganglia module
 
-### <a name="gangliaweb"></a>`ganglia::web`
+### <a name="ganglia--web"></a>`ganglia::web`
 
 ganglia::web
 Sets php web package and config for Ganglia
@@ -343,10 +343,10 @@ Sets php web package and config for Ganglia
 
 The following parameters are available in the `ganglia::web` class:
 
-* [`ganglia_ip`](#ganglia_ip)
-* [`ganglia_port`](#ganglia_port)
+* [`ganglia_ip`](#-ganglia--web--ganglia_ip)
+* [`ganglia_port`](#-ganglia--web--ganglia_port)
 
-##### <a name="ganglia_ip"></a>`ganglia_ip`
+##### <a name="-ganglia--web--ganglia_ip"></a>`ganglia_ip`
 
 Data type: `Stdlib::IP::Address`
 
@@ -354,7 +354,7 @@ IP address of web daemon
 
 Default value: `'127.0.0.1'`
 
-##### <a name="ganglia_port"></a>`ganglia_port`
+##### <a name="-ganglia--web--ganglia_port"></a>`ganglia_port`
 
 Data type: `Integer`
 
