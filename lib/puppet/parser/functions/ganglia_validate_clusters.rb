@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 
 module Puppet::Parser::Functions
-  newfunction(:ganglia_validate_clusters, type: :rvalue, doc: <<-'ENDHEREDOC') do |args|
+  newfunction(:ganglia_validate_clusters, type: :rvalue, doc: <<-ENDHEREDOC) do |args|
     The following values will pass:
 
     * [{ 'name' => 'my cluster', 'address' => 'localhost' }]
